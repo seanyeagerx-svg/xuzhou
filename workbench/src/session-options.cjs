@@ -1,0 +1,5 @@
+function codexModels(data){return data.filter(m=>!m.hidden).map(m=>({id:m.model||m.id,name:m.displayName||m.model||m.id,defaultEffort:m.defaultReasoningEffort||null,efforts:(m.supportedReasoningEfforts||[]).map(e=>({id:e.reasoningEffort,name:e.reasoningEffort,description:e.description})),isDefault:!!m.isDefault}));}
+function acpOptions(r){return {models:(r.models?.availableModels||[]).map(m=>({id:m.modelId,name:m.name||m.modelId,description:m.description})),model:r.models?.currentModelId||null,modes:(r.modes?.availableModes||[]).map(m=>({id:m.id,name:m.name||m.id,description:m.description})),mode:r.modes?.currentModeId||null};}
+function requireChoice(choices,value,label){if(typeof value!=='string'||!choices.some(x=>x.id===value))throw new Error(label+'不在当前 AI 提供的选项中，请刷新后重试');return value;}
+function idleSession(adapter,id){const s=adapter.sessions.get(id);if(!s)throw new Error('会话尚未加载');if(s.busy)throw new Error('当前任务仍在执行，结束后才能切换');return s;}
+module.exports={codexModels,acpOptions,requireChoice,idleSession};

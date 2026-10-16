@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <defs>
+    <linearGradient id="sea" x1="36" y1="16" x2="224" y2="248" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#164C54"/><stop offset="1" stop-color="#092E3C"/>
+    </linearGradient>
+    <linearGradient id="sail" x1="151" y1="61" x2="195" y2="153" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A2F2D1"/><stop offset="1" stop-color="#56CDB4"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="60" fill="url(#sea)"/>
+  <path d="M61 63h62a19 19 0 0 1 19 19v33a19 19 0 0 1-19 19h-23l-26 22v-22H61a19 19 0 0 1-19-19V82a19 19 0 0 1 19-19Z" fill="#F4FAF4"/>
+  <path d="M151 78h27a28 28 0 0 1 28 28v22a28 28 0 0 1-28 28h-47l20-19V78Z" fill="url(#sail)"/>
+  <path d="M61 173h136c-12 22-35 35-68 35s-56-13-68-35Z" fill="#F4FAF4"/>
+  <path d="M68 94h48" stroke="#164C54" stroke-width="11" stroke-linecap="round"/>
+  <path d="M68 113h27" stroke="#164C54" stroke-width="9" stroke-linecap="round"/>
+</svg>

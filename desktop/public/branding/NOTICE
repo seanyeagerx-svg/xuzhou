@@ -1,0 +1,15 @@
+续舟 / Xuzhou
+
+Independent derivative of AionUi 2.2.2, commit c140550d04e44f3d6f8a9830b40ae56e4689a977. Copyright 2025 AionUi (aionui.com), Apache License 2.0. Original attribution and license notices are retained. No upstream endorsement or trademark right is claimed.
+
+AionCore v0.2.2, commit 47e66d0d151123e973b3fd1e77afcb5671b3f8c5; rebuilt SHA256 920aba62a6ff7ff25d51ac1fd740b1043d6899c875648f807c59547512d9bf9d. The original root Apache-2.0 grant and MIT workspace metadata are recorded separately. The entire proprietary PDF skill was omitted before compilation and replaced with independent Apache-2.0 instructions. The replacement binary was checked for restricted embedded text and materialization of the independent skill. SQL statements are unchanged; CRLF checksums preserve compatibility with existing Windows databases. aionrs v0.2.11 is Apache-2.0.
+
+Node.js 24.11.0, npm, Corepack, Electron 44.8.0 and Chromium retain all their original license and third-party notices below. AionHub four extension wrappers are pinned to source ebc6a2bc3a84c5bbc4436939abe879cf9c8478c2, Apache-2.0; external client software is installed only on user request.
+
+Original Xuzhou crayfish sprite artwork created 2026-10-16 with AI assistance and no reference images; original sprite animation and chat-boat branding contributed under Apache-2.0 to the extent rights are held. See the asset provenance file. The previous OpenMoji artwork is not part of this candidate. Codex, Kiro, ZCode and Grok identify external products; their accounts, service terms and clients remain separate.
+
+NSIS 3.12 standard installer runtime/plugins use the original NSIS terms. This installer uses zlib compression. No community installer plugins are included.
+
+Third-party license rights, notices, disclaimers and applicable source/replacement rights survive any Xuzhou terms. Some releases only declare a license; standard-text supplements are explicitly labelled and preserve published attribution. The inventory is a conservative dependency superset; the separate release verification report binds the final installer hash and actual payload. Private profiles, login credentials and conversation archives are never release assets.
+
+Xuzhou 2.3.0-preview.1 additions, Copyright 2026 Xuzhou contributors, Apache-2.0: conversation continuity protocol, confirmed per-provider handoff receipts, synchronization policy and conversation-level software/model chooser. Existing upstream code and dependencies remain separately attributed. This is an independent product contribution within a derivative distribution, not a claim that all included code is original.

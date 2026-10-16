@@ -1,0 +1,17 @@
+{
+  "name": "workbench-aionui-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AionUi ACP bridge reusing the workbench Codex/Kiro adapters and conversation routing",
+  "scripts": {
+    "start": "node bridge.mjs",
+    "test": "node --test test/*.test.mjs test/*.test.cjs"
+  },
+  "dependencies": {
+    "@agentclientprotocol/sdk": "0.18.2"
+  },
+  "devDependencies": {
+    "7zip-bin": "5.2.0"
+  }
+}

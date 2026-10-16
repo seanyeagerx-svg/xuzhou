@@ -1,0 +1,2606 @@
+{
+  "version": 1,
+  "scope": "Current dependency versions only; upgrades require a fresh review.",
+  "selections": [
+    {
+      "name": "qrcode-terminal",
+      "version": "0.12.0",
+      "declared": "Apache 2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "adler2",
+      "version": "2.0.1",
+      "declared": "0BSD OR MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "aead",
+      "version": "0.5.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "aes",
+      "version": "0.8.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "aes-gcm",
+      "version": "0.10.3",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ahash",
+      "version": "0.8.12",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "aho-corasick",
+      "version": "1.1.4",
+      "declared": "Unlicense OR MIT",
+      "selected": "MIT"
+    },
+    {
+      "name": "allocator-api2",
+      "version": "0.2.21",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "android_system_properties",
+      "version": "0.1.5",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "anstream",
+      "version": "1.0.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "anstyle",
+      "version": "1.0.14",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "anstyle-parse",
+      "version": "1.0.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "anstyle-query",
+      "version": "1.1.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "anstyle-wincon",
+      "version": "3.0.11",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "anyhow",
+      "version": "1.0.102",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "arbitrary",
+      "version": "1.4.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "arboard",
+      "version": "3.6.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "async-channel",
+      "version": "2.5.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "async-io",
+      "version": "2.6.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "async-lock",
+      "version": "3.4.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "async-process",
+      "version": "2.5.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "async-signal",
+      "version": "0.2.14",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "async-task",
+      "version": "4.7.1",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "async-trait",
+      "version": "0.1.89",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "atoi_simd",
+      "version": "0.18.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "atomic-waker",
+      "version": "1.1.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "autocfg",
+      "version": "1.5.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "base16ct",
+      "version": "0.1.1",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "base64",
+      "version": "0.22.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "base64ct",
+      "version": "1.8.3",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "bit-set",
+      "version": "0.8.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "bit-vec",
+      "version": "0.8.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "bitflags",
+      "version": "2.11.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "block-buffer",
+      "version": "0.10.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "block-buffer",
+      "version": "0.12.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "blocking",
+      "version": "1.6.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "blowfish",
+      "version": "0.9.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "bs58",
+      "version": "0.5.1",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "bstr",
+      "version": "1.12.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "bumpalo",
+      "version": "3.20.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "byteorder",
+      "version": "1.5.0",
+      "declared": "Unlicense OR MIT",
+      "selected": "MIT"
+    },
+    {
+      "name": "bytes-utils",
+      "version": "0.1.4",
+      "declared": "Apache-2.0/MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "bzip2",
+      "version": "0.5.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "bzip2-sys",
+      "version": "0.1.13+1.0.8",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "cc",
+      "version": "1.2.62",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "cfg-if",
+      "version": "1.0.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "chrono",
+      "version": "0.4.44",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "chrono-tz",
+      "version": "0.10.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "cipher",
+      "version": "0.4.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "clap",
+      "version": "4.6.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "clap_builder",
+      "version": "4.6.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "clap_derive",
+      "version": "4.6.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "clap_lex",
+      "version": "1.1.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "cmake",
+      "version": "0.1.58",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "cmov",
+      "version": "0.5.3",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "codepage",
+      "version": "0.1.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "colorchoice",
+      "version": "1.0.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "concurrent-queue",
+      "version": "2.5.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "const-oid",
+      "version": "0.10.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "const-oid",
+      "version": "0.9.6",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "constant_time_eq",
+      "version": "0.3.1",
+      "declared": "CC0-1.0 OR MIT-0 OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "core-foundation",
+      "version": "0.10.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "core-foundation-sys",
+      "version": "0.8.7",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "cpufeatures",
+      "version": "0.2.17",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "cpufeatures",
+      "version": "0.3.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crc",
+      "version": "3.4.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crc-catalog",
+      "version": "2.5.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crc32fast",
+      "version": "1.5.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "cron",
+      "version": "0.15.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crossbeam-channel",
+      "version": "0.5.15",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crossbeam-deque",
+      "version": "0.8.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crossbeam-epoch",
+      "version": "0.9.20",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crossbeam-queue",
+      "version": "0.3.12",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crossbeam-utils",
+      "version": "0.8.21",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crypto-bigint",
+      "version": "0.4.9",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crypto-bigint",
+      "version": "0.5.5",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crypto-common",
+      "version": "0.1.7",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "crypto-common",
+      "version": "0.2.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ctr",
+      "version": "0.9.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ctutils",
+      "version": "0.4.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "curve25519-dalek-derive",
+      "version": "0.1.1",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "deadpool",
+      "version": "0.12.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "deadpool-runtime",
+      "version": "0.1.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "debug_unsafe",
+      "version": "0.1.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "der",
+      "version": "0.6.1",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "der",
+      "version": "0.7.10",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "deranged",
+      "version": "0.5.8",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "derive_arbitrary",
+      "version": "1.4.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "digest",
+      "version": "0.10.7",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "digest",
+      "version": "0.11.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "dirs",
+      "version": "6.0.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "dirs-sys",
+      "version": "0.5.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "dispatch2",
+      "version": "0.3.1",
+      "declared": "Zlib OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "displaydoc",
+      "version": "0.2.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "document-features",
+      "version": "0.2.12",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "dunce",
+      "version": "1.0.5",
+      "declared": "CC0-1.0 OR MIT-0 OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "dyn-clone",
+      "version": "1.0.20",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ecdsa",
+      "version": "0.14.8",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ed25519",
+      "version": "2.2.3",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "either",
+      "version": "1.15.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "elliptic-curve",
+      "version": "0.12.3",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "env_home",
+      "version": "0.1.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "equivalent",
+      "version": "1.0.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "errno",
+      "version": "0.3.14",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "etcetera",
+      "version": "0.8.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "event-listener",
+      "version": "5.4.1",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "event-listener-strategy",
+      "version": "0.5.4",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "fallible-iterator",
+      "version": "0.3.0",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "fallible-streaming-iterator",
+      "version": "0.1.9",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "fast-float2",
+      "version": "0.2.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "fastrand",
+      "version": "2.4.1",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ff",
+      "version": "0.12.1",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "fiat-crypto",
+      "version": "0.2.9",
+      "declared": "MIT OR Apache-2.0 OR BSD-1-Clause",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "filetime",
+      "version": "0.2.29",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "find-msvc-tools",
+      "version": "0.1.9",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "fixedbitset",
+      "version": "0.5.7",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "flate2",
+      "version": "1.1.9",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "flume",
+      "version": "0.11.1",
+      "declared": "Apache-2.0/MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "fnv",
+      "version": "1.0.7",
+      "declared": "Apache-2.0 / MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "form_urlencoded",
+      "version": "1.2.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "fs2",
+      "version": "0.4.3",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures",
+      "version": "0.3.32",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures-channel",
+      "version": "0.3.32",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures-concurrency",
+      "version": "7.7.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures-core",
+      "version": "0.3.32",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures-executor",
+      "version": "0.3.32",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures-intrusive",
+      "version": "0.5.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures-io",
+      "version": "0.3.32",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures-lite",
+      "version": "2.6.1",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures-macro",
+      "version": "0.3.32",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures-sink",
+      "version": "0.3.32",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures-task",
+      "version": "0.3.32",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "futures-util",
+      "version": "0.3.32",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "getrandom",
+      "version": "0.2.17",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "getrandom",
+      "version": "0.3.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "getrandom",
+      "version": "0.4.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ghash",
+      "version": "0.5.1",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "git2",
+      "version": "0.21.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "glob",
+      "version": "0.3.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "globset",
+      "version": "0.4.18",
+      "declared": "Unlicense OR MIT",
+      "selected": "MIT"
+    },
+    {
+      "name": "group",
+      "version": "0.12.1",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hashbrown",
+      "version": "0.12.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hashbrown",
+      "version": "0.14.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hashbrown",
+      "version": "0.15.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hashbrown",
+      "version": "0.17.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hashlink",
+      "version": "0.10.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hashlink",
+      "version": "0.9.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "heck",
+      "version": "0.5.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hermit-abi",
+      "version": "0.5.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hex",
+      "version": "0.4.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hkdf",
+      "version": "0.12.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hmac",
+      "version": "0.12.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hmac",
+      "version": "0.13.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "home",
+      "version": "0.5.12",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "http",
+      "version": "0.2.12",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "http",
+      "version": "1.4.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "httparse",
+      "version": "1.10.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "httpdate",
+      "version": "1.0.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hybrid-array",
+      "version": "0.4.12",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "hyper-rustls",
+      "version": "0.27.9",
+      "declared": "Apache-2.0 OR ISC OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "iana-time-zone",
+      "version": "0.1.65",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "iana-time-zone-haiku",
+      "version": "0.1.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "id-arena",
+      "version": "2.3.0",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ident_case",
+      "version": "1.0.1",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "idna",
+      "version": "1.1.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "idna_adapter",
+      "version": "1.2.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ignore",
+      "version": "0.4.25",
+      "declared": "Unlicense OR MIT",
+      "selected": "MIT"
+    },
+    {
+      "name": "indexmap",
+      "version": "1.9.3",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "indexmap",
+      "version": "2.14.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "inout",
+      "version": "0.1.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ipnet",
+      "version": "2.12.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "is_terminal_polyfill",
+      "version": "1.70.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "itertools",
+      "version": "0.14.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "itoa",
+      "version": "1.0.18",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "jobserver",
+      "version": "0.1.34",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "js-sys",
+      "version": "0.3.98",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "lazy_static",
+      "version": "1.5.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "leb128fmt",
+      "version": "0.1.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "libc",
+      "version": "0.2.186",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "libgit2-sys",
+      "version": "0.18.4+1.9.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "libz-sys",
+      "version": "1.1.28",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "linux-raw-sys",
+      "version": "0.12.1",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "litrs",
+      "version": "1.0.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "lock_api",
+      "version": "0.4.14",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "log",
+      "version": "0.4.29",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "lru-slab",
+      "version": "0.1.2",
+      "declared": "MIT OR Apache-2.0 OR Zlib",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "lzma-sys",
+      "version": "0.1.20",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "md-5",
+      "version": "0.10.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "memchr",
+      "version": "2.8.0",
+      "declared": "Unlicense OR MIT",
+      "selected": "MIT"
+    },
+    {
+      "name": "mime",
+      "version": "0.3.17",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "miniz_oxide",
+      "version": "0.8.9",
+      "declared": "MIT OR Zlib OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "notify-types",
+      "version": "2.1.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "num_cpus",
+      "version": "1.17.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "num-bigint",
+      "version": "0.4.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "num-bigint-dig",
+      "version": "0.8.6",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "num-conv",
+      "version": "0.2.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "num-integer",
+      "version": "0.1.46",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "num-iter",
+      "version": "0.1.45",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "num-traits",
+      "version": "0.2.19",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "oauth2",
+      "version": "5.0.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "objc2-app-kit",
+      "version": "0.3.2",
+      "declared": "Zlib OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "objc2-core-foundation",
+      "version": "0.3.2",
+      "declared": "Zlib OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "objc2-core-graphics",
+      "version": "0.3.2",
+      "declared": "Zlib OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "objc2-io-surface",
+      "version": "0.3.2",
+      "declared": "Zlib OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "once_cell",
+      "version": "1.21.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "once_cell_polyfill",
+      "version": "1.70.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "opaque-debug",
+      "version": "0.3.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "openssl-probe",
+      "version": "0.2.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "p256",
+      "version": "0.11.1",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "parking",
+      "version": "2.2.1",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "parking_lot",
+      "version": "0.12.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "parking_lot_core",
+      "version": "0.9.12",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pastey",
+      "version": "0.2.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pathdiff",
+      "version": "0.2.3",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pbkdf2",
+      "version": "0.12.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pem-rfc7468",
+      "version": "0.7.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "percent-encoding",
+      "version": "2.3.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pin-project",
+      "version": "1.1.13",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pin-project-internal",
+      "version": "1.1.13",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pin-project-lite",
+      "version": "0.2.17",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pin-utils",
+      "version": "0.1.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "piper",
+      "version": "0.2.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pkcs1",
+      "version": "0.7.5",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pkcs8",
+      "version": "0.10.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pkcs8",
+      "version": "0.9.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "pkg-config",
+      "version": "0.3.33",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "plain",
+      "version": "0.2.3",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "polling",
+      "version": "3.11.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "polyval",
+      "version": "0.6.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "powerfmt",
+      "version": "0.2.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ppv-lite86",
+      "version": "0.2.21",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "prettyplease",
+      "version": "0.2.37",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "proc-macro2",
+      "version": "1.0.106",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "proptest",
+      "version": "1.11.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "quick-error",
+      "version": "1.2.3",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "quinn",
+      "version": "0.11.9",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "quinn-proto",
+      "version": "0.11.15",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "quinn-udp",
+      "version": "0.5.14",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "quote",
+      "version": "1.0.45",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "r-efi",
+      "version": "5.3.0",
+      "declared": "MIT OR Apache-2.0 OR LGPL-2.1-or-later",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "r-efi",
+      "version": "6.0.0",
+      "declared": "MIT OR Apache-2.0 OR LGPL-2.1-or-later",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rand",
+      "version": "0.8.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rand",
+      "version": "0.9.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rand_chacha",
+      "version": "0.3.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rand_chacha",
+      "version": "0.9.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rand_core",
+      "version": "0.6.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rand_core",
+      "version": "0.9.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rand_xorshift",
+      "version": "0.4.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ref-cast",
+      "version": "1.0.25",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ref-cast-impl",
+      "version": "1.0.25",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "regex",
+      "version": "1.12.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "regex-automata",
+      "version": "0.4.14",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "regex-lite",
+      "version": "0.1.9",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "regex-syntax",
+      "version": "0.8.10",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "reqwest",
+      "version": "0.12.28",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rfc6979",
+      "version": "0.3.1",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rsa",
+      "version": "0.9.10",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rust_xlsxwriter",
+      "version": "0.82.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rustc_version",
+      "version": "0.4.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rustc-hash",
+      "version": "2.1.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rustix",
+      "version": "1.1.4",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rustls",
+      "version": "0.23.40",
+      "declared": "Apache-2.0 OR ISC OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rustls-native-certs",
+      "version": "0.8.3",
+      "declared": "Apache-2.0 OR ISC OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rustls-pki-types",
+      "version": "1.14.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rustversion",
+      "version": "1.0.22",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "rusty-fork",
+      "version": "0.3.1",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "ryu",
+      "version": "1.0.23",
+      "declared": "Apache-2.0 OR BSL-1.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "same-file",
+      "version": "1.0.6",
+      "declared": "Unlicense/MIT",
+      "selected": "MIT"
+    },
+    {
+      "name": "scopeguard",
+      "version": "1.2.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "sec1",
+      "version": "0.3.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "security-framework",
+      "version": "3.7.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "security-framework-sys",
+      "version": "2.17.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "semver",
+      "version": "1.0.28",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde",
+      "version": "1.0.228",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde_core",
+      "version": "1.0.228",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde_derive",
+      "version": "1.0.228",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde_derive_internals",
+      "version": "0.29.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde_json",
+      "version": "1.0.149",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde_path_to_error",
+      "version": "0.1.20",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde_spanned",
+      "version": "0.6.9",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde_spanned",
+      "version": "1.1.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde_urlencoded",
+      "version": "0.7.1",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde_with",
+      "version": "3.20.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde_with_macros",
+      "version": "3.20.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "serde_yaml",
+      "version": "0.9.34+deprecated",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "sha1",
+      "version": "0.10.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "sha2",
+      "version": "0.10.9",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "sha2",
+      "version": "0.11.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "shell-words",
+      "version": "1.1.1",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "shlex",
+      "version": "1.3.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "signal-hook",
+      "version": "0.3.18",
+      "declared": "Apache-2.0/MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "signal-hook-mio",
+      "version": "0.2.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "signal-hook-registry",
+      "version": "1.4.8",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "signature",
+      "version": "1.6.4",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "signature",
+      "version": "2.2.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "siphasher",
+      "version": "1.0.3",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "smallvec",
+      "version": "1.15.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "socket2",
+      "version": "0.6.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "spki",
+      "version": "0.6.0",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "spki",
+      "version": "0.7.3",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "sqlx",
+      "version": "0.8.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "sqlx-core",
+      "version": "0.8.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "sqlx-macros",
+      "version": "0.8.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "sqlx-macros-core",
+      "version": "0.8.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "sqlx-mysql",
+      "version": "0.8.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "sqlx-postgres",
+      "version": "0.8.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "sqlx-sqlite",
+      "version": "0.8.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "stable_deref_trait",
+      "version": "1.2.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "stringprep",
+      "version": "0.1.5",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "symlink",
+      "version": "0.1.0",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "syn",
+      "version": "2.0.117",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "syn",
+      "version": "3.0.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "tar",
+      "version": "0.4.46",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "tempfile",
+      "version": "3.27.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "thiserror",
+      "version": "1.0.69",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "thiserror",
+      "version": "2.0.18",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "thiserror-impl",
+      "version": "1.0.69",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "thiserror-impl",
+      "version": "2.0.18",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "thread_local",
+      "version": "1.1.9",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "time",
+      "version": "0.3.47",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "time-core",
+      "version": "0.1.8",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "time-macros",
+      "version": "0.2.27",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "tinyvec",
+      "version": "1.11.0",
+      "declared": "Zlib OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "tinyvec_macros",
+      "version": "0.1.1",
+      "declared": "MIT OR Apache-2.0 OR Zlib",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "tokio-rustls",
+      "version": "0.26.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "toml",
+      "version": "0.8.23",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "toml",
+      "version": "1.1.2+spec-1.1.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "toml_datetime",
+      "version": "0.6.11",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "toml_datetime",
+      "version": "1.1.1+spec-1.1.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "toml_edit",
+      "version": "0.22.27",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "toml_parser",
+      "version": "1.1.2+spec-1.1.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "toml_write",
+      "version": "0.1.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "toml_writer",
+      "version": "1.1.1+spec-1.1.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "tungstenite",
+      "version": "0.26.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "tungstenite",
+      "version": "0.29.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "typed-path",
+      "version": "0.12.3",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "typenum",
+      "version": "1.20.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "unarray",
+      "version": "0.1.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "unicase",
+      "version": "2.9.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "unicode-bidi",
+      "version": "0.3.18",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "unicode-normalization",
+      "version": "0.1.25",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "unicode-properties",
+      "version": "0.1.4",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "unicode-segmentation",
+      "version": "1.13.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "unicode-width",
+      "version": "0.2.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "unicode-xid",
+      "version": "0.2.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "universal-hash",
+      "version": "0.5.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "url",
+      "version": "2.5.8",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "utf-8",
+      "version": "0.7.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "utf8_iter",
+      "version": "1.0.4",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "utf8parse",
+      "version": "0.2.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "uuid",
+      "version": "1.23.1",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "vcpkg",
+      "version": "0.2.15",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "version_check",
+      "version": "0.9.5",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wait-timeout",
+      "version": "0.2.1",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "walkdir",
+      "version": "2.5.0",
+      "declared": "Unlicense/MIT",
+      "selected": "MIT"
+    },
+    {
+      "name": "wasi",
+      "version": "0.11.1+wasi-snapshot-preview1",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasip2",
+      "version": "1.0.3+wasi-0.2.9",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasip3",
+      "version": "0.4.0+wasi-0.3.0-rc-2026-01-06",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasite",
+      "version": "0.1.0",
+      "declared": "Apache-2.0 OR BSL-1.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasm-bindgen",
+      "version": "0.2.121",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasm-bindgen-futures",
+      "version": "0.4.71",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasm-bindgen-macro",
+      "version": "0.2.121",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasm-bindgen-macro-support",
+      "version": "0.2.121",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasm-bindgen-shared",
+      "version": "0.2.121",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasm-encoder",
+      "version": "0.244.0",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasm-metadata",
+      "version": "0.244.0",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasm-streams",
+      "version": "0.4.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wasmparser",
+      "version": "0.244.0",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "web-sys",
+      "version": "0.3.98",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "web-time",
+      "version": "1.1.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "whoami",
+      "version": "1.6.1",
+      "declared": "Apache-2.0 OR BSL-1.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "winapi",
+      "version": "0.3.9",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "winapi-i686-pc-windows-gnu",
+      "version": "0.4.0",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "winapi-util",
+      "version": "0.1.11",
+      "declared": "Unlicense OR MIT",
+      "selected": "MIT"
+    },
+    {
+      "name": "winapi-x86_64-pc-windows-gnu",
+      "version": "0.4.0",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows",
+      "version": "0.56.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_aarch64_gnullvm",
+      "version": "0.48.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_aarch64_gnullvm",
+      "version": "0.52.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_aarch64_gnullvm",
+      "version": "0.53.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_aarch64_msvc",
+      "version": "0.48.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_aarch64_msvc",
+      "version": "0.52.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_aarch64_msvc",
+      "version": "0.53.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_i686_gnu",
+      "version": "0.48.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_i686_gnu",
+      "version": "0.52.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_i686_gnu",
+      "version": "0.53.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_i686_gnullvm",
+      "version": "0.52.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_i686_gnullvm",
+      "version": "0.53.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_i686_msvc",
+      "version": "0.48.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_i686_msvc",
+      "version": "0.52.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_i686_msvc",
+      "version": "0.53.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_x86_64_gnu",
+      "version": "0.48.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_x86_64_gnu",
+      "version": "0.52.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_x86_64_gnu",
+      "version": "0.53.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_x86_64_gnullvm",
+      "version": "0.48.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_x86_64_gnullvm",
+      "version": "0.52.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_x86_64_gnullvm",
+      "version": "0.53.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_x86_64_msvc",
+      "version": "0.48.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_x86_64_msvc",
+      "version": "0.52.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows_x86_64_msvc",
+      "version": "0.53.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-core",
+      "version": "0.56.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-implement",
+      "version": "0.56.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-interface",
+      "version": "0.56.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-link",
+      "version": "0.2.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-result",
+      "version": "0.1.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.48.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.52.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.59.0",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.60.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.61.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-targets",
+      "version": "0.48.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-targets",
+      "version": "0.52.6",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "windows-targets",
+      "version": "0.53.5",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wiremock",
+      "version": "0.6.5",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wit-bindgen",
+      "version": "0.51.0",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wit-bindgen",
+      "version": "0.57.1",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wit-bindgen-core",
+      "version": "0.51.0",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wit-bindgen-rust",
+      "version": "0.51.0",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wit-bindgen-rust-macro",
+      "version": "0.51.0",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wit-component",
+      "version": "0.244.0",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "wit-parser",
+      "version": "0.244.0",
+      "declared": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "x11rb",
+      "version": "0.13.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "x11rb-protocol",
+      "version": "0.13.2",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "xattr",
+      "version": "1.6.1",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "xmlparser",
+      "version": "0.13.6",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "xz2",
+      "version": "0.1.7",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "zerocopy",
+      "version": "0.8.48",
+      "declared": "BSD-2-Clause OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "zerocopy-derive",
+      "version": "0.8.48",
+      "declared": "BSD-2-Clause OR Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "zeroize",
+      "version": "1.8.2",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "zeroize_derive",
+      "version": "1.4.3",
+      "declared": "Apache-2.0 OR MIT",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "zstd-safe",
+      "version": "7.2.4",
+      "declared": "MIT OR Apache-2.0",
+      "selected": "Apache-2.0"
+    },
+    {
+      "name": "zstd-sys",
+      "version": "2.0.16+zstd.1.5.7",
+      "declared": "MIT/Apache-2.0",
+      "selected": "Apache-2.0"
+    }
+  ],
+  "notes": [
+    "AionUi: Apache-2.0 permits an independently branded derivative subject to its notice and modification requirements; no upstream trademark or endorsement is granted.",
+    "aionrs v0.2.11 commit 8e61a90329fa9f67c4fdf7e97fe02c24dba33f75 declares Apache-2.0 in both Cargo.toml and LICENSE.",
+    "khroma 2.1.0 has an actual MIT license despite missing package metadata. duck 0.1.12 actual license is BSD-2-Clause; qrcode-terminal Apache 2.0 spelling is normalized.",
+    "MPL option-ext source is supplied unchanged. libgit2 COPYING and all discovered nested native license documents are retained, together with the exact source crate. No general claim that the whole application must use GPL is made.",
+    "Some npm/crate releases only declare a standard license. Offline terms are explicitly labelled standard-text supplements and retain published authorship/metadata; they are not falsely presented as missing upstream files recovered verbatim.",
+    "The Rust lock includes other operating systems and build/test dependencies. Windows review does not approve macOS Apple SDK-derived bindings or other future distributions.",
+    "Codex, Kiro, ZCode and Grok clients/accounts are user-installed integrations, not relicensed client binaries. Their service terms and third-party trademarks remain applicable.",
+    "No trademark registration or jurisdiction-wide name clearance is implied by this copyright/license audit.",
+    "AionCore original root Apache-2.0 and MIT workspace metadata are recorded separately; the replacement source metadata follows the root Apache grant. The complete proprietary PDF corpus was excluded before compilation. No license is inferred for it.",
+    "Unused sharp/libvips and canvas/Skia are excluded from production dependencies and the actual payload scan rejects their native binaries. Their installed-graph notices remain as a conservative superset.",
+    "The installer uses NSIS 3.12 stock commands/plugins and zlib compression. Community plugins with unclear or additional terms, elevate.exe and nsis7z are not included. NSIS original full LICENSE is retained.",
+    "2.2.3 replaces the prior OpenMoji character with a newly generated Xuzhou sprite and original animation. No OpenMoji character file or animation is distributed in this candidate. Unrelated upstream notices remain unchanged. Electron 44.8.0 and its exact Chromium notices accompany this candidate."
+  ]
+}

@@ -1,0 +1,1 @@
+zh-TW fallback snapshot rule

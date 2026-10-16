@@ -1,0 +1,19 @@
+name: Bug report / 问题反馈
+description: Report a reproducible problem without private data.
+body:
+  - type: markdown
+    attributes:
+      value: "请勿提交聊天正文、账号、密钥、二维码、服务器地址或完整日志。安全漏洞请使用本仓库已启用的私密报告入口。"
+  - type: input
+    id: version
+    attributes:
+      label: Version and Windows build / 版本与系统
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction using synthetic data / 使用合成资料复现
+      description: Describe steps, expected behavior and actual behavior. Redact personal paths.
+    validations:
+      required: true

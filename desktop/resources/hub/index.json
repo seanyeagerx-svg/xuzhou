@@ -1,0 +1,103 @@
+{
+    "schemaVersion": 1,
+    "generatedAt": "2026-04-05T10:21:10.172Z",
+    "extensions": {
+        "aionext-auggie": {
+            "name": "aionext-auggie",
+            "displayName": "Augment Code",
+            "version": "1.0.0",
+            "description": "Integrates Augment Code as an ACP adapter in AionUi.",
+            "author": "Aionui Official",
+            "engines": {
+                "aionui": "^1.0.0"
+            },
+            "hubs": [
+                "acpAdapters"
+            ],
+            "contributes": {
+                "acpAdapters": [
+                    "auggie"
+                ]
+            },
+            "dist": {
+                "tarball": "aionext-auggie.zip",
+                "integrity": "sha512-3RZ1YtLdTx3sfqS6VSlO9NaXXUZ74UC/cxbD5eXnBstptMxqTGf8x71+wG5U4qb/Lmp4U3u2kBXhKeEz36L/Gg==",
+                "unpackedSize": 1326
+            }
+        },
+        "aionext-codebuddy": {
+            "name": "aionext-codebuddy",
+            "displayName": "CodeBuddy",
+            "version": "1.0.0",
+            "description": "Integrates CodeBuddy as an ACP adapter in AionUi.",
+            "author": "Aionui Official",
+            "engines": {
+                "aionui": "^1.0.0"
+            },
+            "hubs": [
+                "acpAdapters"
+            ],
+            "contributes": {
+                "acpAdapters": [
+                    "codebuddy"
+                ]
+            },
+            "dist": {
+                "tarball": "aionext-codebuddy.zip",
+                "integrity": "sha512-GdBqVDJMH8fKtUCqC4bh68kG5t/B/qKpQwlO2bv3vrv743YXD6Nq9YnVX0RbYI6ajn/kue1MHvXB2ed7WcGDYg==",
+                "unpackedSize": 1336
+            }
+        },
+        "aionext-opencode": {
+            "name": "aionext-opencode",
+            "displayName": "OpenCode",
+            "version": "1.0.0",
+            "description": "Integrates OpenCode as an ACP adapter in AionUi.",
+            "author": "Aionui Official",
+            "engines": {
+                "aionui": "^1.0.0"
+            },
+            "hubs": [
+                "acpAdapters"
+            ],
+            "contributes": {
+                "acpAdapters": [
+                    "opencode"
+                ]
+            },
+            "dist": {
+                "tarball": "aionext-opencode.zip",
+                "integrity": "sha512-hlrBBXJDzBYIkqkUXOnbFJcgSsah7OnPwOtrZEOmgocZEB4rRYuJyD7j6hqb68u2vHnJXtLxm7Pvy94oHh7PcA==",
+                "unpackedSize": 1320
+            }
+        },
+        "aionext-qwen": {
+            "name": "aionext-qwen",
+            "displayName": "Qwen Code",
+            "version": "1.0.0",
+            "description": "Integrates Qwen CLI as an ACP adapter in AionUi.",
+            "author": "Aionui Official",
+            "engines": {
+                "aionui": "^1.0.0"
+            },
+            "hubs": [
+                "acpAdapters"
+            ],
+            "contributes": {
+                "acpAdapters": [
+                    "qwen"
+                ]
+            },
+            "dist": {
+                "tarball": "aionext-qwen.zip",
+                "integrity": "sha512-+I6MaGjnOwgFy3Lh6tWqLqvwhG0IRmCnuzApRGCcQ6W0YTbZx8EMDt2Z/Ih4ERMmxyOx4V0IxT+dM++Tu8U9vw==",
+                "unpackedSize": 1327
+            }
+        }
+    },
+    "metadata": {
+        "totalExtensions": 4,
+        "generatedBy": "Aion Extension Builder v1.0.0",
+        "repository": "https://github.com/iOfficeAI/AionHub/"
+    }
+}

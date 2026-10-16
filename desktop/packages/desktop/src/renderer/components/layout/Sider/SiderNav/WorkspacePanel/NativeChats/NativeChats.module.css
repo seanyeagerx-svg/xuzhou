@@ -1,0 +1,53 @@
+.section {
+  padding: 4px 8px 8px;
+  border-bottom: 1px solid var(--color-border-2);
+}
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heading > button:first-child {
+  padding: 0 4px;
+  gap: 5px;
+  color: var(--color-text-2);
+  font-weight: 500;
+}
+.project,
+.chat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  text-align: start;
+  justify-content: flex-start;
+  padding: 0 6px;
+  color: var(--color-text-1);
+  border-radius: 7px;
+}
+.chat {
+  padding-inline-start: 29px;
+  height: 30px;
+  font-size: 13px;
+  font-weight: 400;
+}
+.chat[data-selected='true'] {
+  background: var(--color-fill-3);
+}
+.label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+.count {
+  color: var(--color-text-3);
+  font-size: 11px;
+}
+.hint {
+  color: var(--color-text-3);
+  font-size: 11px;
+  padding: 6px 7px;
+  line-height: 1.6;
+}

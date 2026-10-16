@@ -1,0 +1,23 @@
+{
+  "name": "续舟",
+  "short_name": "续舟",
+  "description": "续舟 — 同一段对话，自由接续不同 AI。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#164C54",
+  "icons": [
+    {
+      "src": "./pwa/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

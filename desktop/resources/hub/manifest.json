@@ -1,0 +1,31 @@
+{
+  "tag": "dist-ebc6a2b",
+  "generatedAt": "2026-09-09T08:46:26.157Z",
+  "indexUrl": "https://raw.githubusercontent.com/iOfficeAI/AionHub/dist-ebc6a2b/index.json",
+  "extensions": [
+    {
+      "name": "aionext-auggie",
+      "file": "aionext-auggie.zip",
+      "size": 1326,
+      "url": "https://raw.githubusercontent.com/iOfficeAI/AionHub/dist-ebc6a2b/aionext-auggie.zip"
+    },
+    {
+      "name": "aionext-codebuddy",
+      "file": "aionext-codebuddy.zip",
+      "size": 1336,
+      "url": "https://raw.githubusercontent.com/iOfficeAI/AionHub/dist-ebc6a2b/aionext-codebuddy.zip"
+    },
+    {
+      "name": "aionext-opencode",
+      "file": "aionext-opencode.zip",
+      "size": 1320,
+      "url": "https://raw.githubusercontent.com/iOfficeAI/AionHub/dist-ebc6a2b/aionext-opencode.zip"
+    },
+    {
+      "name": "aionext-qwen",
+      "file": "aionext-qwen.zip",
+      "size": 1327,
+      "url": "https://raw.githubusercontent.com/iOfficeAI/AionHub/dist-ebc6a2b/aionext-qwen.zip"
+    }
+  ]
+}

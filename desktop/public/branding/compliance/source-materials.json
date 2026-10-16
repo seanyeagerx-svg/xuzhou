@@ -1,0 +1,35 @@
+{
+  "scope": "Offline unmodified source and artwork attachments. Full Xuzhou build source and recipe accompany this release as a separate source archive.",
+  "sources": [
+    {
+      "file": "sources/option-ext-0.2.0.crate",
+      "sha256": "04744f49eae99ab78e0d5c0b603ab218f515ea8cfe5a456d7629ad883a3b6e7d",
+      "reason": "Unmodified MPL-2.0 source; notices retained."
+    },
+    {
+      "file": "sources/libgit2-sys-0.18.4+1.9.3.crate",
+      "sha256": "9b26f66f35e1871b22efcf7191564123d2a446ca0538cde63c23adfefa9b15b7",
+      "reason": "Exact lockfile source including libgit2 linking exception, native dependency licenses and build scripts."
+    },
+    {
+      "file": "sources/xuzhou-lobster-Art.tsx",
+      "sha256": "ca8211f2bc1303b2278d1ce3fcb22d183b8d052ec2fa62ecc123ecd2c22eb257",
+      "reason": "Original Xuzhou asset/animation; AI-assisted provenance and Apache-2.0 contribution terms included."
+    },
+    {
+      "file": "sources/xuzhou-lobster-motion.module.css",
+      "sha256": "cfab3c1843ac60a5fcf038648a0d833f50794ce367250b2032ed707d95c970ca",
+      "reason": "Original Xuzhou asset/animation; AI-assisted provenance and Apache-2.0 contribution terms included."
+    },
+    {
+      "file": "sources/xuzhou-lobster-PROVENANCE.md",
+      "sha256": "6772e0541a2c75e18858e9e6c88f68cafb9139c3268edde5fd7478e4f3e01e52",
+      "reason": "Original Xuzhou asset/animation; AI-assisted provenance and Apache-2.0 contribution terms included."
+    },
+    {
+      "file": "sources/xuzhou-lobster-wave.png",
+      "sha256": "d46dac180827e8249a06be40d371a7c706274b324e2f9d9c3b9c373cd1393aa9",
+      "reason": "Original Xuzhou asset/animation; AI-assisted provenance and Apache-2.0 contribution terms included."
+    }
+  ]
+}

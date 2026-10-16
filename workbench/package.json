@@ -1,0 +1,11 @@
+{
+  "name": "xuzhou-workbench-bridge",
+  "version": "0.9.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "@agentclientprotocol/sdk": "0.18.2",
+    "ssh2": "1.17.0",
+    "ws": "8.18.3"
+  }
+}
