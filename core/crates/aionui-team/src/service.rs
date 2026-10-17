@@ -1134,9 +1134,22 @@ impl TeamSessionService {
             None
         };
 
+        // Xuzhou: removing an AI revokes its team binding, not the user's
+        // conversation. Keep the original row, messages and workspace available
+        // as a standalone chat, and revoke the old team tool endpoint.
         if let Err(error) = self
             .conversation_port
-            .delete_team_conversation(user_id, &removed.conversation_id)
+            .patch_runtime_config(
+                &removed.conversation_id,
+                serde_json::json!({
+                    "teamId": null,
+                    "team_id": null,
+                    "slot_id": null,
+                    "role": null,
+                    "team_mcp_stdio_config": null,
+                    "xuzhou_previous_team": {"id": team_id, "slot_id": slot_id},
+                }),
+            )
             .await
         {
             warn!(
@@ -1144,7 +1157,7 @@ impl TeamSessionService {
                 slot_id,
                 conversation_id = %removed.conversation_id,
                 error = %error,
-                "removed team member conversation cleanup failed"
+                "removed team member history preserved but standalone binding update failed"
             );
         }
 

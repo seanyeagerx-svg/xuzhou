@@ -25,6 +25,8 @@ export type WorkspaceAction =
   | 'companion-cancel'
   | 'companion-read'
   | 'chat-options'
+  | 'chat-models'
+  | 'team-options'
   | 'chat-create'
   | 'codex-catalog'
   | 'codex-open'

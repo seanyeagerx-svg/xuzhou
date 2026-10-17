@@ -9,7 +9,7 @@ function choices(option) {
   return (option?.options||[]).flatMap(o=>Array.isArray(o.options)?o.options:[o]).filter(o=>typeof o.value==='string').map(o=>({id:o.value,name:o.name||o.value,description:o.description}));
 }
 function sessionOptions(reply,previous={}) {
-  const config=reply.configOptions||previous.configOptions||[];
+  const config=[...new Map([...(previous.configOptions||[]),...(reply.configOptions||[])].map(o=>[o.id,o])).values()];
   const model=config.find(o=>o.category==='model'||o.id==='model');
   const effort=config.find(o=>o.category==='thought_level'||o.id==='effortLevel');
   const mode=config.find(o=>o.category==='mode'||o.id==='mode');
@@ -19,7 +19,7 @@ function sessionOptions(reply,previous={}) {
     modes:choices(mode),mode:mode?.currentValue,configOptions:config,apply:'acknowledged'};
 }
 class KiroV3Adapter extends AcpAdapter {
-  constructor(config){super(v3Config(config));}
+  constructor(config){super(v3Config(config));this.earlyOptions=new Map();}
   async newSession(cwd,model,remoteId,conversationId) {
     if(!this.ready)await this.connect(cwd);
     if(!this.info.agentCapabilities?.sessionCapabilities?.list)throw Error('Kiro V3 会话接口未就绪');
@@ -27,7 +27,16 @@ class KiroV3Adapter extends AcpAdapter {
     const id=r.sessionId||remoteId;
     if(!id)throw Error('Kiro V3 未返回会话编号');
     if(remoteId&&(r._meta?.id!==id||!r._meta?.workspacePaths?.some(p=>samePath(p,cwd))))throw Error('Kiro V3 会话编号或项目不匹配');
-    this.sessions.set(id,{busy:false,cwd,options:sessionOptions(r)});
+    this.sessions.set(id,{busy:false,cwd,options:sessionOptions({configOptions:this.earlyOptions.get(id)||[]},sessionOptions(r))});
+    this.earlyOptions.delete(id);
+    if(!this.sessions.get(id).options.models.length){
+      await new Promise((resolve,reject)=>{
+        const listener=e=>{if(e.sessionId===id&&this.sessionOptions(id)?.models.length){cleanup();resolve();}};
+        const timer=setTimeout(()=>{cleanup();reject(Error('Kiro V3 尚未提供模型列表，请刷新模型后重试'));},15000);
+        const cleanup=()=>{clearTimeout(timer);this.off('event',listener);};this.on('event',listener);
+        listener({sessionId:id});
+      });
+    }
     if(model&&model!==this.sessions.get(id).options.model)await this.setSessionOption(id,'model',model);
     return {id,model:this.sessions.get(id).options.model,options:this.sessionOptions(id)};
   }
@@ -43,7 +52,8 @@ class KiroV3Adapter extends AcpAdapter {
   }
   notification(message) {
     if(message.method!=='session/update')return;
-    const p=message.params||{},s=this.sessions.get(p.sessionId),u=p.update||{};if(!s)return;
+    const p=message.params||{},s=this.sessions.get(p.sessionId),u=p.update||{};
+    if(!s){if(u.sessionUpdate==='config_option_update'&&typeof p.sessionId==='string'){if(!this.earlyOptions.has(p.sessionId)&&this.earlyOptions.size>=100)this.earlyOptions.delete(this.earlyOptions.keys().next().value);const previous=this.earlyOptions.get(p.sessionId)||[];this.earlyOptions.set(p.sessionId,sessionOptions(u,sessionOptions({configOptions:previous})).configOptions);}return;}
     if(u._meta?.kiro?.replay)return;
     if(u.sessionUpdate==='config_option_update'){
       s.options=sessionOptions(u,s.options);this.emitEvent(p.sessionId,{type:'session-options',options:this.sessionOptions(p.sessionId)});return;

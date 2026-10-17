@@ -172,7 +172,7 @@
   "assistantTabMine": "My Assistants",
   "assistantTabOfficial": "Official",
   "assistantHomeLead": "Assistants are ready-to-work AI experts, preloaded with skills and tools. Here are your local CLIs, the assistants you tailor yourself, and a set of official experts. Once enabled, they show up in your chats, teams, and scheduled tasks — ready when you need them.",
-  "assistantHomeLeadShort": "Ready-to-work AI experts, preloaded with skills and tools. Enable them to use in chats, teams, and scheduled tasks.",
+  "assistantHomeLeadShort": "Manage connected software and team members. Existing conversations are preserved.",
   "assistantReorderHintShort": "Drag to reorder",
   "assistantReorderSearchDisabled": "Clear search to reorder.",
   "myAssistantsHintShort": "Assistants auto-generated from your local CLIs, plus ones you created or duplicated from official.",
@@ -1169,7 +1169,7 @@
   "agentManagement": {
     "localAgents": "Local Agents",
     "remoteAgents": "Remote Agents",
-    "localAgentsDescription": "Manage the AI coding agents available on this device. Aion CLI is built in and ships with the app — no install needed; other agents are detected only after their CLI is installed locally.",
+    "localAgentsDescription": "Manage local Codex, Kiro V3 and ZCode connections. Sign in through the original software, then choose a model in Xuzhou.",
     "localAgentsSetupLink": "Setup guide",
     "goToChat": "Start Chat",
     "remoteAgentsDescription": "Only remote OpenClaw connections are supported for now. Other agents are in development.",
@@ -1355,7 +1355,7 @@
       "diagnose": "I ran into a problem with 续舟, please help me diagnose it.\n\n[Module] {{module}}\n[Description] {{description}}\n[Attachments] see the screenshots in the input.\n\nPlease diagnose the cause and tell me how to fix it.",
       "diagnoseChatError": "I ran into an error during a conversation in 续舟, please help me diagnose it.\n\n[Error] {{error}}\n\nPlease diagnose the cause and tell me how to fix it."
     },
-    "solveWithButler": "Ask the Butler"
+    "solveWithButler": "Diagnose in Xuzhou"
   },
   "providerIdConflict": "Provider ID already exists. Please try again.",
   "autoInjectedSkillsHint": "Loaded automatically into every conversation — no need to enable them; the agent decides when to use them.",
@@ -1485,7 +1485,26 @@
     "connectSsh": "Connect independent repair",
     "logs": "Recent logs",
     "disk": "Disk",
-    "memory": "Memory"
+    "memory": "Memory",
+    "activity": "Collaboration activity",
+    "activityHint": "Messages, tool calls and delivery receipts for this project. A tool response or a queued report does not mean the whole task is finished. Only events received by Xuzhou are shown.",
+    "activityEmpty": "No collaboration activity in this project yet.",
+    "activityRunning": "In progress",
+    "activityFailed": "Failed",
+    "activityStopped": "Stopped",
+    "activityReview": "Needs verification",
+    "activityToolDone": "Tool returned",
+    "activityDone": "Completed",
+    "activityRecorded": "Recorded",
+    "activityReply": "Lobster replied",
+    "activitySent": "Sent to Lobster",
+    "petHint": "Click to talk, sync or repair",
+    "petOpen": "Open Lobster functions",
+    "petDragHint": "Drag the lobster to move it",
+    "petChat": "Talk and sync",
+    "petListen": "Listen and summarize",
+    "permissionReset": "Revoke remembered tool access",
+    "permissionResetFailed": "Could not revoke tool access. Please retry."
   },
   "workspace": {
     "history": "Import a chat",

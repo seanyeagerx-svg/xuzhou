@@ -110,7 +110,7 @@ export default function SyncPane({ controls, projectId }: { controls: LobsterCon
                   ? t('settings.lobster.title')
                   : m.role === 'report'
                     ? t('settings.lobster.workReport')
-                    : t('settings.lobster.you')}
+                    : m.agentId || t('settings.lobster.you')}
               </Typography.Text>
               <pre className={styles.output}>
                 {m.text || (m.status === 'running' ? t('settings.lobster.replying') : '')}

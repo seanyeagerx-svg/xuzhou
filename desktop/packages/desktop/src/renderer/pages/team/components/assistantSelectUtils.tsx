@@ -5,10 +5,12 @@ import ThemedLogo from '@/renderer/components/agent/ThemedLogo';
 import { resolveAssistantName } from '@renderer/utils/model/assistantDisplay';
 import { assistantRuntimeKey, type Assistant } from '@/common/types/agent/assistantTypes';
 
-/** Team leader selector entry derived from the unified assistant catalog. */
+/** A selectable AI model, backed by an assistant execution connection. */
 export type TeamAssistantOption = {
   id: string;
   name: string;
+  /** Exact native model choice; multiple models can share an assistant id. */
+  model?: string;
   /** Execution backend (claude, gemini, qwen, …). */
   backend?: string;
   /** Avatar token — a backend-resolved URL or an emoji. */
@@ -31,7 +33,32 @@ export function assistantToOption(assistant: Assistant, localeKey = 'en-US'): Te
 }
 
 export function assistantKey(assistant: TeamAssistantOption): string {
-  return assistant.id;
+  return assistant.model ? `${assistant.id}::${encodeURIComponent(assistant.model)}` : assistant.id;
+}
+
+export type TeamModelCatalog = {
+  models: Array<{ id: string; label: string; provider: string }>;
+  errors: Array<{ provider: string; message: string }>;
+};
+
+/** Project native models onto their connections without losing the selected model. */
+export function teamModelOptions(
+  assistants: Array<Assistant & { provider: string }>,
+  catalog: TeamModelCatalog,
+  localeKey: string
+): TeamAssistantOption[] {
+  return catalog.models.flatMap((model) => {
+    const connection = assistants.find((assistant) => assistant.provider === model.provider);
+    if (!connection) return [];
+    return [
+      {
+        ...assistantToOption(connection, localeKey),
+        name: model.label,
+        model: model.id,
+        backend: 'xuzhou/' + model.provider,
+      },
+    ];
+  });
 }
 
 export function assistantFromId(

@@ -42,8 +42,8 @@
     "dispatchAgentPlaceholder": "选择团队 Leader 助手",
     "subAgentsPlaceholder": "选择协作助手",
     "confirm": "确认创建",
-    "noSupportedAgents": "未检测到可用的助手",
-    "supportedAgentsHint": "目前支持 Claude 和 Aion CLI 助手，更多助手适配中",
+    "noSupportedAgents": "未检测到可用的 AI 模型，请检查对应连接并刷新。",
+    "supportedAgentsHint": "可添加本机 Codex、Kiro V3、ZCode；需要对应软件已登录并提供可用模型。",
     "leaderDesc": "接收你的指令，拆解任务并分配给团队中的助手",
     "searchPlaceholder": "搜索",
     "noSearchResults": "未找到结果",
@@ -65,19 +65,19 @@
     "teammate": "队员",
     "selectAtLeastOneMember": "请至少选择一个助手当团队 Leader。",
     "selectOneLeader": "请选择一个 Team Leader",
-    "subtitle": "让多个 AI 助手组队协作。建议一个团队只专注一个目标，不同任务分开建。",
+    "subtitle": "选择 AI 模型组成团队，共用一个项目；成员可随时增减。",
     "nameLabel": "团队名",
-    "workspaceLabel": "工作空间",
-    "allAssistantsWithCount": "所有助手 ({{count}})",
+    "workspaceLabel": "共享项目",
+    "allAssistantsWithCount": "可用 AI 模型（{{count}}）",
     "selectedMembersWithCount": "已选成员 {{count}} · ⚑ = Leader",
     "selectedMembersTitleWithCount": "已选成员 {{count}}",
     "leaderLegend": "= Leader",
-    "membersHelper": "选择团队成员并指定一个 Leader。同一个助手可被多次选择。",
-    "memberHint": "没有合适的助手当队员？创建后可让 Leader 在对话中创建临时队员。"
+    "membersHelper": "选择具体 AI 模型，并指定一名协调者。同一来源可以添加多个模型。",
+    "memberHint": "成员共享项目文件、任务和协作消息；各成员的单聊分别保留。"
   },
   "removeAgent": {
     "confirmTitle": "移除团队成员",
-    "confirmContent": "确定将该成员移出团队吗？",
+    "confirmContent": "将该 AI 移出团队？已有聊天保留为本地对话，项目文件和其他成员不受影响。",
     "confirmContentActive": "该成员正在工作中，确定要强制移除吗？其当前工作会被中断。"
   },
   "emptyState": {
@@ -93,7 +93,7 @@
   },
   "addMember": {
     "title": "添加成员",
-    "subtitle": "同一助手可被反复添加",
+    "subtitle": "选择具体 AI 模型，同一来源可添加多个模型。",
     "searchAssistants": "搜索助手...",
     "addFailed": "添加成员失败",
     "noSearchResults": "未找到结果",

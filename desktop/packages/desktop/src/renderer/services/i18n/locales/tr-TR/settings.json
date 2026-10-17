@@ -172,7 +172,7 @@
   "assistantTabMine": "Asistanlarım",
   "assistantTabOfficial": "Resmi",
   "assistantHomeLead": "Asistanlar, becerileri ve araçları önceden yüklenmiş, çalışmaya hazır yapay zeka uzmanlarıdır. Burada yerel CLI araçlarınız, kendinize göre uyarladığınız asistanlar ve bir dizi resmi uzman bulunur. Etkinleştirildiğinde sohbetlerinizde, ekiplerinizde ve zamanlanmış görevlerinizde görünür ve ihtiyaç duyduğunuzda hazır olurlar.",
-  "assistantHomeLeadShort": "Beceri ve araçlarla önceden yapılandırılmış, hemen kullanıma hazır yapay zekâ uzmanları. Etkinleştirdikten sonra sohbetlerde, ekiplerde ve zamanlanmış görevlerde kullanabilirsiniz.",
+  "assistantHomeLeadShort": "Manage connected software and team members. Existing conversations are preserved.",
   "assistantRuntimeLabel": "Agent:",
   "assistantGoChat": "Sohbet",
   "assistantReorderHint": "Sıralamak için sürükleyin — bu, bir asistan seçtiğiniz her yerde (ana ekran, ekipler, zamanlanmış görevler…) görüntülenme sırasını belirler.",
@@ -1157,7 +1157,7 @@
   "agentManagement": {
     "localAgents": "Yerel Ajanlar",
     "remoteAgents": "Uzak Ajanlar",
-    "localAgentsDescription": "Bu cihazda kullanılabilen yapay zekâ kodlama aracılarını yönetin. Aion CLI yerleşiktir ve uygulamayla birlikte gelir — kuruluma gerek yoktur; diğer aracılar yalnızca CLI’leri yerel olarak kurulduktan sonra algılanır.",
+    "localAgentsDescription": "Manage local Codex, Kiro V3 and ZCode connections. Sign in through the original software, then choose a model in Xuzhou.",
     "localAgentsSetupLink": "Kurulum kılavuzu",
     "goToChat": "Sohbete Başla",
     "remoteAgentsDescription": "Şimdilik yalnızca OpenClaw uzak bağlantısı desteklenmektedir. Diğer ajanlar geliştirilmektedir.",
@@ -1355,7 +1355,7 @@
       "diagnose": "续舟 kullanırken bir sorunla karşılaştım, teşhis etmeme yardım et.\n\n[Modül] {{module}}\n[Açıklama] {{description}}\n[Ekler] giriş alanındaki ekran görüntülerine bakın.\n\nLütfen nedenini teşhis et ve nasıl düzelteceğimi söyle.",
       "diagnoseChatError": "续舟 sohbeti sırasında bir hatayla karşılaştım, teşhis etmeme yardım et.\n\n[Hata] {{error}}\n\nLütfen nedenini teşhis et ve nasıl düzelteceğimi söyle."
     },
-    "solveWithButler": "Kâhya'ya sor"
+    "solveWithButler": "Diagnose in Xuzhou"
   },
   "providerIdConflict": "Provider ID zaten var. Lütfen tekrar deneyin.",
   "autoInjectedSkillsHint": "Her sohbete otomatik olarak yüklenir — etkinleştirmeye gerek yoktur; aracı bunları ne zaman kullanacağına karar verir.",
@@ -1485,7 +1485,26 @@
     "connectSsh": "Connect independent repair",
     "logs": "Recent logs",
     "disk": "Disk",
-    "memory": "Memory"
+    "memory": "Memory",
+    "activity": "Collaboration activity",
+    "activityHint": "Messages, tool calls and delivery receipts for this project. A tool response or a queued report does not mean the whole task is finished. Only events received by Xuzhou are shown.",
+    "activityEmpty": "No collaboration activity in this project yet.",
+    "activityRunning": "In progress",
+    "activityFailed": "Failed",
+    "activityStopped": "Stopped",
+    "activityReview": "Needs verification",
+    "activityToolDone": "Tool returned",
+    "activityDone": "Completed",
+    "activityRecorded": "Recorded",
+    "activityReply": "Lobster replied",
+    "activitySent": "Sent to Lobster",
+    "petHint": "Click to talk, sync or repair",
+    "petOpen": "Open Lobster functions",
+    "petDragHint": "Drag the lobster to move it",
+    "petChat": "Talk and sync",
+    "petListen": "Listen and summarize",
+    "permissionReset": "Revoke remembered tool access",
+    "permissionResetFailed": "Could not revoke tool access. Please retry."
   },
   "workspace": {
     "history": "Import a chat",

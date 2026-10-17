@@ -16,7 +16,7 @@ let agent;
 try {
   const agents = readAgents(configFile);
   const connection = new AgentSideConnection(conn => {
-    agent = new WorkbenchAgent(conn, { agents, dataDir, lobster });
+    agent = new WorkbenchAgent(conn, { agents, dataDir, lobster, preferredProvider:arg('--preferred-provider') });
     return agent;
   }, ndJsonStream(Writable.toWeb(process.stdout), Readable.toWeb(process.stdin)));
   const close = () => { agent?.close(); lobster?.close(); };

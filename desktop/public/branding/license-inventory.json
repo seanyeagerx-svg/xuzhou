@@ -3,7 +3,7 @@
   "scope": "Conservative production/optional npm graph including bundled npm/Corepack; every registry crate in the pinned Core lock. Exact installer contents are verified separately.",
   "npmCount": 1133,
   "rustCount": 615,
-  "aioncoreSha256": "920aba62a6ff7ff25d51ac1fd740b1043d6899c875648f807c59547512d9bf9d",
+  "aioncoreSha256": "c10ff36ce2f3d9567fbfe64e62bae7e9d958e488476fd8fc8709057c9f0723ec",
   "coreSourceCommit": "47e66d0d151123e973b3fd1e77afcb5671b3f8c5",
   "coreLockSha256": "9330b7429f5870bc50d3450e41ce1730ab08798314d42eb7bff9b8ee4631d59a",
   "electronVersion": "44.8.0",

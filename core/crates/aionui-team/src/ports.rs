@@ -13,6 +13,16 @@ use crate::error::TeamError;
 /// or persisted handshake shapes to the Team domain.
 #[async_trait]
 pub trait TeamToolCapabilityPort: Send + Sync {
+    /// Resolve the selected assistant's connection rather than an ambiguous ACP backend.
+    async fn resolve_for_assistant(
+        &self,
+        user_id: &str,
+        backend: &str,
+        _assistant_id: Option<&str>,
+    ) -> Result<ResolvedBackendCapabilities, TeamError> {
+        self.resolve(user_id, backend, None).await
+    }
+
     async fn resolve(
         &self,
         user_id: &str,

@@ -57,7 +57,7 @@ const TeamMemberDraftList: React.FC<Props> = ({
       </div>
       <p className='m-0 mb-12px text-12px leading-18px text-t-tertiary'>
         {t('team.create.membersHelper', {
-          defaultValue: 'Choose team members and assign one Leader. The same assistant can be selected multiple times.',
+          defaultValue: 'Choose AI models and one coordinator. Several models can use the same connection.',
         })}
       </p>
       <div
@@ -74,7 +74,7 @@ const TeamMemberDraftList: React.FC<Props> = ({
             <span className='text-12px leading-18px text-t-tertiary'>
               {t('team.create.memberHint', {
                 defaultValue:
-                  'No suitable assistant as a member? After creation, let the Leader create temporary team members in chat.',
+                  'Members share project files, tasks and collaboration messages. Their individual chats are kept separately.',
               })}
             </span>
           </div>

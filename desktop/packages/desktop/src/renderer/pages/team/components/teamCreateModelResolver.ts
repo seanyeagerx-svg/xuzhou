@@ -5,6 +5,7 @@
  */
 
 import { ipcBridge } from '@/common';
+import { workspaceCall } from '@/renderer/components/layout/Sider/SiderNav/WorkspacePanel/api';
 import { assistantRuntimeKey, type AssistantDetail } from '@/common/types/agent/assistantTypes';
 
 /**
@@ -26,8 +27,19 @@ import { assistantRuntimeKey, type AssistantDetail } from '@/common/types/agent/
 export async function resolveDefaultTeamAgentModel(params: {
   assistant_id?: string;
   assistant_backend?: string;
+  model?: string;
 }): Promise<string> {
-  const { assistant_id, assistant_backend } = params;
+  const { assistant_id, assistant_backend, model } = params;
+  if (assistant_backend?.startsWith('xuzhou/')) {
+    const provider = assistant_backend.slice(7);
+    const catalog = await workspaceCall<{
+      models: Array<{ id: string; provider: string }>;
+      errors: Array<{ provider: string; message: string }>;
+    }>('chat-models');
+    const choice = catalog.models.find((m) => m.provider === provider && (!model || m.id === model));
+    if (!choice) throw Error(catalog.errors.find((e) => e.provider === provider)?.message || 'No available model');
+    return choice.id;
+  }
 
   const assistantDetail = await resolveAssistantDetail(assistant_id);
   if (assistantDetail) {

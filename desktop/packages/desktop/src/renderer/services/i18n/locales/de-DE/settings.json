@@ -172,7 +172,7 @@
   "assistantTabMine": "Meine Assistenten",
   "assistantTabOfficial": "Offiziell",
   "assistantHomeLead": "Assistenten sind einsatzbereite KI-Experten, vorab ausgestattet mit Fähigkeiten und Werkzeugen. Hier findest du deine lokalen CLIs, die Assistenten, die du selbst anpasst, und eine Reihe offizieller Experten. Einmal aktiviert, erscheinen sie in deinen Chats, Teams und geplanten Aufgaben — bereit, wenn du sie brauchst.",
-  "assistantHomeLeadShort": "Einsatzbereite KI-Experten mit vorkonfigurierten Fähigkeiten und Werkzeugen. Nach dem Aktivieren kannst du sie in Chats, Teams und geplanten Aufgaben verwenden.",
+  "assistantHomeLeadShort": "Manage connected software and team members. Existing conversations are preserved.",
   "assistantRuntimeLabel": "Agent:",
   "assistantGoChat": "Chat",
   "assistantReorderHint": "Zum Umsortieren ziehen — das bestimmt die Anzeigereihenfolge überall dort, wo du einen Assistenten auswählst (Startseite, Teams, geplante Aufgaben…).",
@@ -1159,7 +1159,7 @@
   "agentManagement": {
     "localAgents": "Lokale Agenten",
     "remoteAgents": "Remote-Agenten",
-    "localAgentsDescription": "Verwalte die auf diesem Gerät verfügbaren KI-Coding-Agenten. Aion CLI ist integriert und wird mit der App geliefert – keine Installation nötig; andere Agenten werden erst nach lokaler CLI-Installation erkannt.",
+    "localAgentsDescription": "Manage local Codex, Kiro V3 and ZCode connections. Sign in through the original software, then choose a model in Xuzhou.",
     "localAgentsSetupLink": "Einrichtungsanleitung",
     "goToChat": "Chat starten",
     "remoteAgentsDescription": "Derzeit werden nur Remote-OpenClaw-Verbindungen unterstützt. Andere Agenten sind in Entwicklung.",
@@ -1310,7 +1310,7 @@
     "addViaChat": "Per Chat hinzufügen",
     "addManually": "Manuell hinzufügen",
     "solveViaChat": "Per Chat lösen",
-    "enabledToast": "AionUi-Butler für dich aktiviert",
+    "enabledToast": "Xuzhou-Butler für dich aktiviert",
     "prompt": {
       "createAssistant": "Hilf mir, einen neuen Assistenten zu erstellen, und führe mich durch die Einrichtung.",
       "addCustomAgent": "Hilf mir, einen benutzerdefinierten Agent hinzuzufügen.",
@@ -1321,7 +1321,7 @@
       "diagnose": "Ich habe ein Problem mit 续舟, hilf mir bei der Diagnose.\n\n[Modul] {{module}}\n[Beschreibung] {{description}}\n[Anhänge] siehe die Screenshots im Eingabefeld.\n\nBitte diagnostiziere die Ursache und sag mir, wie ich es behebe.",
       "diagnoseChatError": "Während einer Unterhaltung in 续舟 ist ein Fehler aufgetreten, hilf mir bei der Diagnose.\n\n[Fehler] {{error}}\n\nBitte diagnostiziere die Ursache und sag mir, wie ich es behebe."
     },
-    "solveWithButler": "Butler fragen"
+    "solveWithButler": "Diagnose in Xuzhou"
   },
   "browserNotification": {
     "enable": "Enable browser notifications",
@@ -1485,7 +1485,26 @@
     "connectSsh": "Connect independent repair",
     "logs": "Recent logs",
     "disk": "Disk",
-    "memory": "Memory"
+    "memory": "Memory",
+    "activity": "Collaboration activity",
+    "activityHint": "Messages, tool calls and delivery receipts for this project. A tool response or a queued report does not mean the whole task is finished. Only events received by Xuzhou are shown.",
+    "activityEmpty": "No collaboration activity in this project yet.",
+    "activityRunning": "In progress",
+    "activityFailed": "Failed",
+    "activityStopped": "Stopped",
+    "activityReview": "Needs verification",
+    "activityToolDone": "Tool returned",
+    "activityDone": "Completed",
+    "activityRecorded": "Recorded",
+    "activityReply": "Lobster replied",
+    "activitySent": "Sent to Lobster",
+    "petHint": "Click to talk, sync or repair",
+    "petOpen": "Open Lobster functions",
+    "petDragHint": "Drag the lobster to move it",
+    "petChat": "Talk and sync",
+    "petListen": "Listen and summarize",
+    "permissionReset": "Revoke remembered tool access",
+    "permissionResetFailed": "Could not revoke tool access. Please retry."
   },
   "workspace": {
     "history": "Import a chat",

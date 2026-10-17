@@ -1,4 +1,4 @@
-# Rebuilding Xuzhou 2.3.1-beta.1 on Windows x64
+# Rebuilding Xuzhou 2.3.1-beta.2 on Windows x64
 
 Use Node.js 24, Bun 1.4.3, Rust/MSVC C++ Build Tools, CMake and NSIS 3.12. The pinned dependency locks and original license notices are included. Install tools into a location you control; no developer account, server login or private profile is needed.
 

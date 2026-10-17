@@ -12,6 +12,12 @@ import type { Assistant } from '@/common/types/agent/assistantTypes';
 const createTeamInvokeMock = vi.fn();
 const resolveDefaultTeamAgentModelMock = vi.fn();
 const messageErrorMock = vi.fn();
+const nativeCatalog = vi.hoisted(() => ({ enabled: false }));
+const nativeCallMock = vi.fn();
+vi.mock('@/renderer/components/layout/Sider/SiderNav/WorkspacePanel/api', () => ({
+  hasWorkbench: () => nativeCatalog.enabled,
+  workspaceCall: (...args: unknown[]) => nativeCallMock(...args),
+}));
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -128,6 +134,8 @@ describe('TeamCreateModal', () => {
     resolveDefaultTeamAgentModelMock.mockReset();
     resolveDefaultTeamAgentModelMock.mockResolvedValue(undefined);
     messageErrorMock.mockReset();
+    nativeCatalog.enabled = false;
+    nativeCallMock.mockReset();
   });
 
   it('keeps blocked assistants visible and prevents selecting them', () => {
@@ -185,8 +193,7 @@ describe('TeamCreateModal', () => {
   it('renders the reference two-column creation layout with details on the selected-member side', () => {
     render(<TeamCreateModal visible onClose={vi.fn()} onCreated={vi.fn()} />);
 
-    const subtitle =
-      'Let multiple AI assistants team up and collaborate. We suggest one team focuses on a single goal — create separate teams for different tasks.';
+    const subtitle = 'Choose AI models for one shared project. Add or remove members whenever you need.';
     expect(screen.getByRole('heading', { name: 'New Team' })).toBeInTheDocument();
     expect(screen.getByText(subtitle)).toBeInTheDocument();
     expect(screen.getByTestId('team-create-modal')).toHaveAttribute('data-width', '900');
@@ -203,8 +210,8 @@ describe('TeamCreateModal', () => {
     expect(layout).toHaveStyle({ height: 'min(54vh, 470px)', minHeight: '390px' });
     expect(assistantPane).toHaveClass('px-20px', 'pt-12px', 'pb-18px');
     expect(detailsPane).toHaveClass('px-20px', 'pt-12px', 'pb-14px');
-    expect(within(assistantPane).getByText('All assistants (3)')).toBeInTheDocument();
-    expect(within(assistantPane).getByText('All assistants (3)')).toHaveClass('text-15px');
+    expect(within(assistantPane).getByText('Available AI models (3)')).toBeInTheDocument();
+    expect(within(assistantPane).getByText('Available AI models (3)')).toHaveClass('text-15px');
     expect(searchInput.tagName).toBe('INPUT');
     expect(searchInput).toHaveAttribute('placeholder', 'Search');
     expect(within(assistantPane).getByTestId('team-create-agent-picker-body')).not.toHaveClass('bg-fill-1');
@@ -247,6 +254,37 @@ describe('TeamCreateModal', () => {
     expect(payload.agents[0]).not.toHaveProperty('agent_name');
     expect(payload.agents[0]).not.toHaveProperty('agent_type');
     expect(payload).not.toHaveProperty('assistants');
+  });
+
+  it('creates two selected AI models on the same connection and keeps their exact choices', async () => {
+    nativeCatalog.enabled = true;
+    nativeCallMock.mockImplementation(async (action: string) =>
+      action === 'team-options'
+        ? { assistants: [{ ...assistants()[0], id: 'native-codex', provider: 'codex' }] }
+        : {
+            models: [
+              { id: 'codex/first', provider: 'codex', label: 'First AI' },
+              { id: 'codex/second', provider: 'codex', label: 'Second AI' },
+            ],
+            errors: [],
+          }
+    );
+    resolveDefaultTeamAgentModelMock.mockImplementation(async (p: { model: string }) => p.model);
+    render(<TeamCreateModal visible onClose={vi.fn()} onCreated={vi.fn()} />);
+    fireEvent.change(screen.getByTestId('team-create-name-input'), { target: { value: 'Shared AI project' } });
+    fireEvent.click(await screen.findByTestId('team-create-agent-option-native-codex::codex%2Fsecond'));
+    fireEvent.click(screen.getByTestId('team-create-agent-option-native-codex::codex%2Ffirst'));
+    fireEvent.click(screen.getByRole('button', { name: 'Confirm Create' }));
+    await waitFor(() => expect(createTeamInvokeMock).toHaveBeenCalledTimes(1));
+    expect(
+      createTeamInvokeMock.mock.calls[0][0].agents.map((a: { assistant_id: string; model: string }) => [
+        a.assistant_id,
+        a.model,
+      ])
+    ).toEqual([
+      ['native-codex', 'codex/second'],
+      ['native-codex', 'codex/first'],
+    ]);
   });
 
   it('selectedMembers_allows_duplicate_assistant_instances', async () => {

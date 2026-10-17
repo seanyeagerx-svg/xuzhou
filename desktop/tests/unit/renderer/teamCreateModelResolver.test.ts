@@ -7,6 +7,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const getAssistantMock = vi.fn();
+const catalogMock = vi.fn();
+vi.mock('@/renderer/components/layout/Sider/SiderNav/WorkspacePanel/api', () => ({
+  workspaceCall: (...args: unknown[]) => catalogMock(...args),
+}));
 
 vi.mock('@/common', () => ({
   ipcBridge: {
@@ -23,6 +27,7 @@ import { resolveDefaultTeamAgentModel } from '@/renderer/pages/team/components/t
 describe('resolveDefaultTeamAgentModel', () => {
   beforeEach(() => {
     getAssistantMock.mockReset();
+    catalogMock.mockReset();
   });
 
   it('prefers the assistant fixed default model over agent-level fallbacks', async () => {
@@ -147,5 +152,38 @@ describe('resolveDefaultTeamAgentModel', () => {
         assistant_backend: 'claude',
       })
     ).resolves.toBe('default');
+  });
+
+  it('uses the exact AI model selected even when its connection has a different default', async () => {
+    catalogMock.mockResolvedValue({
+      models: [
+        { id: 'codex/default', provider: 'codex' },
+        { id: 'codex/selected', provider: 'codex' },
+      ],
+      errors: [],
+    });
+    await expect(
+      resolveDefaultTeamAgentModel({
+        assistant_id: 'connection',
+        assistant_backend: 'xuzhou/codex',
+        model: 'codex/selected',
+      })
+    ).resolves.toBe('codex/selected');
+  });
+
+  it('never substitutes a default for an unavailable or mismatched selected AI', async () => {
+    catalogMock.mockResolvedValue({
+      models: [
+        { id: 'codex/default', provider: 'codex' },
+        { id: 'kiro-v3/auto', provider: 'kiro-v3' },
+      ],
+      errors: [],
+    });
+    await expect(
+      resolveDefaultTeamAgentModel({ assistant_backend: 'xuzhou/codex', model: 'codex/removed' })
+    ).rejects.toThrow();
+    await expect(
+      resolveDefaultTeamAgentModel({ assistant_backend: 'xuzhou/codex', model: 'kiro-v3/auto' })
+    ).rejects.toThrow();
   });
 });

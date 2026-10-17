@@ -90,6 +90,7 @@ const AcpModelSelector: React.FC<{
     isSetting,
     selectModel,
     thoughtLevel,
+    toolPermissions,
     setStatus,
     setConfigOption,
     isConfigOptionBlocked = () => false,
@@ -284,6 +285,20 @@ const AcpModelSelector: React.FC<{
               disabled={isRuntimeSetting || isConfigOptionBlocked('model')}
               onSelect={selectModel}
             />
+          )}
+          {toolPermissions === 'remembered' && (
+            <Menu.Item
+              key='tool-permissions-reset'
+              disabled={isRuntimeSetting || isConfigOptionBlocked('tool_permissions')}
+              onClick={() => {
+                void setConfigOption('tool_permissions', 'ask').catch(() =>
+                  Message.error(t('settings.lobster.permissionResetFailed'))
+                );
+              }}
+              data-testid='acp-permissions-reset'
+            >
+              {t('settings.lobster.permissionReset')}
+            </Menu.Item>
           )}
         </Menu>
       }

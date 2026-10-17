@@ -8,14 +8,17 @@ import { useLobster } from './useLobster';
 import SyncPane from './SyncPane';
 import MaintenancePane from './MaintenancePane';
 import ConnectionForm from './ConnectionForm';
+import Activity from './Activity';
+import PetLauncher from './Companion/PetLauncher';
+import LobsterCompanion from './Companion';
 import styles from './LobsterPanel.module.css';
 
 export default function LobsterPanel({ collapsed }: { collapsed: boolean }) {
   const { t } = useTranslation();
-  const controls = useLobster(),
-    { state, call, error } = controls;
   const [open, setOpen] = useState(() => localStorage.getItem('workbench:lobster-open') === 'true'),
     [projectId, setProjectId] = useState(() => localStorage.getItem('workbench:lobster-project') || '');
+  const controls = useLobster(projectId),
+    { state, call, error } = controls;
   const [tab, setTab] = useState(() => localStorage.getItem('workbench:lobster-tab') || 'sync');
   useEffect(() => {
     const listener = (e: Event) => {
@@ -27,7 +30,7 @@ export default function LobsterPanel({ collapsed }: { collapsed: boolean }) {
   useEffect(() => {
     const listener = (e: Event) => {
       const value = (e as CustomEvent<string>).detail;
-      if (['sync', 'maintenance', 'connection'].includes(value)) setTab(value);
+      if (['activity', 'sync', 'maintenance', 'connection'].includes(value)) setTab(value);
     };
     window.addEventListener('workbench:lobster-tab', listener);
     return () => window.removeEventListener('workbench:lobster-tab', listener);
@@ -42,18 +45,38 @@ export default function LobsterPanel({ collapsed }: { collapsed: boolean }) {
     localStorage.setItem('workbench:lobster-tab', tab);
   }, [tab]);
   const [workspace, setWorkspace] = useState('');
+  const [conversationId, setConversationId] = useState('');
+  const [contextTitle, setContextTitle] = useState('');
   const location = useLocation();
   useEffect(() => {
     let current = true;
     const id = location.pathname.match(/\/conversation\/([^/]+)/)?.[1];
-    if (id)
+    const teamId = location.pathname.match(/\/team\/([^/]+)/)?.[1];
+    setWorkspace('');
+    setConversationId('');
+    setContextTitle('');
+    if (id || teamId) setProjectId('');
+    if (teamId) {
+      void ipcBridge.team.get
+        .invoke({ id: teamId })
+        .then((team) => {
+          if (!current) return;
+          setWorkspace(team?.workspace || '');
+          setContextTitle(team?.name || '');
+          setConversationId(team?.assistants.find((member) => member.role === 'leader')?.conversation_id || '');
+        })
+        .catch(() => {});
+    } else if (id)
       void ipcBridge.conversation.get
         .invoke({ id })
         .then((c) => {
-          if (current) setWorkspace(c?.extra?.workspace || '');
+          if (current) {
+            setWorkspace(c?.extra?.workspace || '');
+            setConversationId(id);
+            setContextTitle(c?.name || '');
+          }
         })
         .catch(() => {});
-    else setWorkspace('');
     return () => {
       current = false;
     };
@@ -61,15 +84,31 @@ export default function LobsterPanel({ collapsed }: { collapsed: boolean }) {
   useEffect(() => {
     if (!state?.available) return;
     const matching = state.projects.find(
-      (p) => p.root.replace(/\\/g, '/').toLowerCase() === workspace.replace(/\\/g, '/').toLowerCase()
+      (p) =>
+        p.root.replace(/\\/g, '/').replace(/\/+$/, '').toLowerCase() ===
+        workspace.replace(/\\/g, '/').replace(/\/+$/, '').toLowerCase()
     );
     if (matching) setProjectId(matching.id);
-    else setProjectId((current) => current || state.projects[0]?.id || '');
-  }, [workspace, state?.projects?.map((p) => p.id).join(',')]);
+    else if (workspace) setProjectId('');
+    else if (!/\/(?:conversation|team)\//.test(location.pathname))
+      setProjectId((current) => (state.projects.some((p) => p.id === current) ? current : state.projects[0]?.id || ''));
+  }, [workspace, location.pathname, state?.projects?.map((p) => p.id).join(',')]);
   if (!state || (!state.available && !state.error)) return null;
   const selected = state.projects?.find((p) => p.id === projectId);
   return (
     <>
+      <PetLauncher
+        state={state}
+        projectId={projectId}
+        conversationId={conversationId}
+        contextTitle={contextTitle}
+        onOpen={(value) => {
+          setTab(value);
+          window.dispatchEvent(new CustomEvent('workbench:panel', { detail: 'lobster' }));
+          setOpen(true);
+        }}
+      />
+      {conversationId && <LobsterCompanion key={conversationId} conversationId={conversationId} showLauncher={false} />}
       <Tooltip content={t('settings.lobster.title')} position='right'>
         <Button
           type='text'
@@ -121,37 +160,42 @@ export default function LobsterPanel({ collapsed }: { collapsed: boolean }) {
                 {state.maintenance.ready ? t('settings.lobster.connected') : t('settings.lobster.offline')}
               </Tag>
             </Space>
-            {state.approvals.map((a) => (
-              <Alert
-                key={a.id}
-                type='warning'
-                title={`${a.agentId} · ${a.title}`}
-                content={
-                  <div className={styles.stack}>
-                    <Typography.Text>{state.projects.find((p) => p.id === a.projectId)?.name}</Typography.Text>
-                    <pre className={styles.output}>{JSON.stringify(a.details, null, 2)}</pre>
-                    <Space>
-                      <Button
-                        type='primary'
-                        onClick={() => {
-                          void call('decision', { id: a.id, allow: true });
-                        }}
-                      >
-                        {t('settings.lobster.allowOnce')}
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          void call('decision', { id: a.id, allow: false });
-                        }}
-                      >
-                        {t('settings.lobster.deny')}
-                      </Button>
-                    </Space>
-                  </div>
-                }
-              />
-            ))}
+            {state.approvals
+              .filter((a) => a.projectId === projectId)
+              .map((a) => (
+                <Alert
+                  key={a.id}
+                  type='warning'
+                  title={`${a.agentId} · ${a.title}`}
+                  content={
+                    <div className={styles.stack}>
+                      <Typography.Text>{state.projects.find((p) => p.id === a.projectId)?.name}</Typography.Text>
+                      <pre className={styles.output}>{JSON.stringify(a.details, null, 2)}</pre>
+                      <Space>
+                        <Button
+                          type='primary'
+                          onClick={() => {
+                            void call('decision', { id: a.id, allow: true });
+                          }}
+                        >
+                          {t('settings.lobster.allowOnce')}
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            void call('decision', { id: a.id, allow: false });
+                          }}
+                        >
+                          {t('settings.lobster.deny')}
+                        </Button>
+                      </Space>
+                    </div>
+                  }
+                />
+              ))}
             <Tabs activeTab={tab} onChange={setTab} destroyOnHide={false}>
+              <Tabs.TabPane key='activity' title={t('settings.lobster.activity')}>
+                <Activity controls={controls} projectId={projectId} />
+              </Tabs.TabPane>
               <Tabs.TabPane key='sync' title={t('settings.lobster.sync')}>
                 <SyncPane controls={controls} projectId={projectId} />
               </Tabs.TabPane>

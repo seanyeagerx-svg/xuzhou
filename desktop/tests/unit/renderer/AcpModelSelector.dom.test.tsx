@@ -25,6 +25,7 @@ type MockAcpModelInfoResult = {
   isSetting: boolean;
   selectModel: (modelId: string) => void;
   thoughtLevel: AcpDerivedOption | null;
+  toolPermissions?: 'ask' | 'remembered';
   setStatus: AcpConfigSetStatus;
   setConfigOption: (optionId: string, value: string) => Promise<unknown>;
 };
@@ -183,6 +184,13 @@ describe('AcpModelSelector runtime options', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     useAcpModelInfoMock.mockReturnValue(makeResult());
+  });
+  it('lets a team member revoke only its remembered tool access through the team config port', async () => {
+    const setConfigOption = vi.fn().mockResolvedValue(undefined);
+    useAcpModelInfoMock.mockReturnValue(makeResult({ toolPermissions: 'remembered', setConfigOption }));
+    render(<AcpModelSelector conversation_id='team-member' />);
+    fireEvent.click(screen.getByText('settings.lobster.permissionReset'));
+    await waitFor(() => expect(setConfigOption).toHaveBeenCalledWith('tool_permissions', 'ask'));
   });
 
   it('shows the current model and thought level in the header pill', () => {

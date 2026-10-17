@@ -42,8 +42,8 @@
     "dispatchAgentPlaceholder": "Выбрать лидера команды",
     "subAgentsPlaceholder": "Выбрать ассистентов команды",
     "confirm": "Confirm Create",
-    "noSupportedAgents": "Нет доступных поддерживаемых ассистентов",
-    "supportedAgentsHint": "Сейчас поддерживаются ассистенты Claude и Aion CLI. Другие ассистенты появятся позже.",
+    "noSupportedAgents": "Нет доступных моделей ИИ. Проверьте подключения и обновите список.",
+    "supportedAgentsHint": "Add local Codex, Kiro V3 and ZCode. Each requires its original sign-in and an available model.",
     "leaderDesc": "Понимает ваши цели и координирует ассистентов для выполнения задач",
     "searchPlaceholder": "Search",
     "noSearchResults": "Ничего не найдено",
@@ -65,19 +65,19 @@
     "teammate": "Teammate",
     "selectAtLeastOneMember": "Select at least one assistant as the Team Leader.",
     "selectOneLeader": "Select one Team Leader",
-    "subtitle": "Let multiple AI assistants team up and collaborate. We suggest one team focuses on a single goal — create separate teams for different tasks.",
+    "subtitle": "Выберите модели ИИ для общего проекта. Участников можно добавлять и удалять в любое время.",
     "nameLabel": "Team name",
-    "workspaceLabel": "Workspace",
-    "allAssistantsWithCount": "All assistants ({{count}})",
+    "workspaceLabel": "Общий проект",
+    "allAssistantsWithCount": "Доступные модели ИИ ({{count}})",
     "selectedMembersWithCount": "Selected members {{count}} · ⚑ = Leader",
     "selectedMembersTitleWithCount": "Selected members {{count}}",
     "leaderLegend": "= Leader",
-    "membersHelper": "Choose team members and assign one Leader. The same assistant can be selected multiple times.",
-    "memberHint": "No suitable assistant as a member? After creation, let the Leader create temporary team members in chat."
+    "membersHelper": "Выберите модели ИИ и одного координатора. Одно подключение может использовать несколько моделей.",
+    "memberHint": "Участники делятся файлами проекта, задачами и сообщениями для совместной работы. Личные чаты сохраняются отдельно."
   },
   "removeAgent": {
     "confirmTitle": "Удалить участника команды",
-    "confirmContent": "Remove this member from the team?",
+    "confirmContent": "Удалить этот ИИ из команды? Его чат останется локальной беседой. Файлы проекта и другие участники сохранятся.",
     "confirmContentActive": "This member is working. Remove it anyway? Its current work will be interrupted."
   },
   "emptyState": {
@@ -93,7 +93,7 @@
   },
   "addMember": {
     "title": "Add member",
-    "subtitle": "The same assistant can be added repeatedly",
+    "subtitle": "Выберите конкретную модель ИИ. Одно подключение может использовать несколько моделей.",
     "searchAssistants": "Search assistants...",
     "addFailed": "Failed to add member",
     "noSearchResults": "No results found",

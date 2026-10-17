@@ -10,6 +10,7 @@ import { ipcBridge } from '@/common';
 import type { Assistant } from '@/common/types/agent/assistantTypes';
 import { useAssistantOrder } from '@/renderer/hooks/assistant/useAssistantOrder';
 import { selectableAssistants } from '@/renderer/utils/model/assistantSelection';
+import { isXuzhouAssistant } from '@/renderer/utils/model/agentTypeSupportPolicy';
 
 export type UseConversationAssistantsResult = {
   presetAssistants: Assistant[];
@@ -35,7 +36,7 @@ export const useConversationAssistants = (): UseConversationAssistantsResult => 
   // scheduled tasks. Without one, `selectableAssistants` preserves the legacy
   // CLI → user → official ordering.
   const presetAssistants = useMemo(
-    () => selectableAssistants(assistants ?? [], assistantOrder),
+    () => selectableAssistants((assistants ?? []).filter(isXuzhouAssistant), assistantOrder),
     [assistantOrder, assistants]
   );
 

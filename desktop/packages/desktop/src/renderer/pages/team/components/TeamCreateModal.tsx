@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { Button, Input, Message } from '@arco-design/web-react';
+import { Alert, Button, Input, Message, Spin } from '@arco-design/web-react';
 import type { RefInputType } from '@arco-design/web-react/es/Input/interface';
 import { Plus } from '@icon-park/react';
 import { useTranslation } from 'react-i18next';
@@ -37,15 +37,25 @@ const TeamCreateModal: React.FC<Props> = ({ visible, onClose, onCreated }) => {
   const { user } = useAuth();
   const layout = useLayoutContext();
   const isMobile = layout?.isMobile ?? false;
-  const { assistants: allAssistants } = useTeamAssistantOptions(i18n?.language ?? 'en-US');
+  const [workspace, setWorkspace] = useState('');
+  const {
+    assistants: allAssistants,
+    loading: assistantsLoading,
+    error: assistantsError,
+    refresh: refreshAssistants,
+  } = useTeamAssistantOptions(i18n?.language ?? 'en-US', workspace);
   const [name, setName] = useState('');
   const [selectedMembers, setSelectedMembers] = useState<TeamMemberDraft[]>([]);
   const [leaderSelectionId, setLeaderSelectionId] = useState<string | undefined>(undefined);
-  const [workspace, setWorkspace] = useState('');
   const [loading, setLoading] = useState(false);
   // 窄屏专用：助手选择器以下拉列表形式，锚在“添加成员”按钮上按需唤出。
   const [assistantDropdownOpen, setAssistantDropdownOpen] = useState(false);
   const nameInputRef = useRef<RefInputType | null>(null);
+  const handleRefresh = (): void => {
+    void refreshAssistants().catch((error: unknown): void => {
+      Message.error(getConversationCreateErrorMessage(error, t));
+    });
+  };
 
   const hasOneLeader = useMemo(
     () => Boolean(leaderSelectionId && selectedMembers.some((member) => member.selectionId === leaderSelectionId)),
@@ -101,6 +111,7 @@ const TeamCreateModal: React.FC<Props> = ({ visible, onClose, onCreated }) => {
             const model = await resolveDefaultTeamAgentModel({
               assistant_id: member.assistant.id,
               assistant_backend: member.assistant.backend,
+              ...(member.assistant.model ? { model: member.assistant.model } : {}),
             });
             return [member.selectionId, model] as const;
           } catch (error) {
@@ -144,7 +155,18 @@ const TeamCreateModal: React.FC<Props> = ({ visible, onClose, onCreated }) => {
   // 助手选择器：桌面端嵌在左栏，窄屏端复用同一份放进底部面板。空态文案与逻辑完全一致。
   const assistantPicker = (
     <>
-      {allAssistants.length === 0 ? (
+      {assistantsError && (
+        <Alert
+          type='error'
+          content={getConversationCreateErrorMessage(assistantsError, t)}
+          action={<Button onClick={handleRefresh}>{t('common.refresh')}</Button>}
+        />
+      )}
+      {assistantsLoading && allAssistants.length === 0 ? (
+        <div className='flex min-h-112px items-center justify-center'>
+          <Spin />
+        </div>
+      ) : allAssistants.length === 0 ? (
         <div className='flex min-h-112px items-center justify-center rounded-8px border border-dashed border-border-2 bg-fill-1 py-14px text-13px text-t-tertiary'>
           {t('team.create.noSupportedAgents', { defaultValue: 'No supported assistants available' })}
         </div>
@@ -207,11 +229,16 @@ const TeamCreateModal: React.FC<Props> = ({ visible, onClose, onCreated }) => {
         className='flex min-h-0 flex-col border-e border-border-3 px-20px pb-18px pt-12px'
         data-testid='team-create-assistant-pane'
       >
-        <div className='mb-12px text-15px font-600 leading-22px text-t-secondary'>
-          {t('team.create.allAssistantsWithCount', {
-            count: allAssistants.length,
-            defaultValue: `All assistants (${allAssistants.length})`,
-          })}
+        <div className='mb-12px flex items-center justify-between text-15px font-600 leading-22px text-t-secondary'>
+          <span className='text-15px'>
+            {t('team.create.allAssistantsWithCount', {
+              count: allAssistants.length,
+              defaultValue: `Available AI models (${allAssistants.length})`,
+            })}
+          </span>
+          <Button type='text' size='small' loading={assistantsLoading} onClick={handleRefresh}>
+            {t('common.refresh')}
+          </Button>
         </div>
         {assistantPicker}
       </section>
@@ -237,6 +264,9 @@ const TeamCreateModal: React.FC<Props> = ({ visible, onClose, onCreated }) => {
   const addMemberDropdown = (
     <TeamAssistantPickerDropdown
       assistants={allAssistants}
+      loading={assistantsLoading}
+      error={assistantsError ? getConversationCreateErrorMessage(assistantsError, t) : undefined}
+      onRefresh={handleRefresh}
       onSelect={handleSelectFromDropdown}
       visible={assistantDropdownOpen}
       onVisibleChange={setAssistantDropdownOpen}
@@ -294,8 +324,7 @@ const TeamCreateModal: React.FC<Props> = ({ visible, onClose, onCreated }) => {
       header={{
         title: t('team.create.title', { defaultValue: 'New Team' }),
         subtitle: t('team.create.subtitle', {
-          defaultValue:
-            'Let multiple AI assistants team up and collaborate. We suggest one team focuses on a single goal — create separate teams for different tasks.',
+          defaultValue: 'Choose AI models for one shared project. Add or remove members whenever you need.',
         }),
         showClose: true,
       }}

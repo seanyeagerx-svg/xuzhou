@@ -50,6 +50,19 @@ class Delivery {
   event(e) {
     const c = this.r.state.conversations.find(x => x.agentId === 'openclaw' && x.remoteId === e.sessionId && x.gateway === this.r.gatewayConfig().url);
     if (!c) return;
+    if(e.type==='tool'){
+      c.activities ||= [];
+      const id='remote-tool:'+e.runId+':'+e.toolCallId;
+      let activity=c.activities.find(x=>x.id===id);
+      if(activity&&((Number.isSafeInteger(e.seq)&&Number.isSafeInteger(activity.seq)&&e.seq<=activity.seq)||(['completed','error'].includes(activity.status)&&e.phase!=='result')))return;
+      if(!activity){activity={id,time:Date.now(),agentId:'openclaw',title:e.name||e.toolCallId,status:'running',details:{tool:e.name||e.toolCallId}};c.activities.push(activity);}
+      if(e.args!==undefined)activity.input=safeText(JSON.stringify(e.args),20000);
+      if(e.output!==undefined)activity.output=safeText(typeof e.output==='string'?e.output:JSON.stringify(e.output),20000);
+      activity.status=e.phase==='result'?(e.isError?'error':'completed'):e.phase==='review'?'waiting':'running';
+      if(e.phase==='result'){activity.finishedAt=Date.now();if(e.isError)activity.error=activity.output||'龙虾工具执行失败';}
+      if(Number.isSafeInteger(e.seq))activity.seq=e.seq;
+      this.r.save();return;
+    }
     const reply = c.messages.find(x => x.id === c.pendingReplyId);
     if (reply && e.type === 'replace') reply.text = safeText(e.text, 30000);
     if (['completed', 'error', 'cancelled'].includes(e.type)) {
@@ -125,11 +138,11 @@ class Delivery {
     this.r.save();
     return { state: c.status, conversationId: c.id };
   }
-  async send(projectId, message, wait = false) {
+  async send(projectId, message, wait = false, source = {}) {
     if (typeof message !== 'string' || !message.trim() || message.length > 20000) throw new Error('消息为空或过长');
     const c = this.inbox(projectId), a = await this.session(c);
     if (remoteBusy(await a.history(c.remoteId)) || a.sessions.get(c.remoteId)?.busy) throw new Error('龙虾正在处理项目消息，请稍后发送');
-    c.messages.push({ id: crypto.randomUUID(), role: 'user', text: safeText(message), createdAt: Date.now() });
+    c.messages.push({ id: crypto.randomUUID(), role: 'user', text: safeText(message), createdAt: Date.now(), ...source });
     const reply = this.reply(c, crypto.randomUUID());
     let cleanup = () => {};
     const finished = wait ? new Promise((resolve, reject) => {
@@ -142,7 +155,9 @@ class Delivery {
       a.on('event', listener);
     }) : null;
     finished?.catch(() => {});
-    try { await a.prompt(c.remoteId, message); } catch (e) { cleanup(); throw e; }
+    try { await a.prompt(c.remoteId, message); } catch (e) {
+      cleanup(); reply.status='error';reply.error=safeText(e.message);c.status='idle';delete c.pendingReplyId;delete c.pendingStartedAt;this.r.save();throw e;
+    }
     return finished || { state: 'submitted', conversationId: c.id };
   }
 }

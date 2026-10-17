@@ -84,7 +84,7 @@ const TeamAssistantPicker: React.FC<Props> = ({
               const rowKey = `${assistantKey(assistant)}-${index}`;
               const rowBlocked = assistant.team_selectable === false;
               const rowDisabled = disabled || rowBlocked;
-              const isPending = pendingAssistantId === assistant.id;
+              const isPending = pendingAssistantId === assistantKey(assistant);
               const blockReason = rowBlocked
                 ? assistant.team_block_reason ||
                   t('settings.assistantTeamUnsupported', {
@@ -128,6 +128,7 @@ const TeamAssistantPicker: React.FC<Props> = ({
                   aria-disabled='true'
                   tabIndex={-1}
                   data-testid={`${testIdPrefix}-option-${assistantKey(assistant)}`}
+                  data-model-id={assistant.model}
                 >
                   <div className={rowContentClassName} data-testid='team-assistant-picker-row-content'>
                     <div
@@ -147,6 +148,7 @@ const TeamAssistantPicker: React.FC<Props> = ({
                   className={rowClassName}
                   onClick={() => onSelect(assistant)}
                   data-testid={`${testIdPrefix}-option-${assistantKey(assistant)}`}
+                  data-model-id={assistant.model}
                 >
                   <div className={rowContentClassName} data-testid='team-assistant-picker-row-content'>
                     <div

@@ -172,7 +172,7 @@
   "assistantTabMine": "내 어시스턴트",
   "assistantTabOfficial": "공식",
   "assistantHomeLead": "어시스턴트는 스킬과 도구가 미리 탑재되어 바로 일할 수 있는 AI 전문가입니다. 여기에는 로컬 CLI, 직접 다듬은 어시스턴트, 그리고 공식 전문가 모음이 있습니다. 활성화하면 대화, 팀, 예약 작업에 나타나 필요할 때 언제든 대기합니다.",
-  "assistantHomeLeadShort": "스킬과 도구가 준비되어 바로 사용할 수 있는 AI 전문가. 활성화하면 채팅, 팀, 예약 작업에서 사용할 수 있습니다.",
+  "assistantHomeLeadShort": "Manage connected software and team members. Existing conversations are preserved.",
   "assistantRuntimeLabel": "Agent:",
   "assistantGoChat": "채팅",
   "assistantReorderHint": "드래그하여 순서를 바꿀 수 있습니다. 이 순서는 어시스턴트를 선택하는 모든 곳(홈, 팀, 예약 작업 등)에서의 표시 순서를 결정합니다.",
@@ -1159,7 +1159,7 @@
   "agentManagement": {
     "localAgents": "로컬 에이전트",
     "remoteAgents": "원격 에이전트",
-    "localAgentsDescription": "이 기기에서 사용할 수 있는 AI 코딩 에이전트를 관리합니다. Aion CLI는 내장되어 앱과 함께 제공되므로 설치가 필요 없습니다. 다른 에이전트는 해당 CLI를 로컬에 설치한 후에만 감지됩니다.",
+    "localAgentsDescription": "Manage local Codex, Kiro V3 and ZCode connections. Sign in through the original software, then choose a model in Xuzhou.",
     "localAgentsSetupLink": "설치 가이드",
     "goToChat": "채팅 시작",
     "remoteAgentsDescription": "현재는 OpenClaw 원격 연결만 지원하며, 다른 에이전트는 개발 중입니다.",
@@ -1357,7 +1357,7 @@
       "diagnose": "续舟 사용 중 문제가 발생했습니다. 진단을 도와주세요.\n\n[모듈] {{module}}\n[문제 설명] {{description}}\n[첨부] 입력창의 스크린샷 참조.\n\n원인을 진단하고 해결 방법을 알려주세요.",
       "diagnoseChatError": "续舟 대화 중 오류가 발생했습니다. 진단을 도와주세요.\n\n[오류 내용] {{error}}\n\n원인을 진단하고 해결 방법을 알려주세요."
     },
-    "solveWithButler": "집사에게 문의"
+    "solveWithButler": "Diagnose in Xuzhou"
   },
   "providerIdConflict": "Provider ID가 이미 있습니다. 다시 시도하세요.",
   "autoInjectedSkillsHint": "모든 대화에 자동으로 로드됩니다. 활성화할 필요가 없으며, 에이전트가 사용 시점을 결정합니다.",
@@ -1487,7 +1487,26 @@
     "connectSsh": "Connect independent repair",
     "logs": "Recent logs",
     "disk": "Disk",
-    "memory": "Memory"
+    "memory": "Memory",
+    "activity": "Collaboration activity",
+    "activityHint": "Messages, tool calls and delivery receipts for this project. A tool response or a queued report does not mean the whole task is finished. Only events received by Xuzhou are shown.",
+    "activityEmpty": "No collaboration activity in this project yet.",
+    "activityRunning": "In progress",
+    "activityFailed": "Failed",
+    "activityStopped": "Stopped",
+    "activityReview": "Needs verification",
+    "activityToolDone": "Tool returned",
+    "activityDone": "Completed",
+    "activityRecorded": "Recorded",
+    "activityReply": "Lobster replied",
+    "activitySent": "Sent to Lobster",
+    "petHint": "Click to talk, sync or repair",
+    "petOpen": "Open Lobster functions",
+    "petDragHint": "Drag the lobster to move it",
+    "petChat": "Talk and sync",
+    "petListen": "Listen and summarize",
+    "permissionReset": "Revoke remembered tool access",
+    "permissionResetFailed": "Could not revoke tool access. Please retry."
   },
   "workspace": {
     "history": "Import a chat",

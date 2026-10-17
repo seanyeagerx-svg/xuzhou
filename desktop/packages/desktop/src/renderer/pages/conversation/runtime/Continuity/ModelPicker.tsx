@@ -52,6 +52,19 @@ export default function ModelPicker({
       setPending('');
     }
   }
+  async function resetPermissions() {
+    if (busy || isConfigOptionBlocked('tool_permissions')) return;
+    setPending('tool_permissions');
+    setError('');
+    try {
+      await info.setConfigOption('tool_permissions', 'ask');
+    } catch {
+      setError(t('settings.lobster.permissionResetFailed'));
+      setOpen(true);
+    } finally {
+      setPending('');
+    }
+  }
   return (
     <>
       <Button
@@ -69,6 +82,17 @@ export default function ModelPicker({
         <span>{selected?.label || selectedId || t('conversation.continuity.chooseModel')}</span>
         <Down size={12} />
       </Button>
+      {info.toolPermissions === 'remembered' && (
+        <Button
+          type='text'
+          size='small'
+          disabled={busy || isConfigOptionBlocked('tool_permissions')}
+          onClick={() => void resetPermissions()}
+          data-testid='xuzhou-permissions-reset'
+        >
+          {t('settings.lobster.permissionReset')}
+        </Button>
+      )}
       <Modal
         visible={open}
         title={t('conversation.continuity.chooseModel')}

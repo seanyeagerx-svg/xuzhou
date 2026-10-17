@@ -57,6 +57,13 @@ vi.mock('@/renderer/pages/team/hooks/useTeamAssistantOptions', () => ({
         team_block_reason: 'blocked',
       },
       { id: 'unchecked', name: 'Unchecked', backend: 'aionrs', team_selectable: true },
+      {
+        id: 'native-codex',
+        name: 'Chosen AI',
+        backend: 'xuzhou/codex',
+        model: 'codex/selected',
+        team_selectable: true,
+      },
     ],
     loading: false,
     error: undefined,
@@ -134,7 +141,7 @@ describe('TeamAddMemberPopover', () => {
     const header = screen.getByTestId('team-add-member-panel-header');
     expect(header).toBeInTheDocument();
     expect(header).toHaveTextContent('Add member');
-    expect(header).toHaveTextContent('The same assistant can be added repeatedly');
+    expect(header).toHaveTextContent('Choose a specific AI model. Multiple models can use the same connection.');
     expect(screen.queryByTestId('team-add-member-footer')).not.toBeInTheDocument();
   });
 
@@ -245,6 +252,29 @@ describe('TeamAddMemberPopover', () => {
     expect(addAssistantMock).not.toHaveBeenCalled();
     expect(screen.getByTestId('team-add-member-option-unchecked')).toBeInTheDocument();
     expect(switchTabMock).not.toHaveBeenCalled();
+  });
+
+  it('adds the selected AI model rather than replacing it with the connection default', async () => {
+    resolveDefaultTeamAgentModelMock.mockResolvedValue('codex/selected');
+    render(
+      <TeamAddMemberPopover>
+        <button type='button'>add</button>
+      </TeamAddMemberPopover>
+    );
+    fireEvent.click(screen.getByTestId('team-add-member-option-native-codex::codex%2Fselected'));
+    await waitFor(() =>
+      expect(addAssistantMock).toHaveBeenCalledWith({
+        role: 'teammate',
+        assistant_name: 'Chosen AI',
+        assistant_id: 'native-codex',
+        model: 'codex/selected',
+      })
+    );
+    expect(resolveDefaultTeamAgentModelMock).toHaveBeenCalledWith({
+      assistant_id: 'native-codex',
+      assistant_backend: 'xuzhou/codex',
+      model: 'codex/selected',
+    });
   });
 
   it('shows a "tell the Leader" guidance and switches to the leader on click', () => {

@@ -7,13 +7,14 @@ import { RequestError } from '@agentclientprotocol/sdk';
 import { SessionStore } from './store.mjs';
 
 const require = createRequire(import.meta.url);
-const { CodexAdapter, AcpAdapter } = require('../../src/adapters.cjs');
+const { CodexAdapter, AcpAdapter, isConfirmationElicitation } = require('../../src/adapters.cjs');
 const { ZcodeAdapter, discoverZcode } = require('../../src/zcode.cjs');
 const { KiroV3Adapter, v3Config } = require('./kiro/adapter.cjs');
 const routing = require('../../src/conversation-routing.cjs');
 const { applyImport } = require('./workspace/seed.cjs');
 const { applyUpdates } = require('./workspace/updates.cjs');
 const longContext = require('./workspace/context/continuation.cjs');
+const toolPermissions = require('./workspace/context/permissions.cjs');
 const modelKey = (agent, model) => `${agent}/${encodeURIComponent(model)}`;
 // ACP reserves -32000 for authentication; ordinary runtime failures must not
 // turn into misleading login prompts in the host.
@@ -36,7 +37,7 @@ export function readAgents(configFile, discover = discoverZcode) {
 }
 
 export class WorkbenchAgent {
-  constructor(connection, { agents, dataDir, adapterFactory, lobster = null, turnTimeout = 15 * 60_000, cancelGrace = 3000 }) {
+  constructor(connection, { agents, dataDir, adapterFactory, lobster = null, preferredProvider, turnTimeout = 15 * 60_000, cancelGrace = 3000 }) {
     this.connection = connection;
     this.agents = agents;
     this.store = new SessionStore(dataDir);
@@ -45,16 +46,22 @@ export class WorkbenchAgent {
     this.turnTimeout = turnTimeout;
     this.cancelGrace = cancelGrace;
     this.lobster = lobster;
+    this.preferredProvider=preferredProvider;
   }
   async initialize() {
     return {
       protocolVersion: 1,
-      agentCapabilities: { loadSession: true, mcpCapabilities: { http: false, sse: false }, promptCapabilities: { image: true, audio: false, embeddedContext: false } },
+      agentCapabilities: { loadSession: true, mcpCapabilities: { http: false, sse: false }, promptCapabilities: { image: true, audio: false, embeddedContext: false }, _meta: { xuzhou_stdio_mcp: true } },
       agentInfo: { name: 'workbench-continuity', title: '续舟 · 软件与模型接续', version: '0.3.0' },
       authMethods: [],
     };
   }
   async authenticate() { return {}; }
+  async setSessionMode({ sessionId, modeId }) {
+    this.idle(this.get(sessionId));
+    if (modeId !== 'default') throw error('此接续会话只支持默认权限模式');
+    return {};
+  }
   checkedCwd(cwd) {
     if (!path.isAbsolute(cwd) || !fs.statSync(cwd).isDirectory()) throw error('请选择存在的项目文件夹');
     return fs.realpathSync(cwd);
@@ -90,6 +97,9 @@ export class WorkbenchAgent {
     // the preceding provider's capability when switching to Kiro.
     configOptions.push({ id: 'reasoning_effort', name: '思考强度', category: 'thought_level', type: 'select', currentValue: efforts.length ? c.effort || '' : '',
       options: efforts.map(e => ({value:e.id,name:e.name || e.id,description:e.description})) });
+    configOptions.push({ id: 'tool_permissions', name: '本聊天的工具授权', type: 'select',
+      currentValue: toolPermissions.grants(c).length ? 'remembered' : 'ask',
+      options: [{ value: 'ask', name: '每次询问（撤销已记住的授权）' }, { value: 'remembered', name: '已记住具体工具的授权' }] });
     return {
       models: { currentModelId, availableModels: models },
       configOptions,
@@ -121,11 +131,15 @@ export class WorkbenchAgent {
       let native;
       try { native = await a.newSession(s.c.cwd, r.model, r.contextUncertain ? null : r.remoteId, s.c.id); }
       catch (e) {
-        if (!r.remoteId || r.contextUncertain || !/already has an active writer/.test(e.message)) throw e;
+        const missingNative = agentId === 'zcode' && /^Session not found: /.test(e.message)
+          || agentId === 'codex' && /^no rollout found for thread id /.test(e.message);
+        if (!r.remoteId || r.contextUncertain || !(/already has an active writer/.test(e.message) || missingNative)) throw e;
         // Do not steal another client's native thread. The canonical visible
         // transcript remains authoritative, and bindSession retains the old ID.
         native = await a.newSession(s.c.cwd, r.model, null, s.c.id);
-        s.resumeNotice = '原软件会话被其他连接占用；已保留原会话，并使用本聊天完整的可见前文接续。';
+        s.resumeNotice = missingNative
+          ? '原软件中的会话已不可用；已使用本聊天完整的可见前文重新接续。'
+          : '原软件会话被其他连接占用；已保留原会话，并使用本聊天完整的可见前文接续。';
       }
       routing.bindSession(s.c, agentId, native.id);
       let options = native.options || a.sessionOptions(native.id);
@@ -148,7 +162,7 @@ export class WorkbenchAgent {
     // provider cookies or private native histories are copied into this store.
     const candidates = this.agents.filter(a => !a.legacy);
     const discovered = await Promise.allSettled(candidates.map(a => this.ensureRoute(s, a.id)));
-    const first = candidates.find((_, i) => discovered[i].status === 'fulfilled');
+    const first = candidates.find((a, i) => discovered[i].status === 'fulfilled'&&(!this.preferredProvider||a.id===this.preferredProvider));
     if (!first) {
       this.closeSession(s);
       throw error(discovered.map(x => x.reason?.message).filter(Boolean).join('；'));
@@ -214,6 +228,12 @@ export class WorkbenchAgent {
   }
   async setSessionConfigOption({ sessionId, configId, value }) {
     if (configId === 'model') await this.unstable_setSessionModel({ sessionId, modelId: value });
+    else if (configId === 'tool_permissions') {
+      const s = this.get(sessionId); this.idle(s);
+      if (value !== 'ask') throw error('请在具体工具的访问请求中选择记住授权');
+      s.c.toolPermissions = []; this.store.save(s.c);
+      await this.send(s, { sessionUpdate: 'config_option_update', configOptions: this.modelState(s).configOptions });
+    }
     else if (configId === 'reasoning_effort') {
       const s = this.get(sessionId); this.idle(s);
       if (!this.modelState(s).configOptions.find(o => o.id === 'reasoning_effort')?.options.length) throw error('当前软件没有提供可独立切换的思考强度');
@@ -317,6 +337,20 @@ export class WorkbenchAgent {
       try { a.approve(request.requestId, 'deny'); } catch { /* Provider already disconnected. */ }
       return;
     }
+    const memory = toolPermissions.scope(s, a, request);
+    const native = request.method === 'session/request_permission';
+    const once = native ? request.params.options?.find(option => option.kind === 'allow_once') : null;
+    const respond = (selected, result) => {
+      if (native) {
+        const m = a.approvals.get(request.requestId);
+        if (m) { a.rpc.respond(m.id, selected ? result : { outcome: { outcome: 'cancelled' } }); a.approvals.delete(request.requestId); }
+      } else a.approve(request.requestId, selected?.kind.startsWith('allow') ? 'allow' : 'deny');
+    };
+    if (toolPermissions.has(s.c, memory)) {
+      const selected = once || { kind: 'allow_once', optionId: 'allow' };
+      respond(selected, { outcome: { outcome: 'selected', optionId: selected.optionId } });
+      return;
+    }
     // Kiro V3 names MCP permission requests with the server/tool identity.
     // Only this host-owned, current-chat, read-only server bypasses the UI.
     // File, command, other MCP and maintenance permissions keep the normal path.
@@ -334,23 +368,31 @@ export class WorkbenchAgent {
     s.permissions.set(request.requestId, pending);
     void this.lobster?.record(s.c, t.taskId, 'waiting', { goal: t.goal, result: t.reply.text }).catch(() => {});
     try {
-      if (/requestUserInput|elicitation/.test(request.method)) throw error('此样机尚未接入原软件的问答表单，请在聊天中补充要求');
-      const native = request.method === 'session/request_permission';
-      const options = native ? request.params.options : [
+      if (/requestUserInput|elicitation/.test(request.method) && !isConfirmationElicitation(request)) throw error('此样机尚未接入原软件的问答表单，请在聊天中补充要求');
+      const options = native ? [...request.params.options] : [
         { optionId: 'allow', name: '允许本次操作', kind: 'allow_once' },
         { optionId: 'deny', name: '拒绝', kind: 'reject_once' },
       ];
+      const rememberId = 'xuzhou_remember_tool';
+      if (memory && !options.some(option => option.optionId === rememberId)) options.push({
+        optionId: rememberId, name: '允许此工具，本聊天不再询问', kind: 'allow_always',
+      });
       const toolCall = native ? request.params.toolCall : {
-        toolCallId: String(request.params.itemId || request.requestId), title: String(request.params.command || request.params.reason || '请求执行项目操作'),
+        toolCallId: String(request.params.itemId || request.requestId), title: String(request.params.command || request.params.reason || request.params.message || '请求执行项目操作'),
         status: 'pending', rawInput: request.params,
       };
       const result = await this.connection.requestPermission({ sessionId: s.c.id, toolCall, options });
       if (!pending.active || !s.turn || s.turn !== t || t.cancelled) return;
       const selected = result.outcome?.outcome === 'selected' && options.find(o => o.optionId === result.outcome.optionId);
-      if (native) {
-        const m = a.approvals.get(request.requestId);
-        if (m) { a.rpc.respond(m.id, selected ? result : { outcome: { outcome: 'cancelled' } }); a.approvals.delete(request.requestId); }
-      } else a.approve(request.requestId, selected?.kind.startsWith('allow') ? 'allow' : 'deny');
+      // Keep remembered MCP access in the host, including a provider's native
+      // allow-always choice, so revoking it cannot leave a hidden native grant.
+      const nativeResult = memory && selected?.kind === 'allow_always' && once
+        ? { outcome: { outcome: 'selected', optionId: once.optionId } } : result;
+      respond(selected, nativeResult);
+      if (memory && selected?.kind === 'allow_always') {
+        toolPermissions.remember(s.c, memory); this.store.save(s.c);
+        await this.send(s, { sessionUpdate: 'config_option_update', configOptions: this.modelState(s).configOptions });
+      }
     } catch (e) {
       if (pending.active) { try { a.approve(request.requestId, 'deny'); } catch { /* Request already ended. */ } }
       if (/问答表单/.test(e.message)) void this.stop(s, e.message);

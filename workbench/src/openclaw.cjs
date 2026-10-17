@@ -43,7 +43,7 @@ class OpenClawAdapter extends EventEmitter {
             const scopes=['operator.read','operator.write','operator.approvals'];
             const payload=['v2',identity.id,'cli','cli','operator',scopes.join(','),String(signedAt),token,nonce].join('|');
             const signature=crypto.sign(null,Buffer.from(payload),identity.privateKey).toString('base64url');
-            const hello=await this.request('connect',{minProtocol:3,maxProtocol:4,client:{id:'cli',displayName:'协作工作台',version,platform:'win32',mode:'cli'},role:'operator',scopes,caps:[],auth:token?{token}:{},device:{id:identity.id,publicKey:identity.publicKey,signature,signedAt,nonce},locale:'zh-CN'},40000);
+            const hello=await this.request('connect',{minProtocol:3,maxProtocol:4,client:{id:'cli',displayName:'续舟',version,platform:'win32',mode:'cli'},role:'operator',scopes,caps:['tool-events'],auth:token?{token}:{},device:{id:identity.id,publicKey:identity.publicKey,signature,signedAt,nonce},locale:'zh-CN'},40000);
             if(this.ws!==ws)return;
             if(hello.auth?.deviceToken)this.secrets.set('openclaw-device-token',hello.auth.deviceToken);
             this.hello={version:hello.server?.version,protocol:hello.protocol,methods:hello.features?.methods || [],scopes:hello.auth?.scopes || []};
@@ -78,7 +78,7 @@ class OpenClawAdapter extends EventEmitter {
   }
   async prompt(id,text) {
     const s=this.sessions.get(id);if(!s)throw new Error('会话尚未加载');if(s.busy)throw new Error('当前任务仍在执行');
-    s.busy=true;this.emitEvent(id,{type:'started'});
+    s.busy=true;delete s.runId;this.emitEvent(id,{type:'started'});
     const policy=`协作工作台：用户是判断层，OpenClaw 是助理，Codex、Kiro 是执行层。你负责整理信息、提出建议和任务草案，分派及验收由用户决定。不要声称已替本工作台调用 Codex/Kiro；通过工作台交接才会实际分派。当前项目在用户本机 ${s.cwd}，你在云端，不直接访问该目录，只依据传入的资料整理建议。禁止改 VPN、代理、TUN、DNS、路由、hosts、证书和其他 AI 登录配置。`;
     try {const r=await this.request('chat.send',{sessionKey:id,message:policy+'\n\n'+text,idempotencyKey:crypto.randomUUID()},60000);s.runId=r.runId;return r;}
     catch(e){s.busy=false;this.emitEvent(id,{type:'error',text:e.message});throw e;}
@@ -92,6 +92,12 @@ class OpenClawAdapter extends EventEmitter {
   }
   event(m) {
     const p=m.payload || {}; const id=p.sessionKey || [...this.sessions].find(([,s])=>s.runId===p.runId)?.[0];
+    if(m.event==='agent'&&p.stream==='tool'&&id&&this.sessions.has(id)){
+      const s=this.sessions.get(id),d=p.data||{};
+      if(!s.busy||(s.runId&&p.runId&&s.runId!==p.runId)||typeof d.toolCallId!=='string'||!['start','update','result','review'].includes(d.phase))return;
+      this.emitEvent(id,{type:'tool',toolCallId:d.toolCallId,runId:p.runId,phase:d.phase,name:d.name,args:d.args,
+        output:d.phase==='result'?d.result:d.phase==='update'?d.partialResult:undefined,isError:d.isError===true,seq:p.seq,time:p.ts});
+    }
     if(m.event==='chat' && id && this.sessions.has(id)) {
       const s=this.sessions.get(id);if(!s.busy)return;
       if(p.runId?.startsWith('inject-'))return;

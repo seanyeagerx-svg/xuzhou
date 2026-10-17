@@ -3,17 +3,57 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 const mocks = vi.hoisted(() => ({
   set: vi.fn(),
+  catalog: vi.fn(),
   runtime: { activeTurnId: null as string | null },
   info: {} as Record<string, unknown>,
 }));
 vi.mock('react-i18next', () => ({ useTranslation: () => ({ t: (key: string) => key }) }));
+vi.mock('@/renderer/components/layout/Sider/SiderNav/WorkspacePanel/api', () => ({
+  workspaceCall: (...args: unknown[]) => mocks.catalog(...args),
+}));
 vi.mock('@/renderer/hooks/agent/useAcpModelInfo', () => ({ useAcpModelInfo: () => mocks.info }));
 vi.mock('@/renderer/pages/conversation/runtime/useConversationRuntimeView', () => ({
   useConversationRuntimeView: () => mocks.runtime,
 }));
 import ModelPicker from '@/renderer/pages/conversation/runtime/Continuity/ModelPicker';
+import DraftModelPicker from '@/renderer/pages/conversation/runtime/Continuity/DraftModelPicker';
+
+describe('New conversation model selection', () => {
+  beforeEach(() => mocks.catalog.mockReset());
+  it('loads real choices on click before a conversation exists and retains a working provider if another fails', async () => {
+    mocks.catalog.mockResolvedValue({
+      models: [{ id: 'codex/real', label: 'Native Codex model', efforts: [] }],
+      errors: [{ provider: 'kiro-v3', message: 'Sign-in required' }],
+    });
+    const select = vi.fn();
+    render(<DraftModelPicker value={null} onChange={select} />);
+    fireEvent.click(screen.getByTestId('guid-model-selector'));
+    fireEvent.click(await screen.findByText('Native Codex model'));
+    expect(select).toHaveBeenCalledWith('codex/real');
+  });
+  it('shows a discovery failure and lets the user retry instead of leaving a dead default button', async () => {
+    mocks.catalog.mockRejectedValue(Error('native discovery failed'));
+    render(<DraftModelPicker value={null} onChange={vi.fn()} />);
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('guid-model-selector'));
+    });
+    expect(await screen.findByText(/native discovery failed/)).toBeVisible();
+    mocks.catalog.mockResolvedValue({ models: [], errors: [] });
+    await act(async () => {
+      fireEvent.click(screen.getByText('common.refresh'));
+    });
+    await waitFor(() => expect(mocks.catalog).toHaveBeenCalledTimes(2));
+  });
+});
 
 describe('Xuzhou unified model chooser', () => {
+  it('revokes the current chat tool memory through the existing confirmed config port', async () => {
+    mocks.info.toolPermissions = 'remembered';
+    mocks.set.mockResolvedValue([]);
+    render(<ModelPicker conversationId='chat' />);
+    fireEvent.click(screen.getByTestId('xuzhou-permissions-reset'));
+    await waitFor(() => expect(mocks.set).toHaveBeenCalledWith('tool_permissions', 'ask'));
+  });
   it('opens the chooser while native model discovery is still running', () => {
     mocks.info = { ...mocks.info, model_info: null, isLoading: true };
     render(<ModelPicker conversationId='chat' />);

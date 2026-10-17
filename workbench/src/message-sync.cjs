@@ -24,7 +24,13 @@ class MessageSync {
   this.save();
  }
  save(){atomicJson(this.file,this.data);this.onChange(this.snapshot());}
- snapshot(){const projects={};for(const x of this.data.items){projects[x.projectId]||={pending:0,delivered:0};projects[x.projectId][x.state==='delivered'?'delivered':'pending']++;}return {enabled:this.data.enabled,error:this.error,projects,counts:{pending:this.data.items.filter(x=>x.state!=='delivered').length,delivered:this.data.items.filter(x=>x.state==='delivered').length},items:this.data.items.slice(-100).reverse().map(({body,...x})=>({...x,state:this.data.batches.find(b=>b.id===x.batchId)?.state==='review'?'review':x.state})),batches:this.data.batches.slice(-30).map(({payload,...x})=>x)};}
+ snapshot(projectId){
+  const projects={};for(const x of this.data.items){projects[x.projectId]||={pending:0,delivered:0};projects[x.projectId][x.state==='delivered'?'delivered':'pending']++;}
+  const items=this.data.items.filter(x=>!projectId||x.projectId===projectId).slice(-100).reverse(),batchIds=new Set(items.map(x=>x.batchId));
+  return {enabled:this.data.enabled,error:this.error,projects,counts:{pending:this.data.items.filter(x=>x.state!=='delivered').length,delivered:this.data.items.filter(x=>x.state==='delivered').length},
+   items:items.map(({body,...x})=>({...x,text:displayReport({...x,body}),state:this.data.batches.find(b=>b.id===x.batchId)?.state==='review'?'review':x.state})),
+   batches:this.data.batches.filter(b=>batchIds.has(b.id)).map(({payload,...x})=>x)};
+ }
  record({key,projectId,agentId,agentName,taskId,conversationId,phase,body}){
   if(this.data.items.some(x=>x.key===key))return null;
   const s=this.getState(),p=s.projects.find(x=>x.id===projectId);if(!p)throw new Error('同步项目不存在');

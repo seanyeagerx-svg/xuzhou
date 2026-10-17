@@ -606,7 +606,10 @@ impl TeamAgentProvisioner {
         user_id: &str,
         agent: &TeamAgent,
     ) -> Result<(TeamToolTransport, aionui_common::ResolvedBackendCapabilities), TeamError> {
-        let capabilities = self.capability_port.resolve(user_id, &agent.backend, None).await?;
+        let capabilities = self
+            .capability_port
+            .resolve_for_assistant(user_id, &agent.backend, agent.assistant_id.as_deref())
+            .await?;
         if capabilities.mcp.stdio {
             return Ok((TeamToolTransport::Mcp, capabilities));
         }

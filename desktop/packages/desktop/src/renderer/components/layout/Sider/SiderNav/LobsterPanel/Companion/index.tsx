@@ -5,13 +5,31 @@ import { useCompanion } from './useCompanion';
 import Art from './Art';
 import styles from './Companion.module.css';
 
-export default function LobsterCompanion({ conversationId }: { conversationId: string }) {
+export default function LobsterCompanion({
+  conversationId,
+  showLauncher = true,
+}: {
+  conversationId: string;
+  showLauncher?: boolean;
+}) {
   const { t } = useTranslation();
   const { state, busy, error, call } = useCompanion(conversationId);
   const [open, setOpen] = useState(false),
     [question, setQuestion] = useState(''),
     [wave, setWave] = useState(false);
   const waveTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  useEffect(() => {
+    const requested = (event: Event) => {
+      if ((event as CustomEvent<string>).detail !== conversationId) return;
+      window.dispatchEvent(new CustomEvent('workbench:panel', { detail: 'companion' }));
+      setOpen(true);
+      setWave(true);
+      clearTimeout(waveTimer.current);
+      waveTimer.current = setTimeout(() => setWave(false), 1100);
+    };
+    window.addEventListener('workbench:companion-open', requested);
+    return () => window.removeEventListener('workbench:companion-open', requested);
+  }, [conversationId]);
   useEffect(() => {
     setOpen(false);
     setQuestion('');
@@ -58,29 +76,31 @@ export default function LobsterCompanion({ conversationId }: { conversationId: s
   };
   return (
     <>
-      <div className={styles.bar}>
-        <Button
-          type='text'
-          className={styles.petButton}
-          data-testid='companion-open'
-          onClick={() => {
-            window.dispatchEvent(new CustomEvent('workbench:panel', { detail: 'companion' }));
-            setOpen(true);
-            setWave(true);
-            clearTimeout(waveTimer.current);
-            waveTimer.current = setTimeout(() => setWave(false), 1100);
-            if (unread) void call('companion-read');
-          }}
-        >
-          <Badge count={unread}>
-            <Art pose={pose} />
-          </Badge>
-          <span className={styles.caption}>
-            <strong>{t('settings.companion.title')}</strong>
-            <span>{t(`settings.companion.${statusKey}`)}</span>
-          </span>
-        </Button>
-      </div>
+      {showLauncher && (
+        <div className={styles.bar}>
+          <Button
+            type='text'
+            className={styles.petButton}
+            data-testid='companion-open'
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent('workbench:panel', { detail: 'companion' }));
+              setOpen(true);
+              setWave(true);
+              clearTimeout(waveTimer.current);
+              waveTimer.current = setTimeout(() => setWave(false), 1100);
+              if (unread) void call('companion-read');
+            }}
+          >
+            <Badge count={unread}>
+              <Art pose={pose} />
+            </Badge>
+            <span className={styles.caption}>
+              <strong>{t('settings.companion.title')}</strong>
+              <span>{t(`settings.companion.${statusKey}`)}</span>
+            </span>
+          </Button>
+        </div>
+      )}
       <Drawer
         visible={open}
         onCancel={() => setOpen(false)}

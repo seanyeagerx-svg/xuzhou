@@ -180,7 +180,7 @@
   "assistantTabMine": "Мої асистенти",
   "assistantTabOfficial": "Офіційні",
   "assistantHomeLead": "Асистенти — це готові до роботи ШІ-експерти з попередньо встановленими навичками та інструментами. Тут зібрані ваші локальні CLI, асистенти, яких ви налаштували самі, і набір офіційних експертів. Після ввімкнення вони з'являються у ваших чатах, командах і запланованих завданнях — готові допомогти, коли потрібно.",
-  "assistantHomeLeadShort": "Готові до роботи ІІ-експерти з попередньо налаштованими навичками та інструментами. Після ввімкнення їх можна використовувати в чатах, командах і запланованих завданнях.",
+  "assistantHomeLeadShort": "Manage connected software and team members. Existing conversations are preserved.",
   "assistantRuntimeLabel": "Agent:",
   "assistantGoChat": "Чат",
   "assistantReorderHint": "Перетягніть, щоб змінити порядок — він визначає порядок відображення всюди, де ви обираєте асистента (головна, команди, заплановані завдання…).",
@@ -1081,7 +1081,7 @@
   "agentManagement": {
     "localAgents": "Локальні агенти",
     "remoteAgents": "Віддалені агенти",
-    "localAgentsDescription": "Керуйте доступними на цьому пристрої ШІ-агентами для програмування. Aion CLI вбудований і постачається з застосунком — встановлення не потрібне; інші агенти виявляються лише після локального встановлення їхнього CLI.",
+    "localAgentsDescription": "Manage local Codex, Kiro V3 and ZCode connections. Sign in through the original software, then choose a model in Xuzhou.",
     "localAgentsSetupLink": "Посібник із встановлення",
     "goToChat": "Почати чат",
     "remoteAgentsDescription": "Поки що підтримується лише віддалене підключення OpenClaw. Інші агенти знаходяться в розробці.",
@@ -1283,7 +1283,7 @@
       "diagnose": "У мене виникла проблема з 续舟, допоможи її діагностувати.\n\n[Модуль] {{module}}\n[Опис] {{description}}\n[Вкладення] див. скриншоти в полі введення.\n\nБудь ласка, визнач причину та підкажи, як виправити.",
       "diagnoseChatError": "Під час розмови в 续舟 сталася помилка, допоможи її діагностувати.\n\n[Помилка] {{error}}\n\nБудь ласка, визнач причину та підкажи, як виправити."
     },
-    "solveWithButler": "Запитати дворецького"
+    "solveWithButler": "Diagnose in Xuzhou"
   },
   "bugReportModuleLabel": "Module",
   "bugReportModulePlaceholder": "Select the module related to the issue",
@@ -1500,7 +1500,26 @@
     "connectSsh": "Connect independent repair",
     "logs": "Recent logs",
     "disk": "Disk",
-    "memory": "Memory"
+    "memory": "Memory",
+    "activity": "Collaboration activity",
+    "activityHint": "Messages, tool calls and delivery receipts for this project. A tool response or a queued report does not mean the whole task is finished. Only events received by Xuzhou are shown.",
+    "activityEmpty": "No collaboration activity in this project yet.",
+    "activityRunning": "In progress",
+    "activityFailed": "Failed",
+    "activityStopped": "Stopped",
+    "activityReview": "Needs verification",
+    "activityToolDone": "Tool returned",
+    "activityDone": "Completed",
+    "activityRecorded": "Recorded",
+    "activityReply": "Lobster replied",
+    "activitySent": "Sent to Lobster",
+    "petHint": "Click to talk, sync or repair",
+    "petOpen": "Open Lobster functions",
+    "petDragHint": "Drag the lobster to move it",
+    "petChat": "Talk and sync",
+    "petListen": "Listen and summarize",
+    "permissionReset": "Revoke remembered tool access",
+    "permissionResetFailed": "Could not revoke tool access. Please retry."
   },
   "workspace": {
     "history": "Import a chat",

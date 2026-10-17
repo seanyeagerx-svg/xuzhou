@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import storage from '../../src/store.cjs';
 
 // One file and exclusive owner per conversation: AionUi can launch one bridge
 // process per chat without sharing mutable in-memory state between chats.
@@ -34,10 +35,7 @@ export class SessionStore {
   read(id) { return JSON.parse(fs.readFileSync(this.file(id), 'utf8')); }
   save(c) {
     if (!this.owned.has(c.id)) throw new Error('会话尚未取得写入锁');
-    const file = this.file(c.id);
-    const temp = file + '.' + process.pid + '.tmp';
-    fs.writeFileSync(temp, JSON.stringify(c, null, 2));
-    fs.renameSync(temp, file);
+    storage.atomicJson(this.file(c.id), c);
   }
   release(id) {
     if (!this.owned.has(id)) return;

@@ -25,9 +25,22 @@ describe('useConversationAssistants', () => {
 
   it('loads only enabled assistants from the backend catalog', async () => {
     (ipcBridge.assistants.list.invoke as never as ReturnType<typeof vi.fn>).mockResolvedValue([
-      { id: 'bare-aionrs', name: 'Aion CLI', enabled: true, source: 'generated' },
-      { id: 'disabled-writer', name: 'Writer', enabled: false, source: 'user' },
-      { id: 'assistant-1', name: 'Researcher', source: 'user' },
+      {
+        id: 'bare-aionrs',
+        name: 'Codex',
+        enabled: true,
+        source: 'generated',
+        agent: { type: 'acp', source: 'custom' },
+      },
+      {
+        id: 'disabled-writer',
+        name: 'ZCode',
+        enabled: false,
+        source: 'generated',
+        agent: { type: 'acp', source: 'custom' },
+      },
+      { id: 'old-claude', name: 'Claude', enabled: true, source: 'builtin' },
+      { id: 'assistant-1', name: 'Kiro V3', source: 'generated', agent: { type: 'acp', source: 'custom' } },
     ] satisfies Partial<Assistant>[]);
 
     const { result } = renderHook(() => useConversationAssistants());
@@ -39,8 +52,14 @@ describe('useConversationAssistants', () => {
 
   it('keeps the filtered assistant list stable across rerenders when SWR data is unchanged', async () => {
     const catalog = [
-      { id: 'bare-aionrs', name: 'Aion CLI', enabled: true, source: 'generated' },
-      { id: 'assistant-1', name: 'Researcher', source: 'user' },
+      {
+        id: 'bare-aionrs',
+        name: 'Codex',
+        enabled: true,
+        source: 'generated',
+        agent: { type: 'acp', source: 'custom' },
+      },
+      { id: 'assistant-1', name: 'Kiro V3', source: 'generated', agent: { type: 'acp', source: 'custom' } },
     ] satisfies Partial<Assistant>[];
 
     (ipcBridge.assistants.list.invoke as never as ReturnType<typeof vi.fn>).mockResolvedValue(catalog);

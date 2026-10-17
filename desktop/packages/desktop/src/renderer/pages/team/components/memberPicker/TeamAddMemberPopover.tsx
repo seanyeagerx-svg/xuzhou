@@ -7,7 +7,7 @@ import { getConversationCreateErrorMessage } from '@renderer/pages/conversation/
 import { getSendBoxDraftHook } from '@renderer/hooks/chat/useSendBoxDraft';
 import { useTeamAssistantOptions } from '../../hooks/useTeamAssistantOptions';
 import { useTeamTabs } from '../../hooks/TeamTabsContext';
-import type { TeamAssistantOption } from '../assistantSelectUtils';
+import { assistantKey, type TeamAssistantOption } from '../assistantSelectUtils';
 import { resolveDefaultTeamAgentModel } from '../teamCreateModelResolver';
 import TeamAssistantPickerDropdown from './TeamAssistantPickerDropdown';
 
@@ -21,7 +21,7 @@ type Props = {
 
 const TeamAddMemberPopover: React.FC<Props> = ({ children, disabled = false }) => {
   const { t, i18n } = useTranslation();
-  const { assistants } = useTeamAssistantOptions(i18n?.language ?? 'en-US');
+  const { assistants, loading, error: catalogError, refresh } = useTeamAssistantOptions(i18n?.language ?? 'en-US');
   const { addAssistant, switchTab, assistants: teamMembers = [] } = useTeamTabs();
   const [visible, setVisible] = useState(false);
   const [pendingAssistantId, setPendingAssistantId] = useState<string | undefined>();
@@ -53,11 +53,12 @@ const TeamAddMemberPopover: React.FC<Props> = ({ children, disabled = false }) =
 
   const handleSelect = async (assistant: TeamAssistantOption) => {
     if (disabled || !addAssistant || pendingAssistantId) return;
-    setPendingAssistantId(assistant.id);
+    setPendingAssistantId(assistantKey(assistant));
     try {
       const model = await resolveDefaultTeamAgentModel({
         assistant_id: assistant.id,
         assistant_backend: assistant.backend,
+        ...(assistant.model ? { model: assistant.model } : {}),
       });
       const input: TeamAssistantInput = {
         role: 'teammate',
@@ -78,6 +79,13 @@ const TeamAddMemberPopover: React.FC<Props> = ({ children, disabled = false }) =
   return (
     <TeamAssistantPickerDropdown
       assistants={assistants}
+      loading={loading}
+      error={catalogError ? getConversationCreateErrorMessage(catalogError, t) : undefined}
+      onRefresh={
+        refresh
+          ? () => void refresh().catch((e: unknown) => Message.error(getConversationCreateErrorMessage(e, t)))
+          : undefined
+      }
       onSelect={handleSelect}
       visible={visible}
       onVisibleChange={setVisible}
@@ -86,7 +94,9 @@ const TeamAddMemberPopover: React.FC<Props> = ({ children, disabled = false }) =
       testIdPrefix='team-add-member'
       panelTestId='team-add-member-panel'
       title={t('team.addMember.title', { defaultValue: 'Add member' })}
-      subtitle={t('team.addMember.subtitle', { defaultValue: 'The same assistant can be added repeatedly' })}
+      subtitle={t('team.addMember.subtitle', {
+        defaultValue: 'Choose a specific AI model. Multiple models can use the same connection.',
+      })}
       guidanceFooter={
         leader?.slot_id ? (
           <div className='text-12px leading-18px text-t-tertiary'>

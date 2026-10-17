@@ -9,7 +9,6 @@ import useSWR from 'swr';
 import ChatConversation from './components/ChatConversation';
 import ImportedHistory from '@/renderer/components/layout/Sider/SiderNav/WorkspacePanel/ImportedHistory';
 import { NativeTranscriptContext } from '@/renderer/components/layout/Sider/SiderNav/WorkspacePanel/NativeChats/Transcript';
-import LobsterCompanion from '@/renderer/components/layout/Sider/SiderNav/LobsterPanel/Companion';
 import Computers from './Computers';
 import ContinuityDesk from './runtime/Continuity';
 import { usePreviewContext } from '@/renderer/pages/conversation/Preview';
@@ -132,7 +131,6 @@ const ChatConversationIndex: React.FC = () => {
         externalSnapshot={historySnapshot}
         showSync={false}
       />
-      {data?.id && <LobsterCompanion key={data.id} conversationId={data.id} />}
       <Computers key={id} conversationId={id || ''}>
         <div className='h-full min-h-0'>
           <NativeTranscriptContext.Provider value={inlineImport === importId ? importId : undefined}>

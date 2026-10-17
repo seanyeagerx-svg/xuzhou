@@ -8,6 +8,8 @@ import { describe, expect, it } from 'vitest';
 import {
   assistantToOption,
   filterTeamSupportedAssistants,
+  assistantKey,
+  teamModelOptions,
 } from '@/renderer/pages/team/components/assistantSelectUtils';
 import type { Assistant } from '@/common/types/agent/assistantTypes';
 
@@ -55,6 +57,39 @@ describe('assistantSelectUtils', () => {
     const option = assistantToOption(assistant);
 
     expect(option.team_selectable).toBe(true);
+  });
+
+  it('keeps different AI models on one connection independently selectable', () => {
+    const connection = {
+      ...makeAssistant({ id: 'local-codex', name: 'Codex', source: 'generated', preset_agent_type: 'acp' }),
+      provider: 'codex',
+    };
+    const options = teamModelOptions(
+      [connection],
+      {
+        models: [
+          { id: 'codex/first', label: 'First AI', provider: 'codex' },
+          { id: 'codex/second', label: 'Second AI', provider: 'codex' },
+        ],
+        errors: [],
+      },
+      'en-US'
+    );
+    expect(options.map((o) => [o.id, o.model])).toEqual([
+      ['local-codex', 'codex/first'],
+      ['local-codex', 'codex/second'],
+    ]);
+    expect(new Set(options.map(assistantKey)).size).toBe(2);
+  });
+
+  it('does not advertise an AI without a registered execution connection', () => {
+    expect(
+      teamModelOptions(
+        [],
+        { models: [{ id: 'codex/first', label: 'First AI', provider: 'codex' }], errors: [] },
+        'en-US'
+      )
+    ).toEqual([]);
   });
 });
 

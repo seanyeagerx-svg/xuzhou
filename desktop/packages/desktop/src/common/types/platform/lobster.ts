@@ -31,6 +31,9 @@ export type LobsterMessage = {
   status?: string;
   error?: string;
   createdAt?: number;
+  agentId?: string;
+  sourceConversationId?: string;
+  taskId?: string;
 };
 export type LobsterJob = {
   id: string;
@@ -49,6 +52,7 @@ export type LobsterJob = {
     service?: { ActiveState?: string; SubState?: string; NRestarts?: string };
     readiness?: { ready?: boolean };
   };
+  finishedAt?: number;
 };
 export type LobsterState = {
   available: boolean;
@@ -79,6 +83,9 @@ export type LobsterState = {
       createdAt: number;
       taskId?: string;
       batchId?: string;
+      text?: string;
+      gateway?: string;
+      deliveredAt?: number;
     }[];
     batches: { id: string; state: string; receipt?: string; error?: string; detail?: string }[];
   };
@@ -105,6 +112,19 @@ export type LobsterState = {
     title: string;
     details: Record<string, unknown>;
     createdAt: number;
+  }[];
+  activities?: {
+    id: string;
+    projectId: string;
+    conversationId: string;
+    agentId: string;
+    time: number;
+    finishedAt?: number;
+    title: string;
+    status: string;
+    input?: string;
+    output?: string;
+    error?: string;
   }[];
 };
 

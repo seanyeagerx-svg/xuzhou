@@ -5396,8 +5396,8 @@ async fn remove_during_attach_cancels_work_and_rejects_late_ready() {
 
     assert!(task_manager.get_task(&added.conversation_id).is_none());
     assert!(
-        conv_repo.get("user1", &added.conversation_id).await.unwrap().is_none(),
-        "removed attaching member conversation must be deleted"
+        conv_repo.get("user1", &added.conversation_id).await.unwrap().is_some(),
+        "removed attaching member conversation must remain available"
     );
     assert!(
         svc.get_team("user1", &created.id)
@@ -5863,6 +5863,38 @@ async fn ar1_remove_agent_from_team() {
 }
 
 #[tokio::test]
+async fn removed_member_keeps_its_original_conversation_and_revokes_team_tools() {
+    let (svc, _team_repo, _task_manager, conv_repo) = setup_with_factory_metadata_team_repo_and_conversation_repo(
+        success_factory(),
+        Arc::new(StubAgentMetadataRepo::empty()),
+    );
+    let created = svc
+        .create_team(
+            "user1",
+            CreateTeamRequest {
+                name: "Preserve removed AI history".into(),
+                agents: two_agent_input(),
+                workspace: None,
+            },
+        )
+        .await
+        .unwrap();
+    let worker = created.assistants[1].clone();
+    let original = conv_repo.get("user1", &worker.conversation_id).await.unwrap().unwrap();
+    svc.remove_agent("user1", &created.id, &worker.slot_id).await.unwrap();
+    let retained = conv_repo.get("user1", &worker.conversation_id).await.unwrap().unwrap();
+    assert_eq!(retained.id, original.id);
+    assert_eq!(retained.name, original.name);
+    let extra: serde_json::Value = serde_json::from_str(&retained.extra).unwrap();
+    assert!(extra["teamId"].is_null() && extra["team_mcp_stdio_config"].is_null());
+    assert_eq!(extra["xuzhou_previous_team"]["id"], created.id);
+    assert_eq!(
+        extra["workspace"],
+        serde_json::from_str::<serde_json::Value>(&original.extra).unwrap()["workspace"]
+    );
+}
+
+#[tokio::test]
 async fn membership_persist_failure_does_not_delete_the_conversation() {
     let (svc, team_repo, task_manager, conv_repo) = setup_with_factory_metadata_team_repo_and_conversation_repo(
         success_factory(),
@@ -5937,7 +5969,9 @@ async fn remove_tolerates_current_session_already_missing_the_slot() {
         .await
         .expect("post-persistence runtime cleanup must be idempotent");
 
-    assert!(conv_repo.get("user1", &worker.conversation_id).await.unwrap().is_none());
+    assert!(conv_repo.get("user1", &worker.conversation_id).await.unwrap().is_some());
+    let extra = conv_repo.get_extra(&worker.conversation_id).unwrap();
+    assert!(extra["teamId"].is_null() && extra["team_mcp_stdio_config"].is_null());
     assert!(
         svc.get_team("user1", &created.id)
             .await

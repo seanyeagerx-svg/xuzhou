@@ -90,14 +90,15 @@ class LobsterRuntime extends EventEmitter {
     this.connecting = this.gateway.connect().then(() => { void this.sync.retry(); return { state: 'connected' }; }).finally(() => { this.connecting = null; });
     return this.connecting;
   }
-  snapshot() {
+  snapshot(projectId) {
     const trust = this.maintenance.pendingTrust;
     return { available: true, importedAt: this.state.importedAt, projects: this.state.projects,
       gateway: { ...this.gatewayStatus, url: this.gatewayConfig().url, pairing: this.gateway.pairing || null },
       maintenance: { ...this.maintenance.status, ready: this.maintenance.ready, generation: this.maintenance.generation, profile: this.state.maintenanceProfile, hostKey: trust ? { host: trust.host, port: trust.port, fingerprint: trust.fingerprint } : null },
-      sync: this.sync.snapshot(), diagnosis: this.state.diagnosis,
-      jobs: this.state.maintenanceJobs.slice(0, 30), tasks: this.state.tasks.slice(-30).reverse(),
-      conversations: this.state.conversations.filter(x => x.agentId === 'openclaw').map(c => ({ id: c.id, projectId: c.projectId, title: c.title, gateway: c.gateway, status: c.status, messages: c.messages.slice(-40) })),
+      sync: this.sync.snapshot(projectId), diagnosis: this.state.diagnosis,
+      jobs: this.state.maintenanceJobs.filter(x => !projectId || x.projectId === projectId).slice(0, 30), tasks: this.state.tasks.filter(x => !projectId || x.projectId === projectId).slice(-30).reverse(),
+      conversations: this.state.conversations.filter(x => x.agentId === 'openclaw' && (!projectId || x.projectId === projectId)).map(c => ({ id: c.id, projectId: c.projectId, title: c.title, gateway: c.gateway, status: c.status, messages: c.messages.slice(-80) })),
+      activities: this.state.conversations.filter(c => !projectId || c.projectId === projectId).flatMap(c => (c.activities || []).map(a => ({ ...a, projectId: c.projectId, conversationId: c.id }))).sort((a,b) => b.time-a.time).slice(0,100),
       approvals: [...this.decisions.values()].map(({ id, projectId, agentId, title, details, createdAt }) => ({ id, projectId, agentId, title, details, createdAt })) };
   }
   active(context) {
@@ -184,6 +185,19 @@ class LobsterRuntime extends EventEmitter {
     });
   }
   async tool(name, args, context) {
+    const c = this.active(context);
+    const activity = { id: crypto.randomUUID(), time: Date.now(), agentId: c.agentId, title: name,
+      status: 'running', input: safeText(JSON.stringify(args),20000), details: { tool: name } };
+    c.activities ||= []; c.activities.push(activity); this.save();
+    try {
+      const result = await this.executeTool(name,args,context);
+      activity.status = 'completed'; activity.output = safeText(JSON.stringify(result),20000); activity.finishedAt=Date.now(); this.save();
+      return result;
+    } catch(error) {
+      activity.status = 'error'; activity.error = safeText(error.message); activity.finishedAt=Date.now(); this.save(); throw error;
+    }
+  }
+  async executeTool(name, args, context) {
     const c = this.active(context), task = this.state.tasks.find(x => x.id === c.activeTaskId);
     if (name.startsWith('computer_')) {
       if (!this.computers) throw new Error('XUZHOU_DEVICE_UNAVAILABLE');
@@ -196,7 +210,7 @@ class LobsterRuntime extends EventEmitter {
       if (args.conversationId) { const found = conversations.find(x => x.id === args.conversationId); if (!found) throw new Error('只能读取当前项目的龙虾对话'); return found; }
       return { conversations };
     }
-    if (name === 'lobster_message') { await this.decision(context, '发送给龙虾', { message: args.message }); return this.delivery.send(c.projectId, args.message, true); }
+    if (name === 'lobster_message') { await this.decision(context, '发送给龙虾', { message: args.message }); return this.delivery.send(c.projectId, args.message, true, { agentId:c.agentId,sourceConversationId:c.id,taskId:c.activeTaskId }); }
     if (name === 'lobster_maintenance') {
       validateOperation(args); const generation = this.maintenance.generation;
       if (args.action !== 'diagnose') {
@@ -246,7 +260,7 @@ class LobsterRuntime extends EventEmitter {
     } finally { this.polling = false; }
   }
   async call(action, data = {}) {
-    if (action === 'state') return this.snapshot();
+    if (action === 'state') return this.snapshot(data.projectId);
     if (action === 'gateway-connect') return this.connectGateway();
     if (action === 'gateway-disconnect') { this.gateway.close(); this.gatewayStatus = { state: 'disconnected', detail: '已断开龙虾' }; this.changed(); return {}; }
     if (action === 'gateway-save') {

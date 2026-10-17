@@ -6,7 +6,8 @@
 
 import { ipcBridge } from '@/common';
 import type { Assistant } from '@/common/types/agent/assistantTypes';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { isXuzhouAssistant } from '@/renderer/utils/model/agentTypeSupportPolicy';
 import useSWR, { mutate as swrMutate } from 'swr';
 
 type UseCustomAgentsLoaderResult = {
@@ -34,7 +35,7 @@ export const useCustomAgentsLoader = (): UseCustomAgentsLoaderResult => {
       return [] as Assistant[];
     }
   });
-  const assistants = assistantList ?? [];
+  const assistants = useMemo(() => (assistantList ?? []).filter(isXuzhouAssistant), [assistantList]);
 
   useEffect(() => {
     void swrMutate('assistants.list');

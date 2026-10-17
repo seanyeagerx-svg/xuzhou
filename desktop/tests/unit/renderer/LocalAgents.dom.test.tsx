@@ -103,10 +103,10 @@ import type { Assistant } from '@/common/types/agent/assistantTypes';
 const makeAgents = () => [
   {
     id: 'aionrs',
-    name: 'Aion CLI',
-    agent_type: 'aionrs',
-    agent_source: 'internal',
-    backend: 'aionrs',
+    name: 'Codex',
+    agent_type: 'acp',
+    agent_source: 'builtin',
+    backend: 'codex',
     enabled: true,
     available: true,
     installed: true,
@@ -114,10 +114,10 @@ const makeAgents = () => [
   },
   {
     id: 'acp-claude',
-    name: 'Claude Code',
+    name: 'Kiro V3',
     agent_type: 'acp',
     agent_source: 'builtin',
-    backend: 'claude',
+    backend: 'kiro-v3',
     enabled: true,
     available: false,
     installed: false,
@@ -136,10 +136,11 @@ const makeAgents = () => [
   },
   {
     id: 'custom-1',
-    name: 'My Agent',
+    name: 'ZCode',
     agent_type: 'acp',
     agent_source: 'custom',
     command: 'sh',
+    args: ['/project/workbench/integrations/aionui/bridge.mjs'],
     enabled: true,
     available: true,
     installed: true,
@@ -199,9 +200,9 @@ describe('LocalAgents', () => {
 
     // Proves L30 (useManagedAgents) ran and fed the derived lists.
     expect(useManagedAgents).toHaveBeenCalled();
-    expect(screen.getByText('Aion CLI')).toBeTruthy();
-    expect(screen.getByText('Claude Code')).toBeTruthy();
-    expect(screen.getByText('My Agent')).toBeTruthy();
+    expect(screen.getByText('Codex')).toBeTruthy();
+    expect(screen.getByText('Kiro V3')).toBeTruthy();
+    expect(screen.getByText('ZCode')).toBeTruthy();
   });
 
   it('shows the empty state when no detected agents are present', () => {
@@ -244,7 +245,7 @@ describe('LocalAgents', () => {
     render(<LocalAgents />);
 
     expect(screen.getByText('settings.agentManagement.refreshingStatuses')).toBeInTheDocument();
-    expect(screen.getByText('Aion CLI')).toBeInTheDocument();
+    expect(screen.getByText('Codex')).toBeInTheDocument();
   });
 
   it('renders official agents as diagnostics cards and filters out deprecated types', () => {
@@ -257,8 +258,8 @@ describe('LocalAgents', () => {
     render(<LocalAgents />);
 
     // Agent names render
-    expect(screen.getByText('Aion CLI')).toBeInTheDocument();
-    expect(screen.getByText('Claude Code')).toBeInTheDocument();
+    expect(screen.getByText('Codex')).toBeInTheDocument();
+    expect(screen.getByText('Kiro V3')).toBeInTheDocument();
     // Deprecated openclaw-gateway agent is filtered out
     expect(screen.queryByText('OpenClaw Gateway')).toBeNull();
     // Status tags render
@@ -346,7 +347,7 @@ describe('LocalAgents', () => {
     expect(getBoundAssistants(aionrsAgent, assistants)).toEqual([]);
   });
 
-  it('pins Kimi right after the aionrs agent in the official list', () => {
+  it('excludes unrelated upstream agents while keeping connected product software', () => {
     useManagedAgents.mockReturnValue({
       agents: [
         ...makeAgents(),
@@ -368,13 +369,9 @@ describe('LocalAgents', () => {
 
     render(<LocalAgents />);
 
-    // Alphabetically Claude Code < Kimi, so this order proves the pin rule:
-    // aionrs stays first, Kimi jumps ahead of the localeCompare ordering.
-    const aion = screen.getByText('Aion CLI');
-    const kimi = screen.getByText('Kimi');
-    const claude = screen.getByText('Claude Code');
-    expect(kimi.compareDocumentPosition(aion) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
-    expect(claude.compareDocumentPosition(kimi) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
+    expect(screen.queryByText('Kimi')).toBeNull();
+    expect(screen.getByText('Codex')).toBeInTheDocument();
+    expect(screen.getByText('Kiro V3')).toBeInTheDocument();
   });
 
   it('renders agent management as a single diagnostics page without local/remote tabs', () => {
@@ -392,7 +389,7 @@ describe('LocalAgents', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Aion CLI')).toBeInTheDocument();
+    expect(screen.getByText('Codex')).toBeInTheDocument();
     expect(screen.queryByText('settings.agentManagement.localAgents')).toBeNull();
   });
 
@@ -437,17 +434,17 @@ describe('LocalAgents', () => {
     expect(allTab.tagName).toBe('BUTTON');
 
     // Default "all": both official agents visible (Aion CLI online, Claude Code missing).
-    expect(screen.getByText('Aion CLI')).toBeInTheDocument();
-    expect(screen.getByText('Claude Code')).toBeInTheDocument();
+    expect(screen.getByText('Codex')).toBeInTheDocument();
+    expect(screen.getByText('Kiro V3')).toBeInTheDocument();
 
     // "available" keeps only the online agent.
     fireEvent.click(availableTab);
-    expect(screen.getByText('Aion CLI')).toBeInTheDocument();
-    expect(screen.queryByText('Claude Code')).toBeNull();
+    expect(screen.getByText('Codex')).toBeInTheDocument();
+    expect(screen.queryByText('Kiro V3')).toBeNull();
 
     // "unavailable" keeps only the non-online agent.
     fireEvent.click(unavailableTab);
-    expect(screen.queryByText('Aion CLI')).toBeNull();
-    expect(screen.getByText('Claude Code')).toBeInTheDocument();
+    expect(screen.queryByText('Codex')).toBeNull();
+    expect(screen.getByText('Kiro V3')).toBeInTheDocument();
   });
 });

@@ -84,8 +84,22 @@ describe('useAssistantList', () => {
 
   it('loads assistants on mount and selects first by default', async () => {
     const mockList: Assistant[] = [
-      { id: '1', name: 'Claude', sort_order: 1, source: 'builtin', enabled: true },
-      { id: '2', name: 'GPT', sort_order: 2, source: 'user', enabled: true },
+      {
+        id: '1',
+        name: 'Codex',
+        sort_order: 1,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
+      {
+        id: '2',
+        name: 'Kiro V3',
+        sort_order: 2,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
     ];
     (ipcBridge.assistants.list.invoke as any).mockResolvedValue(mockList);
 
@@ -100,8 +114,22 @@ describe('useAssistantList', () => {
 
   it('preserves backend order instead of resorting client side', async () => {
     const mockList: Assistant[] = [
-      { id: 'cowork', name: 'Cowork', sort_order: 2000, source: 'builtin', enabled: true },
-      { id: 'writer', name: 'Writer', sort_order: 1000, source: 'user', enabled: true },
+      {
+        id: 'cowork',
+        name: 'Codex',
+        sort_order: 2000,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
+      {
+        id: 'writer',
+        name: 'Kiro V3',
+        sort_order: 1000,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
     ];
     (ipcBridge.assistants.list.invoke as any).mockResolvedValue(mockList);
 
@@ -126,8 +154,22 @@ describe('useAssistantList', () => {
 
   it('preserves active selection if still present after reload', async () => {
     const mockList: Assistant[] = [
-      { id: '1', name: 'A', sort_order: 1, source: 'user', enabled: true },
-      { id: '2', name: 'B', sort_order: 2, source: 'user', enabled: true },
+      {
+        id: '1',
+        name: 'Codex',
+        sort_order: 1,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
+      {
+        id: '2',
+        name: 'Kiro V3',
+        sort_order: 2,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
     ];
     (ipcBridge.assistants.list.invoke as any).mockResolvedValue(mockList);
 
@@ -151,8 +193,22 @@ describe('useAssistantList', () => {
 
   it('falls back to first assistant if previous active is removed', async () => {
     const initialList: Assistant[] = [
-      { id: '1', name: 'A', sort_order: 1, source: 'user', enabled: true },
-      { id: '2', name: 'B', sort_order: 2, source: 'user', enabled: true },
+      {
+        id: '1',
+        name: 'Codex',
+        sort_order: 1,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
+      {
+        id: '2',
+        name: 'Kiro V3',
+        sort_order: 2,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
     ];
     (ipcBridge.assistants.list.invoke as any).mockResolvedValue(initialList);
 
@@ -164,7 +220,16 @@ describe('useAssistantList', () => {
     });
 
     // Now '2' is removed from backend
-    const updatedList: Assistant[] = [{ id: '1', name: 'A', sort_order: 1, source: 'user', enabled: true }];
+    const updatedList: Assistant[] = [
+      {
+        id: '1',
+        name: 'Codex',
+        sort_order: 1,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
+    ];
     (ipcBridge.assistants.list.invoke as any).mockResolvedValue(updatedList);
 
     await act(async () => {
@@ -192,10 +257,38 @@ describe('useAssistantList', () => {
   it('reorders only enabled assistants through the shared preference', async () => {
     assistantOrderConfigMock.state.value = ['cli', 'custom', 'official'];
     const initialList: Assistant[] = [
-      { id: 'official', name: 'Official', sort_order: 1, source: 'builtin', enabled: true },
-      { id: 'disabled', name: 'Disabled', sort_order: 2, source: 'builtin', enabled: false },
-      { id: 'custom', name: 'Custom', sort_order: 3, source: 'user', enabled: true },
-      { id: 'cli', name: 'CLI', sort_order: 4, source: 'generated', enabled: true },
+      {
+        id: 'official',
+        name: 'Codex',
+        sort_order: 1,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
+      {
+        id: 'disabled',
+        name: 'ZCode',
+        sort_order: 2,
+        source: 'generated',
+        enabled: false,
+        agent: { type: 'acp', source: 'custom' },
+      },
+      {
+        id: 'custom',
+        name: 'Kiro V3',
+        sort_order: 3,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
+      {
+        id: 'cli',
+        name: 'Codex / Kiro / ZCode · 同一对话',
+        sort_order: 4,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
     ];
     (ipcBridge.assistants.list.invoke as any).mockResolvedValue(initialList);
 
@@ -218,8 +311,22 @@ describe('useAssistantList', () => {
   it('restores the enabled order when preference persistence fails', async () => {
     assistantOrderConfigMock.state.value = ['cli', 'official'];
     const initialList: Assistant[] = [
-      { id: 'official', name: 'Official', sort_order: 1, source: 'builtin', enabled: true },
-      { id: 'cli', name: 'CLI', sort_order: 2, source: 'generated', enabled: true },
+      {
+        id: 'official',
+        name: 'Codex',
+        sort_order: 1,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
+      {
+        id: 'cli',
+        name: 'Codex / Kiro / ZCode · 同一对话',
+        sort_order: 2,
+        source: 'generated',
+        enabled: true,
+        agent: { type: 'acp', source: 'custom' },
+      },
     ];
     (ipcBridge.assistants.list.invoke as any).mockResolvedValue(initialList);
     assistantOrderConfigMock.service.set.mockImplementationOnce(async (_key, value) => {

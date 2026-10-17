@@ -98,24 +98,25 @@ function creationFixture(t){
   };
   const h=new History({directory:root,legacyDirectory:root,v3,v3Sync,backend});t.after(()=>{h.close();fs.rmSync(root,{recursive:true,force:true});});return {root,h,v3,created,prepared,chats,calls};
 }
+function createV3(history,cwd,id,options={}) {return history.createNew(cwd,id,{...options,overrides:{...options.overrides,model:options.overrides?.model||'kiro-v3/a'}});}
 test('new V3 conversation prepares the persistent return path before exposing one unified chat',async t=>{
-  const f=creationFixture(t),requestId=crypto.randomUUID();const [a,b]=await Promise.all([f.h.createNew(f.root,requestId),f.h.createNew(f.root,requestId)]);
-  const c=await f.h.createNew(f.root,requestId);assert.equal(a.id,b.id);assert.equal(c.conversationId,'chat');assert.equal(f.created.length,1);assert.equal(f.chats.length,1);assert.equal(f.h.snapshot(a.id).source.messages.length,0);
+  const f=creationFixture(t),requestId=crypto.randomUUID();const [a,b]=await Promise.all([createV3(f.h,f.root,requestId),createV3(f.h,f.root,requestId)]);
+  const c=await createV3(f.h,f.root,requestId);assert.equal(a.id,b.id);assert.equal(c.conversationId,'chat');assert.equal(f.created.length,1);assert.equal(f.chats.length,1);assert.equal(f.h.snapshot(a.id).source.messages.length,0);
 });
 test('a lost unified creation reply reuses the V3 source and the already created chat',async t=>{
   const f=creationFixture(t),requestId=crypto.randomUUID(),base=f.h.backend;let lost=true;
   f.h.backend=async(...args)=>{const r=await base(...args);if(args[1]==='POST'&&lost){lost=false;throw Error('lost reply');}return r;};
-  await assert.rejects(f.h.createNew(f.root,requestId),/lost reply/);const recovered=await f.h.createNew(f.root,requestId);
+  await assert.rejects(createV3(f.h,f.root,requestId),/lost reply/);const recovered=await createV3(f.h,f.root,requestId);
   assert.equal(recovered.existing,true);assert.equal(f.created.length,1);assert.equal(f.chats.length,1);
 });
 test('unknown native creation outcome is held visibly instead of silently duplicating the native chat',async t=>{
   const f=creationFixture(t),requestId=crypto.randomUUID();let tries=0;f.v3.create=async()=>{tries++;throw Error('native reply lost');};
-  await assert.rejects(f.h.createNew(f.root,requestId),/native reply lost/);await assert.rejects(f.h.createNew(f.root,requestId),/未重复创建/);assert.equal(tries,1);assert.equal(f.chats.length,0);
+  await assert.rejects(createV3(f.h,f.root,requestId),/native reply lost/);await assert.rejects(createV3(f.h,f.root,requestId),/未重复创建/);assert.equal(tries,1);assert.equal(f.chats.length,0);
 });
 test('ordinary new chat allocates one persistent workspace and keeps selected model, effort and attachments',async t=>{
-  const f=creationFixture(t),requestId=crypto.randomUUID(),overrides={model:'codex::gpt-5.4',thought_level:'high',permission:'default',skill_ids:['read'],mcp_ids:['mcp']};
-  const first=await f.h.createNew('',requestId,{name:'First question',locale:'zh-CN',overrides,extra:{default_files:['D:/note.txt'],selected_mcp_server_ids:['mcp'],workspace:'D:/wrong',workbench_import_id:'wrong'}});
-  const again=await f.h.createNew('',requestId);
+  const f=creationFixture(t),requestId=crypto.randomUUID(),overrides={model:'kiro-v3/a',thought_level:'high',permission:'default',skill_ids:['read'],mcp_ids:['mcp']};
+  const first=await createV3(f.h,'',requestId,{name:'First question',locale:'zh-CN',overrides,extra:{default_files:['D:/note.txt'],selected_mcp_server_ids:['mcp'],workspace:'D:/wrong',workbench_import_id:'wrong'}});
+  const again=await createV3(f.h,'',requestId);
   const cwd=path.join(f.root,'workspaces','chat-temp-'+requestId),chat=f.chats[0];
   assert.equal(first.conversationId,again.conversationId);assert.equal(f.created.length,1);assert.equal(f.chats.length,1);
   assert.equal(chat.extra.workspace,cwd);assert.ok(fs.statSync(cwd).isDirectory());assert.equal(f.h.snapshot(first.id).cwd,cwd);
@@ -123,9 +124,9 @@ test('ordinary new chat allocates one persistent workspace and keeps selected mo
   assert.deepEqual(chat.extra.default_files,['D:/note.txt']);assert.deepEqual(chat.extra.selected_mcp_server_ids,['mcp']);assert.equal(chat.extra.workbench_import_id,first.id);
 });
 test('project new chat retains the selected project and rejects a changed project on the same request',async t=>{
-  const f=creationFixture(t),requestId=crypto.randomUUID();await f.h.createNew(f.root,requestId,{name:'Project chat'});
+  const f=creationFixture(t),requestId=crypto.randomUUID();await createV3(f.h,f.root,requestId,{name:'Project chat'});
   assert.equal(f.created[0],f.root);assert.equal(f.chats[0].extra.workspace,f.root);assert.equal(fs.existsSync(path.join(f.root,'workspaces')),false);
-  await assert.rejects(f.h.createNew('',requestId),/项目已变化/);assert.equal(f.created.length,1);assert.equal(f.chats.length,1);
+  await assert.rejects(createV3(f.h,'',requestId),/项目已变化/);assert.equal(f.created.length,1);assert.equal(f.chats.length,1);
 });
 
 function terminalHistoryFixture(status) {

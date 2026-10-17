@@ -5,6 +5,7 @@ const {History} = require('./history.cjs');
 const {ContinuityDesk} = require('./context/desk.cjs');
 const {AutoSync} = require('./auto-sync.cjs');
 const {NativeCatalog} = require('./native-catalog.cjs');
+const {ModelCatalog}=require('./context/models.cjs');
 const {NativeApp, discoverGrok} = require('../../../src/native-app.cjs');
 const {atomicJson} = require('../../../src/store.cjs');
 const {ChatCompanion} = require('../lobster/companion.cjs');
@@ -22,6 +23,7 @@ class WorkspaceRuntime {
     this.sync = new AutoSync({history:this.history}); this.sync.start();
     this.desk = new ContinuityDesk({history:this.history,sync:this.sync,backend});
     this.nativeCatalog=new NativeCatalog({history:this.history});
+    this.models=new ModelCatalog(path.join(legacyDirectory,'workspace.json'),path.join(directory,'model-discovery'));
     if(lobster)this.companion=new ChatCompanion({directory,sessionsDirectory:this.history.directory,backend,lobster});
     this.computers=new Computers({directory,sessionsDirectory:this.history.directory,backend,lobster,native,dispatch:(action,data,caller)=>this.call(action,data,caller)});
   }
@@ -37,6 +39,16 @@ class WorkspaceRuntime {
     if (action==='state') return {available:true,grok:await this.grok.status()};
     if (['chat-continuity','chat-sync-now','chat-sync-toggle'].includes(action)) return this.desk.call(action,data);
     if (action==='chat-options') return {available:true,assistantId:(await this.history.assistant()).id};
+    if (action==='chat-models') return this.models.read(data.cwd,data.refresh===true);
+    if(action==='team-options'){
+      const {ensureAssistant}=require('../distribution/assistant.cjs');
+      const assistants=[];
+      for(const provider of ['codex','kiro-v3','zcode']){
+        const assistant=await ensureAssistant({backend:this.history.backend,bridge:path.resolve(__dirname,'../bridge.mjs'),dataDir:this.history.directory,configFile:process.env.XUZHOU_BRIDGE_CONFIG,command:process.env.XUZHOU_NODE_BIN,endpoint:process.env.AIONUI_WORKBENCH_ENDPOINT,preferredProvider:provider});
+        assistants.push({...assistant,provider});
+      }
+      return {assistants};
+    }
     if (action==='chat-create') return this.history.createNew(data.cwd,data.requestId,{name:data.name,locale:data.locale,overrides:data.overrides,extra:data.extra});
     if (action==='history-list') return this.history.list(data.agentId,data.cursor);
     if (action==='codex-catalog') return this.nativeCatalog.list();

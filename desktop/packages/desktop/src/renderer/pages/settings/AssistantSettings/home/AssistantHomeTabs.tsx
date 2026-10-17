@@ -9,7 +9,6 @@ import EnabledAssistantsList from './EnabledAssistantsList';
 import MyAssistantsList from './MyAssistantsList';
 import OfficialAssistantsGrid from './OfficialAssistantsGrid';
 import { useLayoutContext } from '@/renderer/hooks/context/LayoutContext';
-import TalkToButlerButton from '@/renderer/components/base/TalkToButlerButton';
 import { AionSearchInput } from '@/renderer/components/base';
 import SettingsPageHeader from '../../components/SettingsPageHeader';
 import React, { useMemo, useState } from 'react';
@@ -43,17 +42,15 @@ const AssistantHomeTabs: React.FC<AssistantHomeTabsProps> = ({
   onOpenSettings,
   onDuplicate,
   onDelete,
-  onCreate,
   onToggleEnabled,
   onReorderEnabled,
   onStartChat,
-  initialTab = 'enabled',
   onTabChange,
 }) => {
   const { t, i18n } = useTranslation();
   const layout = useLayoutContext();
   const isMobile = layout?.isMobile ?? false;
-  const [tab, setTab] = useState<HomeTab>(initialTab);
+  const [tab, setTab] = useState<HomeTab>('enabled');
   const [searchQuery, setSearchQuery] = useState('');
 
   const selectTab = (next: HomeTab) => {
@@ -118,17 +115,6 @@ const AssistantHomeTabs: React.FC<AssistantHomeTabsProps> = ({
                     onChange={setSearchQuery}
                   />
                 )}
-                <TalkToButlerButton
-                  className='shrink-0'
-                  label={t('settings.createAssistant', { defaultValue: 'Create Assistant' })}
-                  chatLabel={t('settings.talkToButler.createViaChat', { defaultValue: 'Create via chat' })}
-                  onManual={onCreate}
-                  manualLabel={t('settings.talkToButler.createManually', { defaultValue: 'Create manually' })}
-                  prompt={t('settings.talkToButler.prompt.createAssistant', {
-                    defaultValue: 'Help me create a new assistant and walk me through setting it up.',
-                  })}
-                  data-testid='btn-create-assistant'
-                />
               </>
             }
             tabs={[
@@ -147,7 +133,7 @@ const AssistantHomeTabs: React.FC<AssistantHomeTabsProps> = ({
                 label: t('settings.assistantTabOfficial', { defaultValue: 'Official' }),
                 count: counts.official,
               },
-            ]}
+            ].filter((item) => item.key === 'enabled')}
             activeTab={tab}
             onTabChange={(key) => selectTab(key as HomeTab)}
           />

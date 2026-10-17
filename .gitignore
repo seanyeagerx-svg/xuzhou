@@ -24,3 +24,4 @@ secrets.json
 .codex/
 .kiro/
 .ssh/
+/pet-profile/

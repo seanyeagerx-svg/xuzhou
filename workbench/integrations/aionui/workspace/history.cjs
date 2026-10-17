@@ -11,10 +11,11 @@ const {KiroContextWriter} = require('../kiro/sync.cjs');
 const {checkArchive} = require('./context/history.cjs');
 
 class History {
-  constructor({directory, legacyDirectory, backend, reader, v3, v3Sync, workspaceDirectory}) {
-    this.directory = directory; this.backend = backend; this.previews = new Map(); this.pending = new Map();
+  constructor({directory, legacyDirectory, backend, reader, v3, v3Sync, workspaceDirectory,sourceCreator}) {
+    this.directory = directory; this.legacyDirectory=legacyDirectory; this.backend = backend; this.previews = new Map(); this.pending = new Map();
     this.workspaceDirectory = workspaceDirectory || path.join(directory,'workspaces');
     this.config = () => JSON.parse(fs.readFileSync(path.join(legacyDirectory, 'workspace.json'), 'utf8'));
+    this.sourceCreator=sourceCreator;
     this.v3 = v3 || new KiroV3History({config:()=>this.config().agents.find(a=>a.id==='kiro')});
     this.v3Sync = v3Sync || new KiroContextWriter({directory,history:this.v3});
     const legacyReader = new NativeHistory({getConfig:id=>this.config().agents.find(a=>a.id===id) || {}, getAdapter:async()=>{
@@ -132,21 +133,39 @@ class History {
     // Follow AionCore's temporary workspace convention so free chats stay out of project groups.
     if(!cwd){cwd=path.join(this.workspaceDirectory,'chat-temp-'+requestId);fs.mkdirSync(cwd,{recursive:true});}
     cwd = originalProjectRoot(cwd);
-    const key = 'new-kiro-v3:' + requestId;
+    const selected=options.overrides?.model;
+    const provider=selected?.includes('/')?selected.split('/')[0]:'codex';
+    if(!['codex','kiro-v3','zcode'].includes(provider))throw Error('请选择 Codex、Kiro V3 或 ZCode 的可用模型');
+    const key = 'new-'+provider+':' + requestId;
     if(this.pending.has(key))return this.pending.get(key);
-    const promise=this.createNative(key,cwd,options);this.pending.set(key,promise);
+    const promise=this.createNative(key,cwd,options,provider);this.pending.set(key,promise);
     try{return await promise;}finally{this.pending.delete(key);}
   }
-  async createNative(key,cwd,options) {
+  async createNative(key,cwd,options,provider='kiro-v3') {
     this.index = fs.existsSync(this.indexFile)?JSON.parse(fs.readFileSync(this.indexFile,'utf8')):{};
     let entry=this.index[key];
     if(entry&&path.resolve(entry.cwd).toLowerCase()!==cwd.toLowerCase())throw Error('新对话的项目已变化，未重复创建');
-    if(!entry){entry={id:crypto.randomUUID(),conversationId:null,sourceAgent:'kiro-v3',cwd,nativeCreationAttempted:true};this.index[key]=entry;atomicJson(this.indexFile,this.index);
-      const source=await this.v3.create(cwd);
+    if(!entry){entry={id:crypto.randomUUID(),conversationId:null,sourceAgent:provider,cwd,nativeCreationAttempted:true};this.index[key]=entry;atomicJson(this.indexFile,this.index);
+      let source;
+      if(this.sourceCreator)source=await this.sourceCreator(provider,cwd,options);
+      else if(provider==='kiro-v3')source=await this.v3.create(cwd);
+      else {
+        const {readAgents}=await import('../service.mjs');
+        const config=readAgents(process.env.XUZHOU_BRIDGE_CONFIG||path.join(this.legacyDirectory,'workspace.json')).find(a=>a.id===provider);
+        if(!config)throw Error('当前软件尚未配置');
+        const {ZcodeAdapter}=require('../../../src/zcode.cjs');
+        const a=provider==='codex'?new CodexAdapter(config):new ZcodeAdapter(config);
+        try{
+          await a.connect(cwd);const model=options.overrides?.model?.split('/').slice(1).join('/');
+          const native=await a.newSession(cwd,model?decodeURIComponent(model):undefined);
+          if(provider==='codex')await a.rpc.request('thread/inject_items',{threadId:native.id,items:[{type:'message',role:'user',content:[{type:'input_text',text:'Xuzhou new conversation context anchor. No task or response requested.'}]}]});
+          source={id:native.id,agentId:provider,title:options.name||'新对话',cwd,model:native.model,messages:[],updatedAt:Date.now()};
+        }finally{a.close();}
+      }
       atomicJson(snapshotFile(this.directory,entry.id),{id:entry.id,cwd,source,createdAt:Date.now()});
       entry.sourceId=source.id;atomicJson(this.indexFile,this.index);
     }
-    if(!fs.existsSync(snapshotFile(this.directory,entry.id)))throw Error('Kiro V3 创建结果尚未核对，未重复创建，请保留当前页面');
+    if(!fs.existsSync(snapshotFile(this.directory,entry.id)))throw Error('原生会话创建结果尚未核对，未重复创建，请保留当前页面');
     const source=this.snapshot(entry.id).source;
     return this.create(key,{kind:'import',source,conversation:options},cwd);
   }

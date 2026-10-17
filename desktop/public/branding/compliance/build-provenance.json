@@ -8,7 +8,7 @@
   "core": {
     "version": "0.2.2",
     "commit": "47e66d0d151123e973b3fd1e77afcb5671b3f8c5",
-    "sha256": "920aba62a6ff7ff25d51ac1fd740b1043d6899c875648f807c59547512d9bf9d",
+    "sha256": "c10ff36ce2f3d9567fbfe64e62bae7e9d958e488476fd8fc8709057c9f0723ec",
     "rust": "rustc 1.95.0 (59807616e 2026-04-14)",
     "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
     "target": "x86_64-pc-windows-msvc",
@@ -21,6 +21,26 @@
         "crates/aionui-extension/src/skill_service.rs": {
           "sha256": "ceecfc35849cbc2a284f602122562f555081296f6508805a953ea21c45aba8fe",
           "change": "Remove Windows directory reparse points with remove_dir; preserve linked source contents"
+        },
+        "crates/aionui-app/src/router/state.rs": {
+          "sha256": "d9310bdfcbad28dd0bf1c3387a7013b9e05a0b6f500b5d53ad77f48b27bc90f7",
+          "change": "Resolve the selected assistant connection and its declared local stdio capability without advertising unsupported HTTP or SSE."
+        },
+        "crates/aionui-app/src/router/team_capability_resolver.rs": {
+          "sha256": "881d45f88279e6c57660844be5cd13e5dbd58835870810b70cdb1a37cc805034",
+          "change": "Resolve the selected assistant connection and its declared local stdio capability without advertising unsupported HTTP or SSE."
+        },
+        "crates/aionui-team/src/ports.rs": {
+          "sha256": "20c65f27e901bf8dbb1788dc330065d3d47f7645e57b9293e131d9861f45e42c",
+          "change": "Resolve the selected assistant connection and its declared local stdio capability without advertising unsupported HTTP or SSE."
+        },
+        "crates/aionui-team/src/provisioning.rs": {
+          "sha256": "f7e8daa70e994cdb3992c652cf7df2d897c1075649574bb0ad5e69e9d7b3a12f",
+          "change": "Resolve the selected assistant connection and its declared local stdio capability without advertising unsupported HTTP or SSE."
+        },
+        "crates/aionui-team/src/service.rs": {
+          "sha256": "91bbbe109dee4db5fee11b1ac606f9e20618511c4e3e1332728e98520ed3d6a5",
+          "change": "Detach removed AI member conversations without deleting history or workspace; revoke former team tools."
         }
       },
       "changedRustFiles": {
@@ -51,7 +71,12 @@
         "crates/aionui-runtime/src/test_support.rs": "161ba4b4327a5d364cf7636d55d60eeffab812188e46a0eeefa0994926df9903",
         "crates/aionui-shell/src/shell.rs": "475265458b5707890b7898cddd9e80cab433ed27b7fb14d9aaeb0f2f53e794fd",
         "crates/aionui-sidebar/src/service_test.rs": "83b2ed7767fb1463cc5d4921a1a3f100d55ee2ff795cb919c7aa8ed01befe9d4",
-        "crates/aionui-team/tests/session_service_integration.rs": "9cfa2fe2ff852aceae49af80f64264bf3d3f3e6c618e429377d7ed29efb9aa63"
+        "crates/aionui-team/tests/session_service_integration.rs": "8c2765be966976529bc63bdf38f783aa69a3296ddb10dde77ceb151b00242ce5",
+        "crates/aionui-app/src/router/state.rs": "d9310bdfcbad28dd0bf1c3387a7013b9e05a0b6f500b5d53ad77f48b27bc90f7",
+        "crates/aionui-app/src/router/team_capability_resolver.rs": "881d45f88279e6c57660844be5cd13e5dbd58835870810b70cdb1a37cc805034",
+        "crates/aionui-team/src/ports.rs": "20c65f27e901bf8dbb1788dc330065d3d47f7645e57b9293e131d9861f45e42c",
+        "crates/aionui-team/src/provisioning.rs": "f7e8daa70e994cdb3992c652cf7df2d897c1075649574bb0ad5e69e9d7b3a12f",
+        "crates/aionui-team/src/service.rs": "91bbbe109dee4db5fee11b1ac606f9e20618511c4e3e1332728e98520ed3d6a5"
       }
     },
     "replacementSkillSha256": "5e582ec12d0d2731fd451dd698327942bda5a5d2179d91a066654a8188a5ee0e",

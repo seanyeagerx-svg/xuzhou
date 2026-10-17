@@ -172,7 +172,7 @@
   "assistantTabMine": "我的助手",
   "assistantTabOfficial": "官方助手",
   "assistantHomeLead": "助理是配好技能和工具、能直接上工的 AI 專家。這裡有你本機的 CLI、你親手調教的助理，還有一批官方專家。啟用後，它們就會出現在你的對話、開團和定時任務裡，隨時待命。",
-  "assistantHomeLeadShort": "配好技能和工具、能直接上場的 AI 專家。啟用後即可用於對話、開團和定時任務。",
+  "assistantHomeLeadShort": "管理續舟連接的軟體與團隊成員。原有對話繼續保留。",
   "assistantRuntimeLabel": "Agent:",
   "assistantGoChat": "去對話",
   "assistantReorderHint": "拖曳可調整順序，它決定你挑選助理時（首頁、開團、定時任務等）清單裡的顯示先後。",
@@ -1171,7 +1171,7 @@
   "agentManagement": {
     "localAgents": "本機 Agents",
     "remoteAgents": "遠端 Agents",
-    "localAgentsDescription": "管理本機可用的 AI 編程 Agent。Aion CLI 為內建，App 自帶、無需安裝；其它 Agent 需先在本地安裝對應 CLI 才能被識別。",
+    "localAgentsDescription": "管理 Codex、Kiro V3、ZCode 的本機連接。先在原軟體登入，再於續舟選擇模型。",
     "localAgentsSetupLink": "查看安裝指南",
     "goToChat": "開始對話",
     "remoteAgentsDescription": "目前僅支援遠端連接 OpenClaw，其他 Agent 正在開發中。",
@@ -1357,7 +1357,7 @@
       "diagnose": "我在使用 续舟 時遇到問題，幫我排查一下。\n\n【模組】{{module}}\n【問題描述】{{description}}\n【附件】見輸入框中的截圖。\n\n請幫我診斷原因並給出解決辦法。",
       "diagnoseChatError": "我在 续舟 對話過程中遇到了報錯，幫我排查一下。\n\n【報錯內容】{{error}}\n\n請幫我診斷原因並給出解決辦法。"
     },
-    "solveWithButler": "找管家排查"
+    "solveWithButler": "用續舟排查"
   },
   "providerIdConflict": "Provider ID 已存在，請重試。",
   "autoInjectedSkillsHint": "每次對話都會自動載入，無需手動啟用；由智能體自行決定何時呼叫。",
@@ -1487,7 +1487,26 @@
     "connectSsh": "連線獨立維修通道",
     "logs": "最近記錄",
     "disk": "磁碟",
-    "memory": "記憶體"
+    "memory": "記憶體",
+    "activity": "協作動態",
+    "activityHint": "查看本專案的收發訊息、工具呼叫和送達回執。工具返回、訊息排隊都不代表整個任務完成；這裡只顯示續舟實際收到的記錄。",
+    "activityEmpty": "本專案還沒有協作動態。",
+    "activityRunning": "正在處理",
+    "activityFailed": "執行失敗",
+    "activityStopped": "已停止",
+    "activityReview": "需要核對",
+    "activityToolDone": "工具已返回",
+    "activityDone": "已完成",
+    "activityRecorded": "已記錄",
+    "activityReply": "龍蝦回覆",
+    "activitySent": "發給龍蝦",
+    "petHint": "點我對話、同步或維修",
+    "petOpen": "展開小龍蝦功能",
+    "petDragHint": "拖動小龍蝦可以換位置",
+    "petChat": "對話與同步",
+    "petListen": "旁聽與整理",
+    "permissionReset": "撤銷本聊天記住的工具授權",
+    "permissionResetFailed": "未能撤銷工具授權，請重試。"
   },
   "workspace": {
     "history": "匯入舊聊天",

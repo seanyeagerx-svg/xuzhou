@@ -1,5 +1,6 @@
 import React from 'react';
-import { Trigger } from '@arco-design/web-react';
+import { Alert, Button, Spin, Trigger } from '@arco-design/web-react';
+import { useTranslation } from 'react-i18next';
 import type { TeamAssistantOption } from '../assistantSelectUtils';
 import TeamAssistantPicker from './TeamAssistantPicker';
 
@@ -38,6 +39,9 @@ type Props = {
   emptyText?: React.ReactNode;
   /** 行密度，透传给内部 picker。默认 'modal'（较紧凑、无内部边框，适合浮层）。 */
   density?: 'compact' | 'modal';
+  loading?: boolean;
+  error?: string;
+  onRefresh?: () => void;
 };
 
 const TeamAssistantPickerDropdown: React.FC<Props> = ({
@@ -56,7 +60,11 @@ const TeamAssistantPickerDropdown: React.FC<Props> = ({
   guidanceFooter,
   emptyText,
   density = 'modal',
+  loading = false,
+  error,
+  onRefresh,
 }) => {
+  const { t } = useTranslation();
   const showEmpty = emptyText !== undefined && assistants.length === 0;
 
   return (
@@ -83,7 +91,17 @@ const TeamAssistantPickerDropdown: React.FC<Props> = ({
               {subtitle ? <div className='mt-2px text-12px leading-18px text-t-tertiary'>{subtitle}</div> : null}
             </div>
           ) : null}
-          {showEmpty ? (
+          {error ? <Alert type='warning' content={error} /> : null}
+          {onRefresh ? (
+            <Button type='text' size='small' loading={loading} onClick={onRefresh}>
+              {t('common.refresh')}
+            </Button>
+          ) : null}
+          {loading && assistants.length === 0 ? (
+            <div className='flex items-center justify-center p-12px'>
+              <Spin />
+            </div>
+          ) : showEmpty ? (
             <div className='flex items-center justify-center px-12px py-12px text-center text-13px text-t-tertiary'>
               {emptyText}
             </div>

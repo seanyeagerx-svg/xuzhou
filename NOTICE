@@ -2,7 +2,7 @@
 
 Independent derivative of AionUi 2.2.2, commit c140550d04e44f3d6f8a9830b40ae56e4689a977. Copyright 2025 AionUi (aionui.com), Apache License 2.0. Original attribution and license notices are retained. No upstream endorsement or trademark right is claimed.
 
-AionCore v0.2.2, commit 47e66d0d151123e973b3fd1e77afcb5671b3f8c5; rebuilt SHA256 920aba62a6ff7ff25d51ac1fd740b1043d6899c875648f807c59547512d9bf9d. The original root Apache-2.0 grant and MIT workspace metadata are recorded separately. The entire proprietary PDF skill was omitted before compilation and replaced with independent Apache-2.0 instructions. The replacement binary was checked for restricted embedded text and materialization of the independent skill. SQL statements are unchanged; CRLF checksums preserve compatibility with existing Windows databases. aionrs v0.2.11 is Apache-2.0.
+AionCore v0.2.2, commit 47e66d0d151123e973b3fd1e77afcb5671b3f8c5; rebuilt SHA256 c10ff36ce2f3d9567fbfe64e62bae7e9d958e488476fd8fc8709057c9f0723ec. The original root Apache-2.0 grant and MIT workspace metadata are recorded separately. The entire proprietary PDF skill was omitted before compilation and replaced with independent Apache-2.0 instructions. The replacement binary was checked for restricted embedded text and materialization of the independent skill. SQL statements are unchanged; CRLF checksums preserve compatibility with existing Windows databases. aionrs v0.2.11 is Apache-2.0.
 
 Node.js 24.11.0, npm, Corepack, Electron 44.8.0 and Chromium retain all their original license and third-party notices below. AionHub four extension wrappers are pinned to source ebc6a2bc3a84c5bbc4436939abe879cf9c8478c2, Apache-2.0; external client software is installed only on user request.
 

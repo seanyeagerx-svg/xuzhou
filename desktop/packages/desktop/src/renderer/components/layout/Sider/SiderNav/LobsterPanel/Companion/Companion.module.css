@@ -47,3 +47,89 @@
   max-height: 400px;
   overflow: auto;
 }
+.floating {
+  position: fixed;
+  z-index: 1002;
+  width: 100px;
+  touch-action: none;
+}
+.floatingPet {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  height: 106px;
+  padding: 0;
+  cursor: grab;
+  color: var(--color-text-1);
+  border-radius: 24px;
+  background: transparent;
+  user-select: none;
+  touch-action: none;
+}
+.floatingPet > :global(.arco-badge) {
+  height: 82px;
+}
+.floatingPet :global(.arco-badge) > span:first-child {
+  width: 84px;
+  height: 84px;
+}
+.floatingPet:active {
+  cursor: grabbing;
+}
+.petName {
+  font-size: 12px;
+  padding: 2px 10px;
+  background: var(--color-bg-2);
+  border: 1px solid var(--color-border-2);
+  border-radius: 12px;
+}
+.petMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 244px;
+  max-width: calc(100vw - 40px);
+}
+.petPopup:global(.arco-trigger) {
+  z-index: 1003;
+}
+.liveNote {
+  position: absolute;
+  right: 102px;
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 232px;
+  height: auto;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border-2);
+  border-radius: 14px;
+  box-shadow: var(--shadow-2-down);
+  white-space: normal;
+  text-align: start;
+  background: var(--color-bg-2);
+  color: var(--color-text-1);
+}
+.liveNote strong {
+  font-size: 12px;
+}
+.noteRight {
+  right: auto;
+  left: 102px;
+}
+.liveNote > span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 12px;
+  color: var(--color-text-3);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .liveNote {
+    width: 176px;
+  }
+}

@@ -42,8 +42,8 @@
     "dispatchAgentPlaceholder": "팀 리더 선택",
     "subAgentsPlaceholder": "팀 멤버 어시스턴트 선택",
     "confirm": "Confirm Create",
-    "noSupportedAgents": "사용 가능한 어시스턴트가 없습니다",
-    "supportedAgentsHint": "현재 Claude와 Aion CLI 어시스턴트를 지원합니다. 더 많은 어시스턴트가 곧 추가됩니다.",
+    "noSupportedAgents": "사용 가능한 AI 모델이 없습니다. 연결을 확인하고 새로고침하세요.",
+    "supportedAgentsHint": "Add local Codex, Kiro V3 and ZCode. Each requires its original sign-in and an available model.",
     "leaderDesc": "목표를 이해하고 어시스턴트를 조율하여 작업을 완료합니다",
     "searchPlaceholder": "Search",
     "noSearchResults": "검색 결과가 없습니다",
@@ -65,19 +65,19 @@
     "teammate": "Teammate",
     "selectAtLeastOneMember": "Select at least one assistant as the Team Leader.",
     "selectOneLeader": "Select one Team Leader",
-    "subtitle": "Let multiple AI assistants team up and collaborate. We suggest one team focuses on a single goal — create separate teams for different tasks.",
+    "subtitle": "AI 모델을 선택해 한 프로젝트에서 협업하세요. 구성원은 언제든 추가하거나 제거할 수 있습니다.",
     "nameLabel": "Team name",
-    "workspaceLabel": "Workspace",
-    "allAssistantsWithCount": "All assistants ({{count}})",
+    "workspaceLabel": "공유 프로젝트",
+    "allAssistantsWithCount": "사용 가능한 AI 모델 ({{count}})",
     "selectedMembersWithCount": "Selected members {{count}} · ⚑ = Leader",
     "selectedMembersTitleWithCount": "Selected members {{count}}",
     "leaderLegend": "= Leader",
-    "membersHelper": "Choose team members and assign one Leader. The same assistant can be selected multiple times.",
-    "memberHint": "No suitable assistant as a member? After creation, let the Leader create temporary team members in chat."
+    "membersHelper": "AI 모델과 조정자 한 명을 선택하세요. 같은 연결에서 여러 모델을 추가할 수 있습니다.",
+    "memberHint": "프로젝트 파일, 작업, 협업 메시지를 공유합니다. 개별 채팅은 각각 보존됩니다."
   },
   "removeAgent": {
     "confirmTitle": "팀 멤버 제거",
-    "confirmContent": "Remove this member from the team?",
+    "confirmContent": "이 AI를 팀에서 제거할까요? 채팅은 로컬 대화로 남습니다. 프로젝트 파일과 다른 구성원은 보존됩니다.",
     "confirmContentActive": "This member is working. Remove it anyway? Its current work will be interrupted."
   },
   "emptyState": {
@@ -93,7 +93,7 @@
   },
   "addMember": {
     "title": "Add member",
-    "subtitle": "The same assistant can be added repeatedly",
+    "subtitle": "AI 모델을 선택하세요. 같은 연결에서 여러 모델을 추가할 수 있습니다.",
     "searchAssistants": "Search assistants...",
     "addFailed": "Failed to add member",
     "noSearchResults": "No results found",

@@ -4,6 +4,16 @@ const path=require('node:path');
 const {resolveCodexCommand}=require('./agent-command.cjs');
 const {codexModels,acpOptions,requireChoice,idleSession}=require('./session-options.cjs');
 const version=require('../package.json').version;
+// A fieldless MCP form is a confirmation, not a questionnaire. Keep forms
+// that collect values on the unsupported path instead of inventing answers.
+function isConfirmationElicitation(request){
+  const p=request.params||{},schema=p.requestedSchema;
+  return request.method==='mcpServer/elicitation/request'&&p.mode==='form'&&schema?.type==='object'
+    &&Object.keys(schema).every(key=>['type','properties','required','additionalProperties','title','description','$schema'].includes(key))
+    &&schema.properties!==null&&typeof schema.properties==='object'&&!Array.isArray(schema.properties)&&Object.keys(schema.properties).length===0
+    &&(schema.required===undefined||Array.isArray(schema.required)&&schema.required.length===0)
+    &&(schema.additionalProperties===undefined||typeof schema.additionalProperties==='boolean');
+}
 function bridgeServer(adapter,conversationId){
   const bridge=adapter.lobsterBridge?.(conversationId);if(!bridge)return null;
   return {name:'workbench_lobster',command:process.execPath,args:[path.join(__dirname,'lobster-mcp.cjs')],env:{ELECTRON_RUN_AS_NODE:'1',WORKBENCH_LOBSTER_URL:bridge.url,WORKBENCH_LOBSTER_TOKEN:bridge.token,...(bridge.computers?{WORKBENCH_COMPUTERS:'1'}:{})}};
@@ -41,7 +51,10 @@ class Adapter extends EventEmitter {
     } else if(/UserInput/.test(m.method)) {
       const qs=m.params.questions || [];
       result={answers:Object.fromEntries(qs.map(q=>[q.id,{answers:[answers?.[q.id] || (choice==='allow' ? q.options?.[0]?.label : '取消') || '取消']}]))};
-    } else if(/elicitation/.test(m.method)) result={action:'decline',content:null};
+    } else if(/elicitation/.test(m.method)) {
+      const accepted=choice==='allow'&&isConfirmationElicitation(m);
+      result={action:accepted?'accept':'decline',content:accepted?{}:null};
+    }
     else if(/permissions\/requestApproval/.test(m.method)) result={permissions:choice==='allow'?m.params.permissions:{},scope:'turn'};
     else result={decision:choice==='allow'?'accept':'decline'};
     this.rpc.respond(m.id,result); this.approvals.delete(key);
@@ -172,4 +185,4 @@ class AcpAdapter extends Adapter {
   }
   async cancel(id){this.rpc.notify('session/cancel',{sessionId:id});}
 }
-module.exports={Adapter,CodexAdapter,AcpAdapter,guard,bridgeServer,sessionServers};
+module.exports={Adapter,CodexAdapter,AcpAdapter,guard,bridgeServer,sessionServers,isConfirmationElicitation};

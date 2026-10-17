@@ -81,6 +81,7 @@ class AutoSync {
   fail(previous,error) {return failure(previous,error,this.now(),this.interval);}
   async incoming(s) {
     const current=readUpdateState(this.root,s.id);
+    if(current.source.agentId==='zcode'){s.inbound={state:'unsupported',detail:'ZCode 原生历史读取暂未接通；统一聊天中的前文仍可继续使用。'};return;}
     const source=await this.history.reader.read(current.source.agentId,current.source.id);
     if(this.closed || !s.enabled)return;
     const added=addedMessages(current.source,source),stamp=fingerprint(source);

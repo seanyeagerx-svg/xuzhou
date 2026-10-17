@@ -970,9 +970,11 @@ pub fn build_team_state(
     let turn_port: Arc<dyn AgentTurnExecutionPort> = adapters.clone();
     let slash_command_port: Arc<dyn NativeSlashCommandPort> = adapters.clone();
     let cancellation_port: Arc<dyn AgentTurnCancellationPort> = adapters;
-    let capability_port: Arc<dyn aionui_team::TeamToolCapabilityPort> = Arc::new(TeamCapabilityResolver::new(
-        Arc::new(SqliteAgentMetadataRepository::new(services.database.pool().clone())),
-    ));
+    let capability_port: Arc<dyn aionui_team::TeamToolCapabilityPort> =
+        Arc::new(TeamCapabilityResolver::with_assistants(
+            Arc::new(SqliteAgentMetadataRepository::new(services.database.pool().clone())),
+            assistant_service.clone(),
+        ));
     let service = TeamSessionService::new_with_prompt_dump(
         team_repo,
         Arc::new(SqliteAgentMetadataRepository::new(services.database.pool().clone())),

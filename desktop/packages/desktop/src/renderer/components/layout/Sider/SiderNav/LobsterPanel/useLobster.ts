@@ -3,19 +3,19 @@ import { Message } from '@arco-design/web-react';
 import type { LobsterAction, LobsterState } from '@/common/types/platform/lobster';
 import { lobsterCall, hasWorkbench } from '../WorkspacePanel/api';
 
-export function useLobster() {
+export function useLobster(projectId?: string) {
   const [state, setState] = useState<LobsterState | null>(null);
   const [busy, setBusy] = useState('');
   const [error, setError] = useState('');
   const refresh = useCallback(async () => {
     if (!hasWorkbench()) return;
     try {
-      setState(await lobsterCall<LobsterState>('state'));
+      setState(await lobsterCall<LobsterState>('state', { projectId }));
       setError('');
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     }
-  }, []);
+  }, [projectId]);
   useEffect(() => {
     void refresh();
     const timer = setInterval(() => {

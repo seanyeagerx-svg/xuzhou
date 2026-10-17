@@ -42,8 +42,8 @@
     "dispatchAgentPlaceholder": "Sélectionner le chef d'équipe",
     "subAgentsPlaceholder": "Sélectionner les sous-agents",
     "confirm": "Créer l'équipe",
-    "noSupportedAgents": "Aucun agent compatible installé",
-    "supportedAgentsHint": "Supporte actuellement Claude et Codex. D'autres agents bientôt disponibles.",
+    "noSupportedAgents": "Aucun modèle IA disponible. Vérifiez les connexions et actualisez.",
+    "supportedAgentsHint": "Add local Codex, Kiro V3 and ZCode. Each requires its original sign-in and an available model.",
     "leaderDesc": "Comprend vos objectifs et coordonne les agents pour accomplir les tâches",
     "searchPlaceholder": "Assistants de recherche...",
     "noSearchResults": "Aucun résultat trouvé",
@@ -65,19 +65,19 @@
     "teammate": "Équipier",
     "selectAtLeastOneMember": "Sélectionnez au moins un assistant comme chef d'équipe.",
     "selectOneLeader": "Sélectionnez un chef d'équipe",
-    "subtitle": "Faites collaborer plusieurs assistants IA en équipe. Nous conseillons qu'une équipe se concentre sur un seul objectif — créez des équipes distinctes pour des tâches différentes.",
+    "subtitle": "Choisissez des modèles IA pour un projet partagé. Ajoutez ou retirez des membres à tout moment.",
     "nameLabel": "Nom de l'équipe",
-    "workspaceLabel": "Espace de travail",
-    "allAssistantsWithCount": "Tous les assistants ({{count}})",
+    "workspaceLabel": "Projet partagé",
+    "allAssistantsWithCount": "Modèles IA disponibles ({{count}})",
     "selectedMembersWithCount": "Membres sélectionnés {{count}} · ⚑ = Chef",
     "selectedMembersTitleWithCount": "Membres sélectionnés {{count}}",
     "leaderLegend": "= Chef",
-    "membersHelper": "Choisissez les membres et désignez un chef. Le même assistant peut être sélectionné plusieurs fois.",
-    "memberHint": "Aucun assistant adapté comme membre ? Après la création, laissez le chef créer des membres temporaires dans la discussion."
+    "membersHelper": "Choisissez des modèles IA et un coordinateur. Plusieurs modèles peuvent utiliser la même connexion.",
+    "memberHint": "Les membres partagent les fichiers du projet, les tâches et les messages de collaboration. Les chats individuels restent séparés."
   },
   "removeAgent": {
     "confirmTitle": "Retirer un membre de l'équipe",
-    "confirmContent": "Ce membre est actuellement actif. Forcer la suppression ?",
+    "confirmContent": "Retirer cette IA de l’équipe ? Son chat reste une conversation locale. Les fichiers du projet et les autres membres sont conservés.",
     "confirmContentActive": "Ce membre est en train de travailler. Le retirer quand même ? Son travail en cours sera interrompu."
   },
   "emptyState": {
@@ -93,7 +93,7 @@
   },
   "addMember": {
     "title": "Ajouter un membre",
-    "subtitle": "Le même assistant peut être ajouté plusieurs fois",
+    "subtitle": "Choisissez un modèle IA. Plusieurs modèles peuvent utiliser la même connexion.",
     "searchAssistants": "Rechercher des assistants...",
     "addFailed": "Échec de l'ajout du membre",
     "noSearchResults": "Aucun résultat trouvé",

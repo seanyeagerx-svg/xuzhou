@@ -23,6 +23,7 @@ import AssistantSelectionArea from './components/AssistantSelectionArea';
 import GuidActionRow from './components/GuidActionRow';
 import GuidInputCard from './components/GuidInputCard';
 import GuidModelSelector from './components/GuidModelSelector';
+import DraftModelPicker from '../conversation/runtime/Continuity/DraftModelPicker';
 import QuickActionButtons from './components/QuickActionButtons';
 import FeedbackReportModal from '@/renderer/components/settings/SettingsModal/contents/FeedbackReportModal';
 import { useGuidAssistantSelection } from './hooks/useGuidAssistantSelection';
@@ -42,7 +43,7 @@ import { Alert, Button, ConfigProvider } from '@arco-design/web-react';
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
-import useSWR from 'swr';
+import useSWR, { mutate as refreshCache } from 'swr';
 import styles from './index.module.css';
 
 type GuidNavigationState = {
@@ -149,6 +150,9 @@ const GuidPage: React.FC = () => {
     { revalidateOnFocus: false }
   );
   const resetAssistantRequested = navState?.resetAssistant === true;
+  useEffect(() => {
+    if (workbench?.assistantId) void refreshCache('assistants.list');
+  }, [workbench?.assistantId]);
   const preselectAssistantId = navState?.selectedAssistantId || workbench?.assistantId;
   const agentSelection = useGuidAssistantSelection({
     selectionReady: !workbenchLoading && !workbenchError,
@@ -595,7 +599,15 @@ const GuidPage: React.FC = () => {
 
   // Build the mention dropdown node
   // Build the model selector node
-  const modelSelectorNode = (
+  const modelSelectorNode = unifiedChat ? (
+    <DraftModelPicker
+      workspace={guidInput.dir}
+      value={agentSelection.selectedAcpModel}
+      onChange={setGuidSelectedAcpModel}
+      effort={agentSelection.currentThoughtLevelOption?.currentValue || undefined}
+      onEffortChange={setGuidSelectedThoughtLevel}
+    />
+  ) : (
     <GuidModelSelector
       isGeminiMode={isGeminiMode}
       modelList={modelSelection.modelList}

@@ -42,8 +42,8 @@
     "dispatchAgentPlaceholder": "Виберіть лідера команди",
     "subAgentsPlaceholder": "Виберіть асистентів команди",
     "confirm": "Confirm Create",
-    "noSupportedAgents": "Немає доступних підтримуваних асистентів",
-    "supportedAgentsHint": "Наразі підтримуються асистенти Claude та Aion CLI. Інші асистенти з'являться незабаром.",
+    "noSupportedAgents": "Немає доступних моделей ШІ. Перевірте підключення й оновіть список.",
+    "supportedAgentsHint": "Add local Codex, Kiro V3 and ZCode. Each requires its original sign-in and an available model.",
     "leaderDesc": "Розуміє ваші цілі та координує асистентів для виконання завдань",
     "searchPlaceholder": "Search",
     "noSearchResults": "Нічого не знайдено",
@@ -65,19 +65,19 @@
     "teammate": "Teammate",
     "selectAtLeastOneMember": "Select at least one assistant as the Team Leader.",
     "selectOneLeader": "Select one Team Leader",
-    "subtitle": "Let multiple AI assistants team up and collaborate. We suggest one team focuses on a single goal — create separate teams for different tasks.",
+    "subtitle": "Виберіть моделі ШІ для спільного проєкту. Учасників можна додавати й видаляти будь-коли.",
     "nameLabel": "Team name",
-    "workspaceLabel": "Workspace",
-    "allAssistantsWithCount": "All assistants ({{count}})",
+    "workspaceLabel": "Спільний проєкт",
+    "allAssistantsWithCount": "Доступні моделі ШІ ({{count}})",
     "selectedMembersWithCount": "Selected members {{count}} · ⚑ = Leader",
     "selectedMembersTitleWithCount": "Selected members {{count}}",
     "leaderLegend": "= Leader",
-    "membersHelper": "Choose team members and assign one Leader. The same assistant can be selected multiple times.",
-    "memberHint": "No suitable assistant as a member? After creation, let the Leader create temporary team members in chat."
+    "membersHelper": "Виберіть моделі ШІ та одного координатора. Одне підключення може використовувати кілька моделей.",
+    "memberHint": "Учасники діляться файлами проєкту, завданнями та повідомленнями для співпраці. Окремі чати зберігаються незалежно."
   },
   "removeAgent": {
     "confirmTitle": "Видалити учасника команди",
-    "confirmContent": "Remove this member from the team?",
+    "confirmContent": "Видалити цей ШІ з команди? Його чат залишиться локальною бесідою. Файли проєкту й інші учасники збережуться.",
     "confirmContentActive": "This member is working. Remove it anyway? Its current work will be interrupted."
   },
   "emptyState": {
@@ -93,7 +93,7 @@
   },
   "addMember": {
     "title": "Add member",
-    "subtitle": "The same assistant can be added repeatedly",
+    "subtitle": "Виберіть конкретну модель ШІ. Одне підключення може використовувати кілька моделей.",
     "searchAssistants": "Search assistants...",
     "addFailed": "Failed to add member",
     "noSearchResults": "No results found",

@@ -21,7 +21,7 @@ import TalkToButlerButton from '@/renderer/components/base/TalkToButlerButton';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import AgentCard from './AgentCard';
-import { isDeprecatedRuntimeAgentType } from '@/renderer/utils/model/agentTypeSupportPolicy';
+import { isDeprecatedRuntimeAgentType, isXuzhouAgent } from '@/renderer/utils/model/agentTypeSupportPolicy';
 import InlineAgentEditor, { type CustomAgentDraft } from './InlineAgentEditor';
 import { getBoundAssistants, useAssistantsForAgents } from './BoundAssistants';
 import SettingsPageHeader from '../components/SettingsPageHeader';
@@ -53,10 +53,10 @@ const LocalAgents: React.FC = () => {
   // Hide deprecated runtime backends (nanobot / openclaw-gateway / remote / gemini)
   // — they are no longer offered as agents and shouldn't appear on the detection page.
   const officialAgents = allAgents.filter(
-    (a) => a.agent_source !== 'custom' && !isDeprecatedRuntimeAgentType(a.agent_type)
+    (a) => isXuzhouAgent(a) && a.agent_source !== 'custom' && !isDeprecatedRuntimeAgentType(a.agent_type)
   );
 
-  const customAgents: ManagedAgent[] = allAgents.filter((a) => a.agent_source === 'custom');
+  const customAgents: ManagedAgent[] = allAgents.filter((a) => isXuzhouAgent(a) && a.agent_source === 'custom');
 
   const [editorVisible, setEditorVisible] = useState(false);
   const [editingAgent, setEditingAgent] = useState<ManagedAgent | null>(null);

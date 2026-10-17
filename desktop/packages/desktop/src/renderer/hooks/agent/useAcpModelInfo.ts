@@ -35,6 +35,7 @@ export type UseAcpModelInfoResult = {
   isSetting: boolean;
   selectModel: (model_id: string) => void;
   thoughtLevel: AcpDerivedOption | null;
+  toolPermissions?: 'ask' | 'remembered';
   setStatus: AcpConfigSetStatus;
   setConfigOption: (optionId: string, value: string) => Promise<AcpConfigOptionDto[]>;
   isConfigOptionBlocked: (optionId: string) => boolean;
@@ -169,6 +170,10 @@ export const useAcpModelInfo = ({
     isSetting: setStatus.state === 'setting' && setStatus.optionId === model?.id,
     selectModel,
     thoughtLevel,
+    toolPermissions: runtimeConfig.configOptions?.find((option) => option.id === 'tool_permissions')?.current_value as
+      | 'ask'
+      | 'remembered'
+      | undefined,
     setStatus,
     setConfigOption,
     isConfigOptionBlocked,

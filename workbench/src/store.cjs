@@ -2,7 +2,20 @@ const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
 function readJson(file,fallback){try{return JSON.parse(fs.readFileSync(file,'utf8'));}catch{return fallback;}}
-function atomicJson(file,value){fs.mkdirSync(path.dirname(file),{recursive:true});const tmp=file+'.'+crypto.randomUUID()+'.tmp';fs.writeFileSync(tmp,JSON.stringify(value,null,2));fs.renameSync(tmp,file);}
+function atomicJson(file,value){
+  fs.mkdirSync(path.dirname(file),{recursive:true});const tmp=file+'.'+crypto.randomUUID()+'.tmp';
+  try{
+    fs.writeFileSync(tmp,JSON.stringify(value,null,2));
+    const delays=[10,20,40,80,160,250,400];
+    for(let attempt=0;;attempt++){
+      try{fs.renameSync(tmp,file);break;}
+      catch(error){
+        if(!['EPERM','EACCES','EBUSY'].includes(error.code)||attempt>=delays.length)throw error;
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,delays[attempt]);
+      }
+    }
+  }finally{try{fs.unlinkSync(tmp);}catch(error){if(error.code!=='ENOENT')throw error;}}
+}
 class Store {
   constructor(directory,defaults){this.file=path.join(directory,'workspace.json');this.value=readJson(this.file,defaults);this.save();}
   save(){atomicJson(this.file,this.value);}
